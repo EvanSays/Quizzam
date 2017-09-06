@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "eslintIgnore": [
+    "app.bundle.js",
+    "app.bundle.js.map"
+  ],
   "scripts": {
     "build": "webpack --watch",
     "start": "nodemon server.js",
