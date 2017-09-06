@@ -1,0 +1,9 @@
+node_modules/
+
+.DS_Store
+.env
+
+package-lock.json
+
+./build/app.bundle.js
+./build/app.bundle.js.map
