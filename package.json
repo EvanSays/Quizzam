@@ -5,7 +5,7 @@
   "main": "index.js",
   "eslintIgnore": [
     "app.bundle.js",
-    "app.bundle.map.js"
+    "app.bundle.js.map"
   ],
   "scripts": {
     "build": "webpack --watch",
