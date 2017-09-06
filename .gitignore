@@ -1,9 +1,11 @@
 node_modules/
+npm-debug.log*
+
 
 .DS_Store
 .env
 
 package-lock.json
 
-./build/app.bundle.js
-./build/app.bundle.js.map
+/build/app.bundle.js
+/build/app.bundle.js.map
