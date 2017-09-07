@@ -7,9 +7,10 @@ module.exports = {
     ],
     "rules": {
       "arrow-body-style": [0],
-      "extensions": [ 0, { "jsx": "always" }],
+      "react/jsx-filename-extension": [ 1, {"extensions": [".jsx", ".js"] }],
       "jsx-a11y/href-no-hash": "off",
-      "jsx-a11y/anchor-is-valid": [ 0, { "aspects": ["invalidHref"] }]
+      "jsx-a11y/anchor-is-valid": [ 0, { "aspects": ["invalidHref"] }],
+      "react/jsx-no-literals": [ 0, { "noStrings": true }]
     },
     "env": {
       "browser": true,

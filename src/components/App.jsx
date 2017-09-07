@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import CreateQuiz from './CreateQuiz';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-    };
+  shouldComponentUpdate() {
+    return false;
   }
   render() {
     return (
       <section className="App">
+
+        <CreateQuiz />
+
       </section>
     );
   }
