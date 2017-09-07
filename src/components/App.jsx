@@ -8,7 +8,9 @@ class App extends Component {
   render() {
     return (
       <section className="App">
+
         <CreateQuiz />
+
       </section>
     );
   }
