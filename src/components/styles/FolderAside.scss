@@ -1,0 +1,15 @@
+.folder-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+  width: 256px;
+  height: 100vh;
+}
+
+.folders-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
