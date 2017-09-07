@@ -1,5 +1,5 @@
 module.exports = {
-    "extends": "airbnb",
+    "extends": ["airbnb", "plugin:react/all"],
     "plugins": [
         "react",
         "jsx-a11y",
@@ -23,5 +23,10 @@ module.exports = {
       "it": false,
       "beforeEach": false,
       "should": false
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
     }
 };
