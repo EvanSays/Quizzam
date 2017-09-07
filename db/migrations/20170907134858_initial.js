@@ -8,7 +8,6 @@ exports.up = function (knex, Promise) {
       table.string('password').notNullable();
       table.timestamps(true, true);
     }),
-
     knex.schema.createTable('folder', (table) => {
       table.increments('id').primary();
       table.string('name', 64).unique().notNullable();
@@ -16,7 +15,6 @@ exports.up = function (knex, Promise) {
       table.foreign('teacher_id').references('teacher.id');
       table.timestamps(true, true);
     }),
-
     knex.schema.createTable('quiz', (table) => {
       table.increments('id').primary();
       table.string('name', 64).notNullable();
@@ -28,7 +26,6 @@ exports.up = function (knex, Promise) {
       table.string('type', 64);
       table.timestamps(true, true);
     }),
-
     knex.schema.createTable('question', (table) => {
       table.increments('id').primary();
       table.string('question_text').notNullable();
@@ -39,7 +36,6 @@ exports.up = function (knex, Promise) {
       table.integer('difficulty').unsigned();
       table.timestamps(true, true);
     }),
-
     knex.schema.createTable('answer', (table) => {
       table.increments('id').primary();
       table.string('answer_text').notNullable();
