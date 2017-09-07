@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/jdiejim/Quizzam#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "history": "^4.7.2",
