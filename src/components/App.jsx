@@ -6,11 +6,9 @@ class App extends Component {
     this.state = {
     };
   }
-
   render() {
     return (
       <section className="App">
-        <h1 className="hello">hello</h1>
       </section>
     );
   }
