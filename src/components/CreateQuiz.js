@@ -1,25 +1,98 @@
 import React, { Component } from 'react';
 
 class CreateQuiz extends Component {
+  constructor() {
+    super();
+    this.state = {
+      folderName: '',
+      quizName: '',
+      currentQuestion: '',
+      currentAnswer1: '',
+      currentAnswer2: '',
+      currentAnswer3: '',
+      currentAnswer4: '',
+      quiz: [
+        {
+          question: '',
+          answers: [],
+        },
+      ],
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
   shouldComponentUpdate() {
     return true;
   }
+
+  handleFormClick(event) {
+    event.preventDefault();
+    console.log('working');
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    console.log(target, value, name);
+    this.setState({ [name]: value });
+  }
+
   render() {
+    const { folderName,
+      quizName,
+      currentQuestion,
+      currentAnswer1,
+      currentAnswer2,
+      currentAnswer3,
+      currentAnswer4,
+    } = this.state;
+
     return (
       <div>
-        <section>
-          <h1>CreateQuiz</h1>
-          <div>
-            <h3>Folder 1</h3>
-            <h3>Folder 2</h3>
-            <h3>Folder 3</h3>
-          </div>
-          <button>Submit</button>
-        </section>
-        <form action="">
-          <input type="text" value="question" />
-          <input type="text" value="answer" />
-          <button>Add</button>
+        <form onSubmit={this.handleFormClick}>
+          <input
+            type="text"
+            name="quizName"
+            value={quizName}
+            placeholder="Quiz Name"
+            onChange={this.handleInputChange}
+          />
+          <input
+            type="text"
+            name="currentQuestion"
+            value={currentQuestion}
+            placeholder="Question"
+            onChange={this.handleInputChange}
+          />
+          <input
+            type="text"
+            name="currentAnswer1"
+            value={currentAnswer1}
+            placeholder="Answer1"
+            onChange={this.handleInputChange}
+          />
+          <input
+            type="text"
+            name="currentAnswer2"
+            value={currentAnswer2}
+            placeholder="Answer2"
+            onChange={this.handleInputChange}
+          />
+          <input
+            type="text"
+            name="currentAnswer3"
+            value={currentAnswer3}
+            placeholder="Answer3"
+            onChange={this.handleInputChange}
+          />
+          <input
+            type="text"
+            name="currentAnswer4"
+            value={currentAnswer4}
+            placeholder="Answer4"
+            onChange={this.handleInputChange}
+          />
+          <input type="submit" value="Create Question" />
         </form>
 
       </div>
