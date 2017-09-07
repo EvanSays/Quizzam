@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "webpack --watch",
-    "start": "nodemon server.js",
+    "start": "webpack-dev-server --open",
+    "server": "nodemon server.js",
     "testBE": "./node_modules/.bin/mocha",
     "testFE": "./node_modules/.bin/jest",
     "test": "npm run testBE & npm run testFE",
@@ -56,6 +57,8 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.6"
-  }
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "proxy": "http://localhost:3000"
 }

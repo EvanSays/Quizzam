@@ -44,4 +44,9 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'build'),
+    inline: true,
+    stats: 'errors-only',
+  },
 };
