@@ -63,7 +63,6 @@
   - There should be a back button
   - Final submit would verify that all questions are answered.  It will alert student of missing answers.  If all questions are answered, it will submit the scores and show the student the results of their quiz and possibly the class results?
   
-
 ## Stack
   - Web Sockets
   - React and Redux
