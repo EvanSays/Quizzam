@@ -17,8 +17,10 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, 'index.html'));
 });
 
+/* eslint-disable no-console */
 app.listen(app.get('port'), () => {
   console.log(`Quizzam is running on ${app.get('port')}.`);
 });
+/* eslint-enable */
 
 module.exports = app;
