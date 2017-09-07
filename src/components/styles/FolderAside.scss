@@ -5,6 +5,11 @@
   background-color: red;
   width: 256px;
   height: 100vh;
+  transition: transform 0.2s;
+}
+
+.folder-aside-hidden {
+  transform: translateX(-100%);
 }
 
 .folders-wrapper {

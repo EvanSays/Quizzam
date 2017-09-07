@@ -5,6 +5,7 @@ import './styles/FolderAside.scss';
 
 const FolderAside = () => {
   const folders = [];
+
   return (
     <aside className="folder-aside">
       <CreateFolder />
