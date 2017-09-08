@@ -10,7 +10,9 @@ module.exports = {
       "react/jsx-filename-extension": [ 1, {"extensions": [".jsx", ".js"] }],
       "jsx-a11y/href-no-hash": "off",
       "jsx-a11y/anchor-is-valid": [ 0, { "aspects": ["invalidHref"] }],
-      "react/jsx-no-literals": [ 0, { "noStrings": true }]
+      "react/jsx-no-literals": [ 0, { "noStrings": true }],
+      "react/no-set-state": [0],
+      "react/require-optimization": [0],
     },
     "env": {
       "browser": true,
