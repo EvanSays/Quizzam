@@ -9,10 +9,6 @@ class CreateFolder extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  shouldComponentUpdate() {
-    return true;
-  }
-
   handleOnChange(event) {
     const name = event.target.value;
 
@@ -22,11 +18,11 @@ class CreateFolder extends Component {
   render() {
     return (
       <form className="create-folder">
-        <input 
+        <input
+          className="input-folder"
           onChange={this.handleOnChange}
-          className="input-folder" 
-          type="text" 
-          value={this.state.name} 
+          type="text"
+          value={this.state.name}
         />
         <button className="folder-submit">Submit</button>
       </form>
