@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 exports.seed = (knex, Promise) => {
   // Deletes ALL existing entries
   return knex('answer').del()
@@ -7,11 +9,15 @@ exports.seed = (knex, Promise) => {
     .then(() => knex('teacher').del())
     .then(() => {
       // Inserts seed entries
-      return knex('teacher').insert({
-        email: 'joe@joe.com',
-        password: 'password',
-        name: 'George Superteacher',
-      }, '*')
+
+      return bcrypt.hash('password', 10)
+        .then((hash) => {
+          return knex('teacher').insert({
+            email: 'joe@joe.com',
+            password: hash,
+            name: 'George Superteacher',
+          }, '*');
+        })
         .then((teacher) => {
           return knex('folder').insert({
             name: 'Pop Quiz',
