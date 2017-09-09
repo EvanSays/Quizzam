@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import { getKey } from '../helpers';
 import Answer from './Answer';
@@ -60,3 +61,14 @@ class Question extends Component {
 }
 
 export default Question;
+=======
+import React from 'react';
+
+const Question = ({ id }) => {
+  return (
+    <input id={id} type="text" placeholder="Question"/>
+  );
+};
+
+export default Question;
+>>>>>>> add loop to render a new quuestion and answer

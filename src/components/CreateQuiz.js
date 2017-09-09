@@ -18,4 +18,8 @@ class CreateQuiz extends Component {
   }
 }
 
+CreateQuiz.propTypes = {
+
+};
+
 export default CreateQuiz;
