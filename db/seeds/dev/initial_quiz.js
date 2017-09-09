@@ -6,29 +6,31 @@ exports.seed = (knex, Promise) => {
     .then(() => knex('question').del())
     .then(() => knex('quiz').del())
     .then(() => knex('folder').del())
-    .then(() => knex('teacher').del())
+    .then(() => knex('user').del())
     .then(() => {
       // Inserts seed entries
 
       return bcrypt.hash('password', 10)
         .then((hash) => {
-          return knex('teacher').insert({
+          return knex('user').insert({
             email: 'joe@joe.com',
             password: hash,
-            name: 'George Superteacher',
+            first_name: 'George',
+            last_name: 'Superuser',
+            token: 'XXXXXXX',
           }, '*');
         })
-        .then((teacher) => {
+        .then((user) => {
           return knex('folder').insert({
             name: 'Pop Quiz',
-            teacher_id: teacher[0].id,
+            user_id: user[0].id,
           }, '*');
         })
         .then((folder) => {
           return knex('quiz').insert({
             name: 'First Quiz',
             folder_id: folder[0].id,
-            teacher_id: folder[0].teacher_id,
+            user_id: folder[0].user_id,
             subject: 'Javascript',
             type: 'Pop Quiz',
           }, '*');

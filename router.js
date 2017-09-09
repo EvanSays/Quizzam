@@ -1,16 +1,21 @@
 const express = require('express');
+
+const user = require('./controllers/userController');
+
 const auth = require('./controllers/authController');
-const teacher = require('./controllers/teacherController');
+
 const quiz = require('./controllers/quizController');
 
 const router = express.Router();
 
+
+// User
+router.get('/users/:id/folders', user.indexFolders);
+router.post('/users', user.signIn);
+
 // Authorization
 router.post('/auth', auth.auth);
 
-// Teacher
-router.get('/teachers/:id/folders', teacher.indexFolders);
-router.post('/teachers', teacher.signIn);
 
 // Quiz
 router.get('/quizzes', quiz.index);

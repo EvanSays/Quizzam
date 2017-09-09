@@ -1,18 +1,20 @@
 
-exports.up = function (knex, Promise) {
+exports.up = (knex, Promise) => {
   return Promise.all([
-    knex.schema.createTable('teacher', (table) => {
+    knex.schema.createTable('user', (table) => {
       table.increments('id').primary();
       table.string('email', 64).unique().notNullable();
-      table.string('name', 64).notNullable();
+      table.string('first_name', 64).notNullable();
+      table.string('last_name', 64).notNullable();
       table.string('password').notNullable();
+      table.string('token', 400).notNullable();
       table.timestamps(true, true);
     }),
     knex.schema.createTable('folder', (table) => {
       table.increments('id').primary();
       table.string('name', 64).unique().notNullable();
-      table.integer('teacher_id').unsigned();
-      table.foreign('teacher_id').references('teacher.id');
+      table.integer('user_id').unsigned();
+      table.foreign('user_id').references('user.id');
       table.timestamps(true, true);
     }),
     knex.schema.createTable('quiz', (table) => {
@@ -20,8 +22,8 @@ exports.up = function (knex, Promise) {
       table.string('name', 64).notNullable();
       table.integer('folder_id').unsigned();
       table.foreign('folder_id').references('folder.id');
-      table.integer('teacher_id').unsigned();
-      table.foreign('teacher_id').references('teacher.id');
+      table.integer('user_id').unsigned();
+      table.foreign('user_id').references('user.id');
       table.string('subject', 64);
       table.string('type', 64);
       table.timestamps(true, true);
@@ -48,12 +50,12 @@ exports.up = function (knex, Promise) {
   ]);
 };
 
-exports.down = function (knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
     knex.schema.dropTable('answer'),
     knex.schema.dropTable('question'),
     knex.schema.dropTable('quiz'),
     knex.schema.dropTable('folder'),
-    knex.schema.dropTable('teacher'),
+    knex.schema.dropTable('user'),
   ]);
 };
