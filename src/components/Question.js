@@ -1,8 +1,11 @@
 import React from 'react';
 
-const Question = ({ id }) => {
+const Question = ({ id, addAnswer }) => {
   return (
-    <input id={id} type="text" placeholder="Question"/>
+    <div>
+      <input id={id} type="text" placeholder="Question" />
+      <button onClick={() => addAnswer(id)}>Add Answer</button>
+    </div>
   );
 };
 

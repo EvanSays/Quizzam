@@ -15,12 +15,13 @@ class CreateQuiz extends Component {
         title: '',
         answers:
           {
-            a1: '',
+            a0: '',
           },
       }],
     };
     this.renderQuestions = this.renderQuestions.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
   }
 
 
@@ -43,7 +44,7 @@ class CreateQuiz extends Component {
 
     for (let i = 0; i < questionLength; i += 1) {
       const answersLength = Object.keys(this.state.questions[i].answers).length;
-      questionsArray.push(<Question key={Math.random()} id={i} />);
+      questionsArray.push(<Question key={Math.random()} addAnswer={this.addAnswer} id={i} />);
 
       for (let j = 0; j < answersLength; j += 1) {
         questionsArray.push(<Answer key={Math.random()} id={j} />);
@@ -54,25 +55,39 @@ class CreateQuiz extends Component {
   }
 
   addQuestion() {
-    const newState = Array.from(this.state.questions);
+    const newState = [...this.state.questions];
 
     newState.push({
       title: '',
       answers:
         {
-          a1: '',
+          a0: '',
         },
     });
 
     this.setState({ questions: newState });
   }
 
+  addAnswer(id) {
+    const { answers } = this.state.questions[id];
+    const answerLength = Object.keys(answers).length;
+    const newKey = `a${answerLength}`;
+    const newQuestions = [...this.state.questions];
+
+    const newAnswers = Object.assign({}, answers, { [newKey]: '' });
+
+    newQuestions[id].answers = newAnswers;
+
+    this.setState({ questions: newQuestions });
+  }
+
   render() {
     return (
       <div>
         {this.renderQuestions()}
-        <button onClick={() => this.addQuestion()}>Add Question</button>
-        <button>Add Answer</button>
+        <button onClick={() => this.addQuestion()}>
+          Add Question
+        </button>
       </div>
     );
   }

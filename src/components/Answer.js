@@ -2,7 +2,7 @@ import React from 'react';
 
 const Answer = ({ id }) => {
   return (
-    <input id={id} type="text" placeholder="Answer"/>
+    <input id={id} type="text" placeholder="Answer" />
   );
 };
 
