@@ -3,6 +3,7 @@ import { func, string } from 'prop-types';
 
 const Answer = ({ id, onChange, value }) => {
   return (
+<<<<<<< HEAD
     <form>
       <input
         id={id}
@@ -26,4 +27,10 @@ Answer.propTypes = {
   value: string,
 };
 
+=======
+    <input id={id} type="text" placeholder="Answer" />
+  );
+};
+
+>>>>>>> Add dynamically add answers.
 export default Answer;

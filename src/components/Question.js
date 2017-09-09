@@ -64,11 +64,17 @@ export default Question;
 =======
 import React from 'react';
 
-const Question = ({ id }) => {
+const Question = ({ id, addAnswer }) => {
   return (
-    <input id={id} type="text" placeholder="Question"/>
+    <div>
+      <input id={id} type="text" placeholder="Question" />
+      <button onClick={() => addAnswer(id)}>Add Answer</button>
+    </div>
   );
 };
 
 export default Question;
+<<<<<<< HEAD
 >>>>>>> add loop to render a new quuestion and answer
+=======
+>>>>>>> Add dynamically add answers.
