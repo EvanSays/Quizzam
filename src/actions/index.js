@@ -13,18 +13,16 @@ export const foldersFail = (bool) => {
 };
 
 export const fetchFolders = (id) => {
-  console.log(id);
-  
   return (dispatch) => {
     dispatch(foldersLoading(true));
     fetch(`api/v1/teachers/${id}/folders`)
       .then((res) => {
-        foldersLoading(false);
+        dispatch(foldersLoading(false));
         return res.json();
       })
       .then((folders) => {
-        getFolders(folders);
-        foldersFail(false);
+        dispatch(getFolders(folders));
+        dispatch(foldersFail(false));
       })
       .catch(() => foldersFail(true));
   };

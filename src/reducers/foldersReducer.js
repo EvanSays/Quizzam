@@ -18,7 +18,7 @@ export const foldersLoadingReducer = (state = false, action) => {
   }
 };
 
-export const foldersFail = (state = false, action) => {
+export const foldersFailReducer = (state = false, action) => {
   switch (action.type) {
     case constants.FOLDERS_FAIL:
       return action.bool;
