@@ -6,6 +6,7 @@ const router = express.Router();
 
 // Teacher
 router.get('/teachers/:id/folders', teacher.indexFolders);
+router.post('/teachers', teacher.signIn);
 
 // Quiz
 router.get('/quizzes', quiz.index);

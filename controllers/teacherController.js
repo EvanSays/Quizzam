@@ -1,4 +1,5 @@
 const { db } = require('../server');
+const bcrypt = require('bcrypt');
 
 exports.indexFolders = (req, res) => {
   const teacher_id = req.params.id;
@@ -12,13 +13,13 @@ exports.indexFolders = (req, res) => {
           });
       }));
     })
-    .then((quizzes) => {
-      return Promise.all(quizzes.map((quiz, index, array) => {
-        return Promise.all(quiz.quizzes.map((qz, i, a) => {
-          return db('question').where('quiz_id', qz.id).select()
+    .then((folders) => {
+      return Promise.all(folders.map((quizzes, index, array) => {
+        return Promise.all(quizzes.quizzes.map((quiz, quizIndex, quizArray) => {
+          return db('question').where('quiz_id', quiz.id).select()
             .then((questions) => {
-              a[i].questions = questions;
-              return a[i];
+              quizArray[quizIndex].questions = questions;
+              return quizArray[quizIndex];
             });
         })).then(() => {
           return array[index];
@@ -43,8 +44,36 @@ exports.indexFolders = (req, res) => {
               });
           }));
         })
-        .then((stuff) => {
-          res.status(200).json(stuff);
+        .then((data) => {
+          res.status(200).json(data);
         });
+    });
+};
+
+exports.signIn = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(422).json({ Error: 'Missing user name or password' });
+  }
+  return db('teacher').where('email', req.body.email).select('password')
+    .then((hash) => {
+      bcrypt.compare(req.body.password, hash[0].password)
+        .then((result) => {
+          if (result) {
+            return db('teacher').where('email', req.body.email).select('id', 'email', 'name')
+              .then((teacher) => {
+                res.status(201).json({
+                  message: `Logged in successfully as ${teacher[0].name}`,
+                  data: teacher[0],
+                });
+              })
+              .catch((error) => {
+                return res.status(500).json({ error });
+              });
+          }
+          return res.status(401).json({ error: 'Incorrect email or password' });
+        });
+    })
+    .catch(() => {
+      return res.status(401).json({ error: 'Incorrect email or password' });
     });
 };
