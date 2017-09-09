@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func, array } from 'prop-types';
 import CreateFolder from './CreateFolder';
 import Folder from './Folder';
 import { getKey } from '../helpers';
@@ -25,7 +26,7 @@ class FolderAside extends Component {
   }
 
   render() {
-    const { folders } = this.props;
+    const { folders } = this.state;
     const foldersArray = folders.map(folder => <Folder key={getKey()} folder={folder} />);
 
     return (
@@ -37,6 +38,11 @@ class FolderAside extends Component {
       </aside>
     );
   }
+}
+
+FolderAside.propTypes = {
+  folders: array,
+  fetchFolders: func,
 };
 
 export default FolderAside;

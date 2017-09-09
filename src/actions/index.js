@@ -8,7 +8,7 @@ const foldersLoading = (bool) => {
   return { type: constants.FOLDERS_LOADING, bool };
 };
 
-export const foldersFail = (bool) => {
+const foldersFail = (bool) => {
   return { type: constants.FOLDERS_FAIL, bool };
 };
 

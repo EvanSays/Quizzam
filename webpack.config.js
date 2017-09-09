@@ -49,7 +49,7 @@ module.exports = {
     inline: true,
     stats: 'errors-only',
     proxy: {
-      '/api/v1': 'http://localhost:3000',
+      '/api/': 'http://localhost:3000',
     },
   },
 };
