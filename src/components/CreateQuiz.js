@@ -10,48 +10,47 @@ class CreateQuiz extends Component {
       count: 0,
       quizTitle: '',
       folder: '',
-      questions:
-      [{
-        title: '',
-        answers:
-          {
-            a0: '',
-          },
-      }],
+      question: '',
+      answer: ''
     };
+
     this.renderQuestions = this.renderQuestions.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
+    this.handleQuestionInput = this.handleQuestionInput.bind(this)
   }
-
-
-  handleInputChange(e) {
-    const target = e.target;
-    const value = e.target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  // handleAddInput() {
-  //   return true
-  // }
 
   renderQuestions() {
     const questionsArray = [];
     const questionLength = this.state.questions.length;
+    
 
     for (let i = 0; i < questionLength; i += 1) {
       const answersLength = Object.keys(this.state.questions[i].answers).length;
-      questionsArray.push(<Question key={Math.random()} addAnswer={this.addAnswer} id={i} />);
+      questionsArray.push(<Question key={Math.random()} 
+                                    handleQuestionInput={this.handleQuestionInput} 
+                                    addAnswer={this.addAnswer} 
+                                    value={this.state.questions[i].title}
+                                    id={i} />);
 
       for (let j = 0; j < answersLength; j += 1) {
         questionsArray.push(<Answer key={Math.random()} id={j} />);
       }
     }
-    // console.log(questionsArray);
     return questionsArray;
+  }
+
+  handleQuestionInput(e) {
+    console.log(e.target.name);
+    
+    const newQuestions = [...this.state.questions];
+
+    newQuestions[e.target.id].title = e.target.value
+
+    const title = this.state.questions[0].title
+    
+    this.setState({
+      questions: newQuestions
+    });
   }
 
   addQuestion() {
@@ -82,12 +81,10 @@ class CreateQuiz extends Component {
   }
 
   render() {
+    
     return (
       <div>
-        {this.renderQuestions()}
-        <button onClick={() => this.addQuestion()}>
-          Add Question
-        </button>
+        <Question />
       </div>
     );
   }
