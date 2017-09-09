@@ -1,11 +1,11 @@
 const express = require('express');
-const folder = require('./controllers/folderController');
+const teacher = require('./controllers/teacherController');
 const quiz = require('./controllers/quizController');
 
 const router = express.Router();
 
-// Folder
-router.get('/folders', folder.index);
+// Teacher
+router.get('/teachers/:id/folders', teacher.indexFolders);
 
 // Quiz
 router.get('/quizzes', quiz.index);
