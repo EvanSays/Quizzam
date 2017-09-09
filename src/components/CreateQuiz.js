@@ -1,103 +1,94 @@
 import React, { Component } from 'react';
+import Question from './Question';
+import Answer from './Answer';
+import PropTypes from 'prop-types';
 
 class CreateQuiz extends Component {
   constructor() {
     super();
     this.state = {
-      folderName: '',
-      quizName: '',
-      currentQuestion: '',
-      currentAnswer1: '',
-      currentAnswer2: '',
-      currentAnswer3: '',
-      currentAnswer4: '',
-      quiz: [
+      count: 0,
+      quizTitle: '',
+      folder: '',
+      questions:
+      [
         {
-          question: '',
-          answers: [],
+          title: '',
+          answers:
+          {
+            a1: '',
+          }
         },
-      ],
+        {
+          title: '',
+          answers:
+          {
+            a1: '',
+          }
+        }
+      ]
     };
+    this.renderQuestions = this.renderQuestions.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
-  shouldComponentUpdate() {
-    return true;
+
+  renderQuestions() {
+    let questionsArray = [];
+    let questionLength = this.state.questions.length;
+    
+    
+    for (let i = 0; i < questionLength; i++) {
+      let answersLength = Object.keys(this.state.questions[i].answers).length
+      questionsArray.push(<Question id={i} key={Math.random()} />)
+
+      for (let j = 0; j < answersLength; j++) {
+        questionsArray.push(<Answer id={j} key={Math.random()} />)
+      }
+    }
+    console.log(questionsArray)
+    return questionsArray
   }
 
-  handleFormClick(event) {
-    event.preventDefault();
-    console.log('working');
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
+  handleInputChange(e) {
+    const target = e.target;
+    const value = e.target.value
     const name = target.name;
-    console.log(target, value, name);
-    this.setState({ [name]: value });
+    this.setState({
+      [name]: value
+    });
   }
+
+  handleAddInput() {
+
+  }
+
 
   render() {
-    const { folderName,
-      quizName,
-      currentQuestion,
-      currentAnswer1,
-      currentAnswer2,
-      currentAnswer3,
-      currentAnswer4,
-    } = this.state;
-
     return (
       <div>
-        <form onSubmit={this.handleFormClick}>
-          <input
-            type="text"
-            name="quizName"
-            value={quizName}
-            placeholder="Quiz Name"
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="text"
-            name="currentQuestion"
-            value={currentQuestion}
-            placeholder="Question"
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="text"
-            name="currentAnswer1"
-            value={currentAnswer1}
-            placeholder="Answer1"
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="text"
-            name="currentAnswer2"
-            value={currentAnswer2}
-            placeholder="Answer2"
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="text"
-            name="currentAnswer3"
-            value={currentAnswer3}
-            placeholder="Answer3"
-            onChange={this.handleInputChange}
-          />
-          <input
-            type="text"
-            name="currentAnswer4"
-            value={currentAnswer4}
-            placeholder="Answer4"
-            onChange={this.handleInputChange}
-          />
-          <input type="submit" value="Create Question" />
-        </form>
+        {this.renderQuestions()}
+        
+        {/* <input type="text"
+               name="quizTitle"
+               placeholder="Quiz title"
+               onChange={this.handleInputChange}/> 
+        <input type="text"
+               name="question"
+               placeholder="Question Name"
+               onChange={this.handleInputChange}/>
+        <input type="text" 
+               name="answer"
+               placeholder="Answer1"
+               onChange={this.handleInputChange}/>
+        <button>New Question</button>  */}
 
       </div>
     );
   }
 }
+
+CreateQuiz.propTypes = {
+
+};
 
 export default CreateQuiz;
