@@ -7,7 +7,7 @@ exports.up = (knex, Promise) => {
       table.string('first_name', 64).notNullable();
       table.string('last_name', 64).notNullable();
       table.string('password').notNullable();
-      table.string('token').notNullable();
+      table.string('token', 400).notNullable();
       table.timestamps(true, true);
     }),
     knex.schema.createTable('folder', (table) => {
