@@ -1,12 +1,12 @@
 const express = require('express');
-const teacher = require('./controllers/teacherController');
+const user = require('./controllers/userController');
 const quiz = require('./controllers/quizController');
 
 const router = express.Router();
 
-// Teacher
-router.get('/teachers/:id/folders', teacher.indexFolders);
-router.post('/teachers', teacher.signIn);
+// User
+router.get('/users/:id/folders', user.indexFolders);
+router.post('/users', user.signIn);
 
 // Quiz
 router.get('/quizzes', quiz.index);
