@@ -8,7 +8,7 @@
     "app.bundle.js.map"
   ],
   "scripts": {
-    "build": "webpack --watch",
+    "build": "webpack",
     "start": "webpack-dev-server --open",
     "server": "nodemon server.js",
     "testBE": "./node_modules/.bin/mocha",
