@@ -60,6 +60,5 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
-  },
-  "proxy": "http://localhost:3000"
+  }
 }
