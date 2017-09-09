@@ -8,7 +8,7 @@
     "app.bundle.js.map"
   ],
   "scripts": {
-    "build": "webpack --watch",
+    "build": "webpack",
     "start": "webpack-dev-server --open",
     "server": "nodemon server.js",
     "testBE": "./node_modules/.bin/mocha",
@@ -34,6 +34,7 @@
     "history": "^4.7.2",
     "knex": "^0.13.0",
     "pg": "^7.3.0",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
@@ -60,6 +61,5 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
-  },
-  "proxy": "http://localhost:3000"
+  }
 }

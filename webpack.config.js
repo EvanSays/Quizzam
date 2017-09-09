@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: {
-    app: './index.jsx',
+    app: './index.js',
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -48,5 +48,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'build'),
     inline: true,
     stats: 'errors-only',
+    proxy: {
+      '/api/': 'http://localhost:3000',
+    },
   },
 };
