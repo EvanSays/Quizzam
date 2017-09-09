@@ -11,77 +11,68 @@ class CreateQuiz extends Component {
       quizTitle: '',
       folder: '',
       questions:
-      [
-        {
-          title: '',
-          answers:
+      [{
+        title: '',
+        answers:
           {
             a1: '',
-          }
-        },
-        {
-          title: '',
-          answers:
-          {
-            a1: '',
-          }
-        }
-      ]
+          },
+      }],
     };
     this.renderQuestions = this.renderQuestions.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  renderQuestions() {
-    let questionsArray = [];
-    let questionLength = this.state.questions.length;
-    
-    
-    for (let i = 0; i < questionLength; i++) {
-      let answersLength = Object.keys(this.state.questions[i].answers).length
-      questionsArray.push(<Question id={i} key={Math.random()} />)
-
-      for (let j = 0; j < answersLength; j++) {
-        questionsArray.push(<Answer id={j} key={Math.random()} />)
-      }
-    }
-    console.log(questionsArray)
-    return questionsArray
-  }
 
   handleInputChange(e) {
     const target = e.target;
-    const value = e.target.value
+    const value = e.target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
-  handleAddInput() {
+  // handleAddInput() {
+  //   return true
+  // }
 
+  renderQuestions() {
+    const questionsArray = [];
+    const questionLength = this.state.questions.length;
+
+    for (let i = 0; i < questionLength; i += 1) {
+      const answersLength = Object.keys(this.state.questions[i].answers).length;
+      questionsArray.push(<Question key={Math.random()} id={i} />);
+
+      for (let j = 0; j < answersLength; j += 1) {
+        questionsArray.push(<Answer key={Math.random()} id={j} />);
+      }
+    }
+    // console.log(questionsArray);
+    return questionsArray;
   }
 
+  addQuestion() {
+    const newState = Array.from(this.state.questions);
+
+    newState.push({
+      title: '',
+      answers:
+        {
+          a1: '',
+        },
+    });
+
+    this.setState({ questions: newState });
+  }
 
   render() {
     return (
       <div>
         {this.renderQuestions()}
-        
-        {/* <input type="text"
-               name="quizTitle"
-               placeholder="Quiz title"
-               onChange={this.handleInputChange}/> 
-        <input type="text"
-               name="question"
-               placeholder="Question Name"
-               onChange={this.handleInputChange}/>
-        <input type="text" 
-               name="answer"
-               placeholder="Answer1"
-               onChange={this.handleInputChange}/>
-        <button>New Question</button>  */}
-
+        <button onClick={() => this.addQuestion()}>Add Question</button>
+        <button>Add Answer</button>
       </div>
     );
   }
