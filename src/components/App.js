@@ -8,14 +8,11 @@ class App extends Component {
     return false;
   }
   render() {
-    if (true) {
-      return <Redirect to='/about' />;
-    }
 
     return (
       <section className="App">
 
-        <FolderAsideContainer />
+        {/* <FolderAsideContainer /> */}
         <CreateQuiz />
 
       </section>
