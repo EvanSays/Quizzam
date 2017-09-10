@@ -5,3 +5,4 @@ exports.index = (req, res) => {
     .then(quizzes => res.status(200).json(quizzes))
     .catch(error => res.status(500).json({ error }));
 };
+
