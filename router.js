@@ -1,6 +1,5 @@
 const express = require('express');
 const user = require('./controllers/userController');
-const auth = require('./controllers/authController');
 const quiz = require('./controllers/quizController');
 const room = require('./controllers/roomController');
 
@@ -14,6 +13,7 @@ router.post('/users/new', user.createUser);
 
 // Quiz
 router.get('/quizzes', quiz.index);
+router.post('/quizzes', quiz.addQuiz);
 
 // Room 
 router.get('/room/:id', room.quiz);
