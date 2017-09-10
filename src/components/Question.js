@@ -1,7 +1,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 import React, { Component } from 'react';
+import { func } from 'prop-types';
 import { getKey } from '../helpers';
+<<<<<<< HEAD
 =======
 import React, { Component } from 'react';
 <<<<<<< HEAD
@@ -10,6 +12,9 @@ import { getKey } from '../helpers';
 >>>>>>> Add path for getKeys.
 import PropTypes from 'prop-types';
 >>>>>>> wip
+=======
+
+>>>>>>> Add addQuestion reducer working.
 import Answer from './Answer';
 
 class Question extends Component {
@@ -23,6 +28,7 @@ class Question extends Component {
     this.handleQuestionInput = this.handleQuestionInput.bind(this);
     this.handleAddNewAnswer = this.handleAddNewAnswer.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleAddQuestion = this.handleAddQuestion.bind(this);
   }
 
   handleQuestionInput(e) {
@@ -42,8 +48,12 @@ class Question extends Component {
     this.setState({ answers });
   }
 
-  submitQuestion() {
-    return true;
+  handleAddQuestion() {
+    const { addQuestion } = this.props;
+    const { title } = this.state;
+    const { answers } = this.state;
+
+    addQuestion({ title, answers });
   }
 
   render() {
@@ -142,7 +152,7 @@ class Question extends Component {
         />
         {answers}
         <button onClick={this.handleAddNewAnswer}>Add Answer</button>
-        <button onClick={this.submitQuestion}>Submit Question</button>
+        <button onClick={this.handleAddQuestion}>Submit Question</button>
       </section>
 =======
           placeholder="Question" />
@@ -175,7 +185,7 @@ export default Question;
 >>>>>>> Add dynamically add answers.
 =======
 Question.propTypes = {
-
+  addQuestion: func,
 };
 
 export default Question;

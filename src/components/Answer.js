@@ -40,17 +40,19 @@ class Answer extends Component {
     super();
     this.state = {
       answer: '',
-    }
+    };
   }
   render() {
-    console.log(this.props)
     return (
       <div>
-        <input id={this.props.id} type="text"
+        <input
+          id={this.props.id}
+          type="text"
           placeholder="Answer"
           onBlur={this.props.handleChange}
-          onChange={(e) => this.setState({answer:e.target.value})}
-          value={this.state.answer}/>
+          onChange={e => this.setState({ answer: e.target.value })}
+          value={this.state.answer}
+        />
       </div>
     );
   }

@@ -8,5 +8,5 @@ export default combineReducers({
   folders: foldersReducer,
   foldersLoading: foldersLoadingReducer,
   foldersFail: foldersFailReducer,
-  questionsReducer,
+  questions: questionsReducer,
 });

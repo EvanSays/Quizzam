@@ -28,6 +28,7 @@ export const fetchFolders = (id) => {
   };
 };
 
-const addQuestion = (question) => {
+export const addQuestion = (question) => {
+  console.log('addQuestion action', question);
   return { type: 'ADD_QUESTION', question };
 };
