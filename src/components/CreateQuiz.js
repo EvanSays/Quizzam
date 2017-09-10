@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Question from './Question';
+import QuestionContainer from '../containers/QuestionsContainer';
+import Answer from './Answer';
+import PropTypes from 'prop-types';
+
 
 class CreateQuiz extends Component {
   constructor() {
@@ -25,7 +28,7 @@ class CreateQuiz extends Component {
   render() {
     return (
       <section>
-        <Question />
+        <QuestionContainer />
       </section>
     );
   }
