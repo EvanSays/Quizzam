@@ -16,3 +16,15 @@ exports.indexAnswers = (req, res) => {
     })
     .catch(error => res.status(500).json({ error }));
 };
+
+exports.addAnswer = (req, res) => {
+  const newAnswer = req.body;
+  return db('answer')
+    .insert(newAnswer, 'id')
+    .then(answer => res.status(201).json({
+      id: answer[0],
+    }))
+    .catch(error => res.status(500).json({
+      error,
+    }));
+};

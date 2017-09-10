@@ -19,6 +19,7 @@ router.post('/quizzes/:quizId/questions', quiz.addQuestion);
 
 // Answers
 router.get('/questions/:questionId/answers', question.indexAnswers);
+router.post('/questions/:questionId/answers', question.addAnswer);
 
 // Room 
 router.get('/room/:id', room.quiz);
