@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+\import * as constants from '../constants';
 
 export const foldersReducer = (state = [], action) => {
   switch (action.type) {
@@ -22,15 +22,6 @@ export const foldersFailReducer = (state = false, action) => {
   switch (action.type) {
     case constants.FOLDERS_FAIL:
       return action.bool;
-    default:
-      return state;
-  }
-};
-
-export const questionsReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_QUESTION':
-      return [state, ...action.question];
     default:
       return state;
   }
