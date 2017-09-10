@@ -8,5 +8,5 @@ exports.up = (knex) => {
 };
 
 exports.down = (knex) => {
-  knex.schema.dropTable('room');
+  return knex.schema.dropTable('room');
 };
