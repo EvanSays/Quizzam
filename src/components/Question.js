@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { getKey } from '../helpers';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import React, { Component } from 'react';
 <<<<<<< HEAD
@@ -15,6 +16,8 @@ import PropTypes from 'prop-types';
 =======
 
 >>>>>>> Add addQuestion reducer working.
+=======
+>>>>>>> Add housekeeping and proptypes to Answer
 import Answer from './Answer';
 
 class Question extends Component {
@@ -25,6 +28,7 @@ class Question extends Component {
 <<<<<<< HEAD
       answers: {},
     };
+
     this.handleQuestionInput = this.handleQuestionInput.bind(this);
     this.handleAddNewAnswer = this.handleAddNewAnswer.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
