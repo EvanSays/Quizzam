@@ -42,6 +42,10 @@ class Question extends Component {
     this.setState({ answers });
   }
 
+  submitQuestion() {
+    return true;
+  }
+
   render() {
     const answers = Object.keys(this.state.answers).map((answer) => {
       return (
@@ -138,6 +142,7 @@ class Question extends Component {
         />
         {answers}
         <button onClick={this.handleAddNewAnswer}>Add Answer</button>
+        <button onClick={this.submitQuestion}>Submit Question</button>
       </section>
 =======
           placeholder="Question" />
