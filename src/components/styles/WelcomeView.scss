@@ -1,0 +1,25 @@
+.welcome-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  border: 1px solid blue;
+}
+
+.welcome-logo {
+  margin-left: 20px;
+}
+
+.welcome-nav {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.nav-link {
+  margin: 0 10px;
+}
+
+.active-link {
+  color: red;
+}

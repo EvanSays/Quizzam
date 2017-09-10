@@ -1,15 +1,18 @@
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('./knexfile')[environment];
-const db = require('knex')(configuration);
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+
+const environment = process.env.NODE_ENV || 'development';
+const configuration = require('./knexfile')[environment];
+exports.db = require('knex')(configuration);
+const router = require('./router');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, './build')));
+app.use('/api/v1', router);
 
 app.set('port', process.env.PORT || 3000);
 
@@ -23,4 +26,4 @@ app.listen(app.get('port'), () => {
 });
 /* eslint-enable */
 
-module.exports = app;
+exports.app = app;

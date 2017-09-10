@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Question from './Question';
+<<<<<<< HEAD
 import Answer from './Answer';
 import PropTypes from 'prop-types';
+=======
+>>>>>>> a699868f7e6b0b7b74bd466d5620f624c092eb06
 
 class CreateQuiz extends Component {
   constructor() {
     super();
     this.state = {
+<<<<<<< HEAD
       count: 0,
       quizTitle: '',
       folder: '',
@@ -86,6 +90,17 @@ class CreateQuiz extends Component {
       <div>
         <Question />
       </div>
+=======
+
+    };
+  }
+
+  render() {
+    return (
+      <section>
+        <Question />
+      </section>
+>>>>>>> a699868f7e6b0b7b74bd466d5620f624c092eb06
     );
   }
 }

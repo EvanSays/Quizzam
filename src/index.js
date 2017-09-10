@@ -2,8 +2,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
+import { Route } from 'react-router-dom';
 import store, { history } from './store';
-import App from './components/App.jsx';
+import WelcomeView from './components/WelcomeView';
+import App from './components/App';
 import './index.scss';
 
 render(
