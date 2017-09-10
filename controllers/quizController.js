@@ -33,4 +33,16 @@ exports.indexQuestions = (req, res) => {
       }
     })
     .catch(error => res.status(500).json({ error }));
-}
+};
+
+exports.addQuestion = (req, res) => {
+  const newQuestion = req.body;
+  return db('question')
+    .insert(newQuestion, 'id')
+    .then(question => res.status(201).json({
+      id: question[0],
+    }))
+    .catch(error => res.status(500).json({
+      error,
+    }));
+};
