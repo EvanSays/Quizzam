@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 // import { fetchFolders } from '../actions';
-import Questions from '../components/Questions';
+import Question from '../components/Question';
 
-const mapStateToProps = ({ folders }) => {
+const mapStateToProps = () => {
   // return { folders };
   return true;
 };
@@ -12,4 +12,4 @@ const mapDispatchToProps = (dispatch) => {
   return true;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Questions);
+export default connect(mapStateToProps, mapDispatchToProps)(Question);
