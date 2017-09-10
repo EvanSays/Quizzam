@@ -2,9 +2,9 @@ const express = require('express');
 const user = require('./controllers/userController');
 const quiz = require('./controllers/quizController');
 const room = require('./controllers/roomController');
+const question = require('./controllers/questionController');
 
 const router = express.Router();
-
 
 // User
 router.get('/users/:id/folders', user.indexFolders);
@@ -16,6 +16,9 @@ router.get('/quizzes', quiz.index);
 router.post('/quizzes', quiz.addQuiz);
 router.get('/quizzes/:quizId/questions', quiz.indexQuestions);
 router.post('/quizzes/:quizId/questions', quiz.addQuestion);
+
+// Answers
+router.get('/questions/:questionId/answers', question.indexAnswers);
 
 // Room 
 router.get('/room/:id', room.quiz);
