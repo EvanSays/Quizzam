@@ -14,6 +14,7 @@ router.post('/users/new', user.createUser);
 // Quiz
 router.get('/quizzes', quiz.index);
 router.post('/quizzes', quiz.addQuiz);
+router.get('/quizzes/:quizId/questions', quiz.indexQuestions);
 
 // Room 
 router.get('/room/:id', room.quiz);
