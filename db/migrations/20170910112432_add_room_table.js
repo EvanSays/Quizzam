@@ -1,7 +1,7 @@
 
 exports.up = (knex) => {
   return knex.schema.createTable('room', (table) => {
-    table.string('id').primary();
+    table.string('id', 4).primary();
     table.integer('quiz_id').unsigned();
     table.foreign('quiz_id').references('quiz.id');
   });
