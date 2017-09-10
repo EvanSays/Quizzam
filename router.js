@@ -10,10 +10,7 @@ const router = express.Router();
 // User
 router.get('/users/:id/folders', user.indexFolders);
 router.post('/users', user.signIn);
-
-// Authorization
-router.post('/auth', auth.auth);
-
+router.post('/users/new', user.createUser);
 
 // Quiz
 router.get('/quizzes', quiz.index);

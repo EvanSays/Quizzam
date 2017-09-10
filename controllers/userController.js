@@ -1,5 +1,6 @@
 const { db } = require('../server');
 const bcrypt = require('bcrypt');
+const { auth } = require('../jwt-helper');
 
 exports.indexFolders = (req, res) => {
   const user_id = req.params.id;
@@ -10,7 +11,8 @@ exports.indexFolders = (req, res) => {
           .then((quizzes) => {
             array[index].quizzes = quizzes;
             return array[index];
-          });
+          })
+          .catch(error => res.status(500).json({ error }));
       }));
     })
     .then((folders) => {
@@ -20,10 +22,12 @@ exports.indexFolders = (req, res) => {
             .then((questions) => {
               quizArray[quizIndex].questions = questions;
               return quizArray[quizIndex];
-            });
+            })
+            .catch(error => res.status(500).json({ error }));
         })).then(() => {
           return array[index];
-        });
+        })
+          .catch(error => res.status(500).json({ error }));
       }))
         .then((folders) => {
           return Promise.all(folders.map((folder, index, array) => {
@@ -33,21 +37,41 @@ exports.indexFolders = (req, res) => {
                   .then((answers) => {
                     questArray[questIndex].answers = answers;
                     return questArray[questIndex];
-                  });
+                  })
+                  .catch(error => res.status(500).json({ error }));
               }))
                 .then(() => {
                   return quizArray[quizIndex];
-                });
+                })
+                .catch(error => res.status(500).json({ error }));
             }))
               .then(() => {
                 return array[index];
-              });
+              })
+              .catch(error => res.status(500).json({ error }));
           }));
         })
+        .catch(error => res.status(500).json({ error }))
         .then((data) => {
           res.status(200).json(data);
-        });
-    });
+        })
+        .catch(error => res.status(500).json({ error }));
+    })
+    .catch(error => res.status(500).json({ error }));
+};
+
+exports.createUser = (req, res) => {
+  const user = req.body;
+  if (!user.email || !user.password || !user.first_name || !user.last_name) {
+    return res.status(422).json({ Error: 'Missing user name, password, or email' });
+  }
+  const newUser = auth(user);
+  newUser.then((finalUser) => {
+    return db('user').insert(finalUser)
+      .then(() => res.status(201).json('User successfully created'))
+      .catch(error => res.status(500).json({ error }));
+  })
+    .catch(error => res.status(500).json({ error }));
 };
 
 exports.signIn = (req, res) => {
