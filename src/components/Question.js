@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { getKey } from '../helpers';
 import PropTypes from 'prop-types';
 
 import Answer from './Answer';

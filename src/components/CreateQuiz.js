@@ -1,40 +1,40 @@
 import React, { Component } from 'react';
 import Question from './Question';
-<<<<<<< HEAD
 import Answer from './Answer';
 import PropTypes from 'prop-types';
-=======
->>>>>>> a699868f7e6b0b7b74bd466d5620f624c092eb06
+
 
 class CreateQuiz extends Component {
   constructor() {
     super();
     this.state = {
-<<<<<<< HEAD
+
       count: 0,
       quizTitle: '',
       folder: '',
       question: '',
-      answer: ''
+      answer: '',
     };
 
     this.renderQuestions = this.renderQuestions.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
-    this.handleQuestionInput = this.handleQuestionInput.bind(this)
+    this.handleQuestionInput = this.handleQuestionInput.bind(this);
   }
 
   renderQuestions() {
     const questionsArray = [];
     const questionLength = this.state.questions.length;
-    
+
 
     for (let i = 0; i < questionLength; i += 1) {
       const answersLength = Object.keys(this.state.questions[i].answers).length;
-      questionsArray.push(<Question key={Math.random()} 
-                                    handleQuestionInput={this.handleQuestionInput} 
-                                    addAnswer={this.addAnswer} 
-                                    value={this.state.questions[i].title}
-                                    id={i} />);
+      questionsArray.push(<Question
+        key={Math.random()}
+        handleQuestionInput={this.handleQuestionInput}
+        addAnswer={this.addAnswer}
+        value={this.state.questions[i].title}
+        id={i}
+      />);
 
       for (let j = 0; j < answersLength; j += 1) {
         questionsArray.push(<Answer key={Math.random()} id={j} />);
@@ -45,15 +45,15 @@ class CreateQuiz extends Component {
 
   handleQuestionInput(e) {
     console.log(e.target.name);
-    
+
     const newQuestions = [...this.state.questions];
 
-    newQuestions[e.target.id].title = e.target.value
+    newQuestions[e.target.id].title = e.target.value;
 
-    const title = this.state.questions[0].title
-    
+    const title = this.state.questions[0].title;
+
     this.setState({
-      questions: newQuestions
+      questions: newQuestions,
     });
   }
 
@@ -85,22 +85,10 @@ class CreateQuiz extends Component {
   }
 
   render() {
-    
-    return (
-      <div>
-        <Question />
-      </div>
-=======
-
-    };
-  }
-
-  render() {
     return (
       <section>
         <Question />
       </section>
->>>>>>> a699868f7e6b0b7b74bd466d5620f624c092eb06
     );
   }
 }
