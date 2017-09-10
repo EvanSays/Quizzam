@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 import { getKey } from '../helpers';
 =======
 import React, { Component } from 'react';
+<<<<<<< HEAD
+=======
+import { getKey } from '../helpers';
+>>>>>>> Add path for getKeys.
 import PropTypes from 'prop-types';
 >>>>>>> wip
 import Answer from './Answer';
