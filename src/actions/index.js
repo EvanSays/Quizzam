@@ -31,3 +31,33 @@ export const fetchFolders = (id) => {
 export const addQuestion = (question) => {
   return { type: 'ADD_QUESTION', question };
 };
+
+const quizIsLoading = (bool) => {
+  return { type: constants.QUIZ_IS_LOADING, bool };
+};
+
+const getQuiz = (quiz) => {
+  return { type: constants.GET_QUIZ, quiz };
+};
+
+const quizFail = (bool) => {
+  return { type: constants.QUIZ_FAIL, bool };
+};
+
+export const fetchQuiz = (roomNum) => {
+  return (dispatch) => {
+    dispatch(quizIsLoading(true));
+    fetch(`api/v1/room/${roomNum}`)
+      .then((res) => {
+        dispatch(quizIsLoading(false));
+        return res.json();
+      })
+      .then((quiz) => {
+        dispatch(getQuiz(quiz));
+        dispatch(quizFail(true));
+      })
+      .catch(() => {
+        quizFail(true);
+      });
+  };
+};
