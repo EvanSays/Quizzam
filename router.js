@@ -14,6 +14,7 @@ router.post('/users/new', user.createUser);
 // Quiz
 router.get('/quizzes', quiz.index);
 router.post('/quizzes', quiz.addQuiz);
+
 router.get('/quizzes/:quizId/questions', quiz.indexQuestions);
 router.post('/quizzes/:quizId/questions', quiz.addQuestion);
 
@@ -23,5 +24,6 @@ router.post('/questions/:questionId/answers', question.addAnswer);
 
 // Room
 router.get('/room/:id', room.quiz);
+router.post('/room/:quiz_id', room.addRoom);
 
 module.exports = router;
