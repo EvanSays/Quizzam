@@ -1,5 +1,5 @@
-export const getKey = () => Math.round(Math.random() * Date.now());
-export const genRoomNumber = () => {
+const getKey = () => Math.round(Math.random() * Date.now());
+const genRoomNumber = () => {
   const alphaMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let roomNumber = '';
   for (let i = 0; i < 4; i += 1) {
@@ -8,3 +8,5 @@ export const genRoomNumber = () => {
   }
   return roomNumber;
 };
+
+module.exports = { getKey, genRoomNumber };
