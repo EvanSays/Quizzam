@@ -11,10 +11,8 @@ class App extends Component {
 
     return (
       <section className="App">
-
         {/* <FolderAsideContainer /> */}
         <CreateQuiz />
-
       </section>
     );
   }
