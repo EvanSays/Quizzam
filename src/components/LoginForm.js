@@ -18,12 +18,12 @@ class LoginForm extends Component {
     event.preventDefault();
     const { pathname } = this.props.location;
     const { email, password } = this.state;
-    const { signup, login } = this.props;
+    const { signUp, login } = this.props;
 
     if (pathname === '/signup') {
-      // signup(this.state);
+      signUp(this.state);
     } else {
-      // login({ email, password })
+      login({ email, password });
     }
     this.setState({
       first_name: '',
@@ -38,6 +38,7 @@ class LoginForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { pathname } = this.props.location;
     const formClass = pathname.slice(1);
     const { first_name, last_name, email, password } = this.state;
@@ -55,7 +56,7 @@ class LoginForm extends Component {
         <input
           id="last_name"
           className="login-input"
-          type="text" 
+          type="text"
           placeholder="last name"
           value={last_name}
           onChange={this.handleOnChange}
@@ -76,7 +77,7 @@ class LoginForm extends Component {
           value={password}
           onChange={this.handleOnChange}
         />
-       
+
         <button type="submit">Submit</button>
       </form>
     );

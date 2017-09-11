@@ -1,4 +1,7 @@
+// import genRoomNumber from '../src/helpers';
+
 const { db } = require('../server');
+const { genRoomNumber } = require('../src/helpers');
 
 exports.quiz = (req, res) => {
   db('room').join('quiz', 'room.quiz_id', '=', 'quiz.id')
@@ -22,4 +25,19 @@ exports.quiz = (req, res) => {
         });
     })
     .then(data => res.status(200).json(data[0]));
+};
+
+exports.addRoom = (req, res) => {
+  const roomId = genRoomNumber();
+  const quizId = req.params.quiz_id;
+  const newRoom = Object.assign({}, { id: roomId }, { quiz_id: parseInt(quizId, 10) });
+
+  return db('room')
+    .insert(newRoom, 'id')
+    .then(roomCode => res.status(201).json({
+      id: roomCode[0],
+    }))
+    .catch(error => res.status(500).json({
+      error,
+    }));
 };

@@ -8,10 +8,9 @@ class App extends Component {
     return false;
   }
   render() {
-
     return (
       <section className="App">
-        {/* <FolderAsideContainer /> */}
+        <FolderAsideContainer />
         <CreateQuiz />
       </section>
     );

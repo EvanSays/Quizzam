@@ -16,6 +16,6 @@ exports.auth = (user) => {
     const newUser = Object.assign(user, { password: newPassword });
     const token = jwt.sign(newUser, secretKey);
     const finalUser = Object.assign(newUser, { token });
-    return finalUser;
+    return new Promise(res => res(finalUser));
   });
 };
