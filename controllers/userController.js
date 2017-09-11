@@ -60,6 +60,21 @@ exports.indexFolders = (req, res) => {
     .catch(error => res.status(500).json({ error }));
 };
 
+exports.addFolder = (req, res) => {
+  const name = req.body;
+  const userId = req.params.userId;
+  const newFolder = Object.assign({}, name, { user_id: parseInt(userId, 10) });
+
+  return db('folder')
+    .insert(newFolder, 'id')
+    .then(folder => res.status(201).json({
+      id: folder[0],
+    }))
+    .catch(error => res.status(500).json({
+      error,
+    }));
+};
+
 exports.createUser = (req, res) => {
   const user = req.body;
   if (!user.email || !user.password || !user.first_name || !user.last_name) {
