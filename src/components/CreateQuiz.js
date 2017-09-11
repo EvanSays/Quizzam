@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import Question from './Question';
-=======
 import QuestionContainer from '../containers/QuestionsContainer';
->>>>>>> a74483a4febdbeda0d7f35a93292982f8d9fd7b4
 import Answer from './Answer';
 import PropTypes from 'prop-types';
 
