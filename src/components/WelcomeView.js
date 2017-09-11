@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import LoginForm from './LoginForm';
 import { Link, NavLink, Route } from 'react-router-dom';
+import LoginFormContainer from '../containers/LoginFormContainer';
 import './styles/WelcomeView.scss';
 
 class WelcomeView extends Component {
@@ -25,8 +25,8 @@ class WelcomeView extends Component {
           </nav>
         </header>
         <main className="welcome-main">
-          <Route path="/login" component={LoginForm} />
-          <Route path="/signup" component={LoginForm} />
+          <Route path="/login" component={LoginFormContainer} />
+          <Route path="/signup" component={LoginFormContainer} />
         </main>
       </section>
     );
