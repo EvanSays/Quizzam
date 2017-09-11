@@ -27,3 +27,7 @@ export const fetchFolders = (id) => {
       .catch(() => foldersFail(true));
   };
 };
+
+export const addQuestion = (question) => {
+  return { type: 'ADD_QUESTION', question };
+};
