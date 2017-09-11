@@ -77,13 +77,14 @@ exports.addFolder = (req, res) => {
 
 exports.createUser = (req, res) => {
   const user = req.body;
+
   if (!user.email || !user.password || !user.first_name || !user.last_name) {
     return res.status(422).json({ Error: 'Missing user name, password, or email' });
   }
-  const newUser = auth(user);
-  newUser.then((finalUser) => {
-    return db('user').insert(finalUser)
-      .then(() => res.status(201).json('User successfully created'))
+
+  auth(user).then((finalUser) => {
+    return db('user_account').insert(finalUser, ['id', 'first_name', 'last_name', 'email'])
+      .then(data => res.status(201).json(data[0]))
       .catch(error => res.status(500).json({ error }));
   })
     .catch(error => res.status(500).json({ error }));
@@ -93,12 +94,12 @@ exports.signIn = (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(422).json({ Error: 'Missing user name or password' });
   }
-  return db('user').where('email', req.body.email).select('password')
+  return db('user_account').where('email', req.body.email).select('password')
     .then((hash) => {
       bcrypt.compare(req.body.password, hash[0].password)
         .then((result) => {
           if (result) {
-            return db('user').where('email', req.body.email).select('id', 'email', 'first_name', 'last_name', 'token')
+            return db('user_account').where('email', req.body.email).select('id', 'email', 'first_name', 'last_name', 'token')
               .then((user) => {
                 res.status(201).json({
                   message: `Logged in successfully as ${user[0].first_name}`,
