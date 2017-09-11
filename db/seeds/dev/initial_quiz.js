@@ -6,13 +6,13 @@ exports.seed = (knex, Promise) => {
     .then(() => knex('question').del())
     .then(() => knex('quiz').del())
     .then(() => knex('folder').del())
-    .then(() => knex('user').del())
+    .then(() => knex('user_account').del())
     .then(() => {
       // Inserts seed entries
 
       return bcrypt.hash('password', 10)
         .then((hash) => {
-          return knex('user').insert({
+          return knex('user_account').insert({
             email: 'joe@joe.com',
             password: hash,
             first_name: 'George',

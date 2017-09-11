@@ -1,7 +1,7 @@
 
 exports.up = (knex, Promise) => {
   return Promise.all([
-    knex.schema.createTable('user', (table) => {
+    knex.schema.createTable('user_account', (table) => {
       table.increments('id').primary();
       table.string('email', 64).unique().notNullable();
       table.string('first_name', 64).notNullable();
@@ -14,7 +14,7 @@ exports.up = (knex, Promise) => {
       table.increments('id').primary();
       table.string('name', 64).unique().notNullable();
       table.integer('user_id').unsigned();
-      table.foreign('user_id').references('user.id');
+      table.foreign('user_id').references('user_account.id');
       table.timestamps(true, true);
     }),
     knex.schema.createTable('quiz', (table) => {
@@ -23,7 +23,7 @@ exports.up = (knex, Promise) => {
       table.integer('folder_id').unsigned();
       table.foreign('folder_id').references('folder.id');
       table.integer('user_id').unsigned();
-      table.foreign('user_id').references('user.id');
+      table.foreign('user_id').references('user_account.id');
       table.string('subject', 64);
       table.string('type', 64);
       table.timestamps(true, true);
@@ -56,6 +56,6 @@ exports.down = (knex, Promise) => {
     knex.schema.dropTable('question'),
     knex.schema.dropTable('quiz'),
     knex.schema.dropTable('folder'),
-    knex.schema.dropTable('user'),
+    knex.schema.dropTable('user_account'),
   ]);
 };
