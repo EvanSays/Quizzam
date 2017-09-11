@@ -8,6 +8,7 @@ const router = express.Router();
 
 // User
 router.get('/users/:id/folders', user.indexFolders);
+router.post('/users/:userId/folders', user.addFolder);
 router.post('/users', user.signIn);
 router.post('/users/new', user.createUser);
 
