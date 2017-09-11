@@ -15,7 +15,7 @@ const foldersFail = (bool) => {
 export const fetchFolders = (id) => {
   return (dispatch) => {
     dispatch(foldersLoading(true));
-    fetch(`api/v1/teachers/${id}/folders`)
+    fetch(`api/v1/users/${id}/folders`)
       .then((res) => {
         dispatch(foldersLoading(false));
         return res.json();
@@ -31,6 +31,7 @@ export const fetchFolders = (id) => {
 export const addQuestion = (question) => {
   return { type: 'ADD_QUESTION', question };
 };
+
 
 const quizIsLoading = (bool) => {
   return { type: constants.QUIZ_IS_LOADING, bool };
@@ -59,5 +60,6 @@ export const fetchQuiz = (roomNum) => {
       .catch(() => {
         quizFail(true);
       });
+
   };
 };
