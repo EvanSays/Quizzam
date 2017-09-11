@@ -1,6 +1,6 @@
 import * as constants from '../constants';
 
-export const quizReducer = (state = {}, action) => {
+export const getQuizReducer = (state = {}, action) => {
   switch (action.type) {
     case constants.GET_QUIZ:
       return action.quiz;
