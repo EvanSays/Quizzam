@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import store, { history } from './store';
-import WelcomeView from './components/WelcomeView';
+import WelcomeViewContainer from './containers/WelcomeViewContainer';
 import App from './components/App';
 import './index.scss';
 
@@ -12,9 +12,9 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <section>
-        <Route exact path="/" component={WelcomeView} />
-        <Route path="/login" component={WelcomeView} />
-        <Route path="/signup" component={WelcomeView} />
+        <Route exact path="/" component={WelcomeViewContainer} />
+        <Route path="/login" component={WelcomeViewContainer} />
+        <Route path="/signup" component={WelcomeViewContainer} />
       </section>
     </ConnectedRouter>
   </Provider>,
