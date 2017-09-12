@@ -33,8 +33,8 @@ export const addQuestion = (question) => {
 };
 
 
-const quizIsLoading = (bool) => {
-  return { type: constants.QUIZ_IS_LOADING, bool };
+const quizLoading = (bool) => {
+  return { type: constants.QUIZ_LOADING, bool };
 };
 
 const getQuiz = (quiz) => {
@@ -45,12 +45,12 @@ const quizFail = (bool) => {
   return { type: constants.QUIZ_FAIL, bool };
 };
 
-export const fetchQuiz = (roomNum) => {
+export const fetchQuiz = (room) => {
   return (dispatch) => {
-    dispatch(quizIsLoading(true));
-    fetch(`api/v1/room/${roomNum}`)
+    dispatch(quizLoading(true));
+    fetch(`api/v1/room/${room}`)
       .then((res) => {
-        dispatch(quizIsLoading(false));
+        dispatch(quizLoading(false));
         return res.json();
       })
       .then((quiz) => {
