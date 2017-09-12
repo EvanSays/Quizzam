@@ -1,4 +1,5 @@
 const getKey = () => Math.round(Math.random() * Date.now());
+
 const genRoomNumber = () => {
   const alphaMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let roomNumber = '';

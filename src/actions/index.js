@@ -33,8 +33,8 @@ export const addQuestion = (question) => {
 };
 
 
-const quizIsLoading = (bool) => {
-  return { type: constants.QUIZ_IS_LOADING, bool };
+const quizLoading = (bool) => {
+  return { type: constants.QUIZ_LOADING, bool };
 };
 
 const getQuiz = (quiz) => {
@@ -45,11 +45,12 @@ const quizFail = (bool) => {
   return { type: constants.QUIZ_FAIL, bool };
 };
 
-export const fetchQuiz = (roomNum) => {
+export const fetchQuiz = (room) => {
   return (dispatch) => {
-    dispatch(quizIsLoading(true));
-    fetch(`api/v1/room/${roomNum}`)
+    dispatch(quizLoading(true));
+    fetch(`api/v1/room/${room}`)
       .then((res) => {
+        dispatch(quizLoading(false));
         return res.json();
       })
       .then((quiz) => {
@@ -110,10 +111,27 @@ export const login = (body) => {
       })
       .then((user) => {
         dispatch(getUser(user.data));
+        dispatch(fetchFolders(user.data.id));
         dispatch(userFail(true));
       })
       .catch(() => {
         userFail(true);
       });
+  };
+};
+
+export const createFolder = (obj) => {
+  const nameObj = { name: obj.name };
+  return (dispatch) => {
+    fetch(`api/v1/users/${obj.id}/folders`, {
+      method: 'POST',
+      body: JSON.stringify(nameObj),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      .then((data) => {
+        dispatch(foldersFail(false));
+      })
+      .catch(() => foldersFail(true));
   };
 };

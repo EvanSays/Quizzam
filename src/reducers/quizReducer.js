@@ -11,7 +11,7 @@ export const getQuizReducer = (state = {}, action) => {
 
 export const quizLoadingReducer = (state = false, action) => {
   switch (action.type) {
-    case constants.QUIZ_IS_LOADING:
+    case constants.QUIZ_LOADING:
       return action.bool;
     default:
       return state;

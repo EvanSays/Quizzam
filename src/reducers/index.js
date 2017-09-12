@@ -15,7 +15,7 @@ export default combineReducers({
   user: userReducer,
   userLoading: userLoadingReducer,
   userFail: userFailReducer,
-  getQuiz: getQuizReducer,
+  quiz: getQuizReducer,
   quizLoading: quizLoadingReducer,
   quizFail: quizFailReducer,
 });
