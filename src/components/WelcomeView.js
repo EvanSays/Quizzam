@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink, Route } from 'react-router-dom';
 import LoginFormContainer from '../containers/LoginFormContainer';
+import CodeForm from './CodeForm';
 import './styles/WelcomeView.scss';
 
 class WelcomeView extends Component {
@@ -27,6 +28,7 @@ class WelcomeView extends Component {
         <main className="welcome-main">
           <Route path="/login" component={LoginFormContainer} />
           <Route path="/signup" component={LoginFormContainer} />
+          <CodeForm />
         </main>
       </section>
     );
