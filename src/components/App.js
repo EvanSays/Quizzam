@@ -6,9 +6,12 @@ import FolderAsideContainer from '../containers/FolderAsideContainer';
 
 class App extends Component {
   shouldComponentUpdate() {
-    return false;
+    return true;
   }
   render() {
+    if (!this.props.user.id) {
+      return <Redirect to={'/'} />;
+    }
     return (
       <section className="App">
         <FolderAsideContainer />

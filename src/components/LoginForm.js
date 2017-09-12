@@ -38,7 +38,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { pathname } = this.props.location;
     const formClass = pathname.slice(1);
     const { first_name, last_name, email, password } = this.state;
