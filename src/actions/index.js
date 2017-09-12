@@ -60,6 +60,61 @@ export const fetchQuiz = (roomNum) => {
       .catch(() => {
         quizFail(true);
       });
+  };
+};
 
+const getUser = (user) => {
+  return { type: constants.GET_USER, user };
+};
+
+const userLoading = (bool) => {
+  return { type: constants.USER_LOADING, bool };
+};
+
+const userFail = (bool) => {
+  return { type: constants.USER_FAIL, bool };
+};
+
+export const signUp = (body) => {
+  return (dispatch) => {
+    dispatch(userLoading(true));
+    fetch('api/v1/users/new', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        dispatch(userLoading(false));
+        return res.json();
+      })
+      .then((user) => {
+        dispatch(getUser(user));
+        dispatch(userFail(true));
+      })
+      .catch(() => {
+        userFail(true);
+      });
+  };
+};
+
+export const login = (body) => {
+  return (dispatch) => {
+    dispatch(userLoading(true));
+    fetch('api/v1/users', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        dispatch(userLoading(false));
+        return res.json();
+      })
+      .then((user) => {
+        dispatch(getUser(user.data));
+        dispatch(userFail(true));
+      })
+      .catch(() => {
+        userFail(true);
+      });
   };
 };
