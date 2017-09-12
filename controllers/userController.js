@@ -83,7 +83,7 @@ exports.createUser = (req, res) => {
   }
 
   auth(user).then((finalUser) => {
-    return db('user_account').insert(finalUser, ['id', 'first_name', 'last_name', 'email'])
+    return db('user_account').insert(finalUser, ['id', 'first_name', 'last_name', 'email', 'token'])
       .then(data => res.status(201).json(data[0]))
       .catch(error => res.status(500).json({ error }));
   })
