@@ -19,7 +19,10 @@ class CodeForm extends Component {
 
   handleOnSubmit(event) {
     event.preventDefault();
+    const { code } = this.state;
+    const { fetchQuiz } = this.props;
 
+    fetchQuiz(code);
     this.setState({ code: '' });
   }
 

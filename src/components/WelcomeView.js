@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink, Route } from 'react-router-dom';
 import LoginFormContainer from '../containers/LoginFormContainer';
-import CodeForm from './CodeForm';
+import CodeFormContainer from '../containers/CodeFormContainer';
 import './styles/WelcomeView.scss';
 
 class WelcomeView extends Component {
@@ -14,7 +14,8 @@ class WelcomeView extends Component {
 
   render() {
     const { activeLink } = this.state;
-
+    console.log(this.props);
+    
 
     return (
       <section className="welcome-view">
@@ -28,7 +29,7 @@ class WelcomeView extends Component {
         <main className="welcome-main">
           <Route path="/login" component={LoginFormContainer} />
           <Route path="/signup" component={LoginFormContainer} />
-          <CodeForm />
+          <CodeFormContainer />
         </main>
       </section>
     );
