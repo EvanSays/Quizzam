@@ -33,8 +33,8 @@ export const addQuestion = (question) => {
 };
 
 
-const quizIsLoading = (bool) => {
-  return { type: constants.QUIZ_IS_LOADING, bool };
+const quizLoading = (bool) => {
+  return { type: constants.QUIZ_LOADING, bool };
 };
 
 const getQuiz = (quiz) => {
@@ -45,12 +45,12 @@ const quizFail = (bool) => {
   return { type: constants.QUIZ_FAIL, bool };
 };
 
-export const fetchQuiz = (roomNum) => {
+export const fetchQuiz = (room) => {
   return (dispatch) => {
-    dispatch(quizIsLoading(true));
-    fetch(`api/v1/room/${roomNum}`)
+    dispatch(quizLoading(true));
+    fetch(`api/v1/room/${room}`)
       .then((res) => {
-        dispatch(quizIsLoading(false));
+        dispatch(quizLoading(false));
         return res.json();
       })
       .then((quiz) => {
@@ -60,6 +60,78 @@ export const fetchQuiz = (roomNum) => {
       .catch(() => {
         quizFail(true);
       });
+  };
+};
 
+const getUser = (user) => {
+  return { type: constants.GET_USER, user };
+};
+
+const userLoading = (bool) => {
+  return { type: constants.USER_LOADING, bool };
+};
+
+const userFail = (bool) => {
+  return { type: constants.USER_FAIL, bool };
+};
+
+export const signUp = (body) => {
+  return (dispatch) => {
+    dispatch(userLoading(true));
+    fetch('api/v1/users/new', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        dispatch(userLoading(false));
+        return res.json();
+      })
+      .then((user) => {
+        dispatch(getUser(user));
+        dispatch(userFail(true));
+      })
+      .catch(() => {
+        userFail(true);
+      });
+  };
+};
+
+export const login = (body) => {
+  return (dispatch) => {
+    dispatch(userLoading(true));
+    fetch('api/v1/users', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        dispatch(userLoading(false));
+        return res.json();
+      })
+      .then((user) => {
+        dispatch(getUser(user.data));
+        dispatch(fetchFolders(user.data.id));
+        dispatch(userFail(true));
+      })
+      .catch(() => {
+        userFail(true);
+      });
+  };
+};
+
+export const createFolder = (obj) => {
+  const nameObj = { name: obj.name };
+  return (dispatch) => {
+    fetch(`api/v1/users/${obj.id}/folders`, {
+      method: 'POST',
+      body: JSON.stringify(nameObj),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      .then((data) => {
+        dispatch(foldersFail(false));
+      })
+      .catch(() => foldersFail(true));
   };
 };
