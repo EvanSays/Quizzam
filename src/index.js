@@ -12,10 +12,10 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <section>
-        <Route exact path="/" component={WelcomeViewContainer} />
+        <Route path="/dashboard" component={AppContainer} />
         <Route path="/login" component={WelcomeViewContainer} />
         <Route path="/signup" component={WelcomeViewContainer} />
-        <Route path="/dashboard" component={AppContainer} />
+        <Route exact path="/" component={WelcomeViewContainer} />
       </section>
     </ConnectedRouter>
   </Provider>,
