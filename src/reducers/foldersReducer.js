@@ -26,3 +26,12 @@ export const foldersFailReducer = (state = false, action) => {
       return state;
   }
 };
+
+// export const createFolderReducer = (state = [], action) => {
+//   switch (action.type) {
+//     case constants.CREATE_FOLDER:
+//       return action.id;
+//     default:
+//       return state;
+//   }
+// };
