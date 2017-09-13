@@ -15,7 +15,7 @@ exports.quiz = (req, res) => {
         })
         .then((quizWithQuestions) => {
           return Promise.all(quizWithQuestions[0].questions.map((question, questIndex, questArray) => {
-            return db('answer').where('question_id', question.id).select()
+            return db('answer').where('question_id', question.id).select('id', 'answer_text', 'question_id')
               .then((answers) => {
                 questArray[questIndex].answers = answers;
                 return questArray[questIndex];
