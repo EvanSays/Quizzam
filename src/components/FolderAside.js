@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { func, array } from 'prop-types';
+import { Link } from 'react-router-dom';
 import CreateFolder from './CreateFolder';
 import Folder from './Folder';
 import { getKey } from '../helpers';
@@ -34,6 +35,9 @@ class FolderAside extends Component {
         <CreateFolder />
         <section className="folders-wrapper">
           {foldersArray}
+          <Link to="/dashboard/folder/2" >
+            folder
+          </Link>
         </section>
       </aside>
     );
