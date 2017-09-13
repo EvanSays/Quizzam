@@ -35,14 +35,13 @@ exports.indexQuestions = (req, res) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-exports.addQuestion = (req, res) => {
-  const newQuestion = req.body;
-  return db('question')
-    .insert(newQuestion, 'id')
-    .then(question => res.status(201).json({
-      id: question[0],
+exports.delQuiz = (req, res) => {
+  db('quiz')
+    .where('id', req.params.id)
+    .del()
+    .then(data => res.status(200).json({
+      res: 'The folder was removed',
+      data,
     }))
-    .catch(error => res.status(500).json({
-      error,
-    }));
+    .catch(error => res.status(500).json({ error }));
 };

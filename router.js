@@ -15,6 +15,8 @@ router.post('/users/new', user.createUser);
 // Quiz
 router.get('/quizzes', quiz.index);
 router.post('/quizzes', quiz.addQuiz);
+router.patch('/quizzes/:id', quiz.editQuiz);
+router.delete('/quizzes/:id', quiz.delQuiz);
 
 router.get('/quizzes/:quizId/questions', quiz.indexQuestions);
 router.post('/quizzes/:quizId/questions', quiz.addQuestion);
