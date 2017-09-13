@@ -62,12 +62,12 @@ export default class TakeQuiz extends Component {
           <div key={answer.answer_text}>
             <input
               type="radio"
-              id={answer.answer_text}
+              id={`answer_${answer.id}`}
               name={this.props.quiz.questions[this.state.currentQuestion].question_text}
               value={answer.answer_text}
               onChange={this.handleSelectAnswer}
             />
-            <label htmlFor={answer.answer_text}>{answer.answer_text}</label>
+            <label htmlFor={`answer_${answer.id}`}>{answer.answer_text}</label>
           </div>
         );
     }
