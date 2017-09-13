@@ -9,24 +9,16 @@ const { app } = require('../server');
 chai.use(chaiHttp);
 
 describe('Testing ________ API routes', () => {
-  beforeEach((done) => {
-    knex.migrate.rollback()
-      .then(() => {
-        knex.migrate.latest()
-          .then(() => {
-            knex.seed.run()
-              .then(() => {
-                done();
-              });
-          });
-      });
+  before((done) => {
+    knex.migrate.latest()
+      .then(() => done())
+      .catch(err => console.log(err));
   });
 
-  afterEach((done) => {
-    knex.migrate.rollback()
-      .then(() => {
-        done();
-      });
+  beforeEach((done) => {
+    knex.seed.run()
+      .then(() => done())
+      .catch(err => console.log(err));
   });
 
   describe('Some Route', () => {
