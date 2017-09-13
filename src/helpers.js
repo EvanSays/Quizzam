@@ -10,4 +10,13 @@ const genRoomNumber = () => {
   return roomNumber;
 };
 
-module.exports = { getKey, genRoomNumber };
+const questionTypes = {
+  'true/false': 'Select true or false',
+  'multiple choice': 'Select the most correct answer',
+  'multiple choice-multiple answer': 'Select all that apply',
+  matching: 'UNDETERMINED IMPLEMENTATION',
+  'short answer': 'UNDETERMINED IMPLEMENTATION',
+  essay: 'UNDETERMINED IMPLEMENTATION',
+};
+
+module.exports = { getKey, genRoomNumber, questionTypes };
