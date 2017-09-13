@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import QuizCard from './QuizCard';
-// import { quizzes } from './stubs';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
-const QuizList = ({ selectedFolder }) => {
-  const { name, quizzes } = selectedFolder;
-  const quizArray = quizzes.map((quiz) => {
-    return <QuizCard key={getKey()} quizData={quiz} />;
-  });
+class QuizList extends Component {
+  constructor() {
+    super();
 
-  return (
-    <section className="quiz-list">
-      <header>
-        <h2>{name}</h2>
-        <button>Create Quiz</button>
-      </header>
-      <section>
-        {quizArray}
+    this.postRoom = this.postRoom.bind(this);
+  }
+
+  postRoom(id) {
+    const { createRoom, history } = this.props;
+    createRoom(id);
+    history.push(`/room/${id}`);
+  }
+
+  render() {
+    const { selectedFolder } = this.props;
+    const { name, quizzes } = selectedFolder;
+    const quizArray = quizzes.map((quiz) => {
+      return (<QuizCard
+        key={getKey()}
+        quizData={quiz}
+        postRoom={this.postRoom}
+      />);
+    });
+    return (
+      <section className="quiz-list">
+        <header>
+          <h2>{name}</h2>
+          <button>Create Quiz</button>
+        </header>
+        <section>
+          {quizArray}
+        </section>
       </section>
-    </section>
-  );
-};
+    );
+  }
+}
 
 // QuizList.defaultProps = {
 //

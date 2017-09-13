@@ -1,8 +1,7 @@
 import React from 'react';
 import { string, number } from 'prop-types';
 
-const QuizCard = ({ quizData }) => {
-  console.log(quizData);
+const QuizCard = ({ quizData, postRoom }) => {
   const questionCount = quizData.questions.length;
   return (
     <section className="quiz-card">
@@ -10,7 +9,11 @@ const QuizCard = ({ quizData }) => {
       <p>{questionCount}</p>
       <button className="quiz-edit-button">Edit Quiz</button>
       <button className="quiz-delete">Delete Quiz</button>
-      <button className="quiz-launch-button">Launch Quiz</button>
+      <button
+        onClick={() => postRoom(quizData.id)}
+        className="quiz-launch-button"
+      >Launch Quiz
+      </button>
     </section>
   );
 };

@@ -4,7 +4,7 @@ import CodeForm from '../components/CodeForm';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchQuiz: (room) => dispatch(fetchQuiz(room)),
+    fetchQuiz: room => dispatch(fetchQuiz(room)),
   };
 };
 

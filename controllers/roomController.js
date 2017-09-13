@@ -28,6 +28,7 @@ exports.quiz = (req, res) => {
 };
 
 exports.addRoom = (req, res) => {
+  console.log('hello');
   const roomId = genRoomNumber();
   const quizId = req.params.quiz_id;
   const newRoom = Object.assign({}, { id: roomId }, { quiz_id: parseInt(quizId, 10) });
