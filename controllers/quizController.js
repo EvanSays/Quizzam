@@ -18,15 +18,31 @@ exports.addQuiz = (req, res) => {
     }));
 };
 
-exports.editQuiz = (req, res) => {
-  const newPatch = req.body;
-  db('quiz')
-    .where('id', req.params.id)
+exports.indexQuestions = (req, res) => {
+  const { quizId } = req.params;
+  db('question')
+    .where('quiz_id', quizId)
     .select()
-    .update(newPatch, 'id')
-    .then((quiz) => {
-      res.status(201).json({ id: quiz });
+    .then((question) => {
+      if (question.length) {
+        res.status(200).json(question);
+      } else {
+        res.status(404).json({
+          error: `Could not find questions with the quiz id of ${quizId}`,
+        });
+      }
     })
     .catch(error => res.status(500).json({ error }));
 };
 
+exports.addQuestion = (req, res) => {
+  const newQuestion = req.body;
+  return db('question')
+    .insert(newQuestion, 'id')
+    .then(question => res.status(201).json({
+      id: question[0],
+    }))
+    .catch(error => res.status(500).json({
+      error,
+    }));
+};
