@@ -7,6 +7,7 @@ class CreateFolder extends Component {
       name: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
   handleOnChange(event) {
@@ -15,9 +16,19 @@ class CreateFolder extends Component {
     this.setState({ name });
   }
 
+  handleOnSubmit(event) {
+    event.preventDefault();
+
+    const { postFolder } = this.props;
+    const { name } = this.state;
+
+    postFolder({ name });
+    this.setState({ name: '' });
+  }
+
   render() {
     return (
-      <form className="create-folder">
+      <form onSubmit={this.handleOnSubmit} className="create-folder">
         <input
           className="input-folder"
           onChange={this.handleOnChange}

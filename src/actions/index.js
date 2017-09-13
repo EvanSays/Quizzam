@@ -124,16 +124,22 @@ export const login = (body) => {
   };
 };
 
-export const createFolder = (obj) => {
-  const nameObj = { name: obj.name };
+const addFolder = (data) => {
+  const folder = Object.assign(data, { quizzes: [] });
+
+  return { type: constants.NEW_FOLDER, folder };
+};
+
+export const createFolder = ({ name, id}) => {
   return (dispatch) => {
-    fetch(`api/v1/users/${obj.id}/folders`, {
+    fetch(`api/v1/users/${id}/folders`, {
       method: 'POST',
-      body: JSON.stringify(nameObj),
+      body: JSON.stringify({ name }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
       .then((data) => {
+        dispatch(addFolder(data[0]));
         dispatch(foldersFail(false));
       })
       .catch(() => foldersFail(true));

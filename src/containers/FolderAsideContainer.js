@@ -9,7 +9,7 @@ const mapStateToProps = ({ folders, user }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchFolders: id => dispatch(fetchFolders(id)),
-    addFolder: obj => dispatch(createFolder(obj)),
+    createFolder: obj => dispatch(createFolder(obj)),
     getQuizzes: obj => dispatch(getQuizzes(obj)),
   };
 };

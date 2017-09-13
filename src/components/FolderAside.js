@@ -14,6 +14,7 @@ class FolderAside extends Component {
     };
 
     this.displayQuizzes = this.displayQuizzes.bind(this);
+    this.postFolder = this.postFolder.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,7 @@ class FolderAside extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.folders.length !== this.props.folders.length) {
+
       this.setState({ folders: nextProps.folders });
     }
   }
@@ -35,15 +37,23 @@ class FolderAside extends Component {
     history.push(`/dashboard/folder/${name}`);
   }
 
+  postFolder(folder) {
+    const { createFolder, user } = this.props;
+    const body = Object.assign(folder, { id: user.id });
+
+    createFolder(body);
+  }
+
   render() {
     const { folders } = this.state;
+
     const foldersArray = folders.map((folder) => {
       return <Folder key={getKey()} folder={folder} displayQuizzes={this.displayQuizzes} />;
     });
 
     return (
       <aside className="folder-aside">
-        <CreateFolder />
+        <CreateFolder postFolder={this.postFolder} />
         <section className="folders-wrapper">
           {foldersArray}
         </section>
@@ -57,6 +67,7 @@ FolderAside.propTypes = {
   folders: array,
   getQuizzes: func,
   history: object,
+  createFolder: func,
 };
 
 export default FolderAside;
