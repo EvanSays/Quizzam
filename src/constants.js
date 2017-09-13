@@ -11,3 +11,7 @@ export const QUIZ_LOADING = 'QUIZ_LOADING';
 export const GET_USER = 'GET_USER';
 export const USER_FAIL = 'USER_FAIL';
 export const USER_LOADING = 'USER_LOADING';
+
+export const GET_ROOM = 'GET_ROOM';
+export const ROOM_FAIL = 'ROOM_FAIL';
+export const ROOM_LOADING = 'ROOM_LOADING';
