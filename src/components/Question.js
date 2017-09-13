@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { getKey } from '../helpers';
+import PropTypes from 'prop-types';
+
 import Answer from './Answer';
 
 class Question extends Component {
