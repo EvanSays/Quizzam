@@ -63,6 +63,10 @@ export const fetchQuiz = (room) => {
   };
 };
 
+export const getQuizzes = (quizzes) => {
+  return { type: constants.GET_QUIZZES, quizzes };
+};
+
 const getUser = (user) => {
   return { type: constants.GET_USER, user };
 };

@@ -5,6 +5,7 @@ export const FOLDERS_FAIL = 'FOLDERS_FAIL';
 export const GET_QUIZ = 'GET_QUIZ';
 export const QUIZ_FAIL = 'QUIZ_FAIL';
 export const QUIZ_LOADING = 'QUIZ_LOADING';
+export const GET_QUIZZES = 'GET_QUIZZES';
 
 export const GET_USER = 'GET_USER';
 export const USER_FAIL = 'USER_FAIL';

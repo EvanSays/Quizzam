@@ -26,3 +26,12 @@ export const quizFailReducer = (state = false, action) => {
       return state;
   }
 };
+
+export const getQuizzesReducer = (state = [], action) => {
+  switch (action.type) {
+    case constants.GET_QUIZZES:
+      return action.quizzes;
+    default:
+      return state;
+  }
+};

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, array } from 'prop-types';
+import { func, array, object } from 'prop-types';
 import { Link } from 'react-router-dom';
 import CreateFolder from './CreateFolder';
 import Folder from './Folder';
@@ -12,12 +12,14 @@ class FolderAside extends Component {
     this.state = {
       folders: [],
     };
+
+    this.displayQuizzes = this.displayQuizzes.bind(this);
   }
 
   componentDidMount() {
-    const { fetchFolders } = this.props;
+    const { fetchFolders, user } = this.props;
 
-    fetchFolders(1);
+    fetchFolders(user.id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,18 +28,24 @@ class FolderAside extends Component {
     }
   }
 
+  displayQuizzes({ name, quizzes }) {
+    const { history, getQuizzes } = this.props;
+
+    getQuizzes(quizzes);
+    history.push(`/dashboard/folder/${name}`);
+  }
+
   render() {
     const { folders } = this.state;
-    const foldersArray = folders.map(folder => <Folder key={getKey()} folder={folder} />);
+    const foldersArray = folders.map((folder) => {
+      return <Folder key={getKey()} folder={folder} displayQuizzes={this.displayQuizzes} />;
+    });
 
     return (
       <aside className="folder-aside">
         <CreateFolder />
         <section className="folders-wrapper">
           {foldersArray}
-          <Link to="/dashboard/folder/2" >
-            folder
-          </Link>
         </section>
       </aside>
     );
@@ -45,8 +53,10 @@ class FolderAside extends Component {
 }
 
 FolderAside.propTypes = {
-  folders: array,
   fetchFolders: func,
+  folders: array,
+  getQuizzes: func,
+  history: object,
 };
 
 export default FolderAside;
