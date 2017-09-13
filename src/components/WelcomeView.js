@@ -5,7 +5,10 @@ import LoginFormContainer from '../containers/LoginFormContainer';
 import CodeFormContainer from '../containers/CodeFormContainer';
 import './styles/WelcomeView.scss';
 
-const WelcomeView = ({ quiz }) => {
+const WelcomeView = ({ quiz, user }) => {
+  if (user.id) {
+    return <Redirect to={'/dashboard'} />;
+  }
   if (quiz.id) {
     return <Redirect to={`/room/${quiz.id}`} />;
   }
