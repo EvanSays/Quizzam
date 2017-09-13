@@ -1,12 +1,15 @@
 import React from 'react';
 import { string, number } from 'prop-types';
 
-const QuizCard = ({ title, questionCount }) => {
+const QuizCard = ({ quizData }) => {
+  console.log(quizData);
+  const questionCount = quizData.questions.length;
   return (
     <section className="quiz-card">
-      <h2 className="quiz-card-title">{title}</h2>
-      <h2 className="quiz-card-question-count">{questionCount} Questions</h2>
+      <p>{quizData.title}</p>
+      <p>{questionCount}</p>
       <button className="quiz-edit-button">Edit Quiz</button>
+      <button className="quiz-delete">Delete Quiz</button>
       <button className="quiz-launch-button">Launch Quiz</button>
     </section>
   );

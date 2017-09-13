@@ -28,3 +28,12 @@ export const foldersFailReducer = (state = false, action) => {
       return state;
   }
 };
+
+export const selectedFolderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case constants.SELECT_FOLDER:
+      return action.folder;
+    default:
+      return state;
+  }
+};

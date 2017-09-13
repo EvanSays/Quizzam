@@ -2,23 +2,35 @@ import React from 'react';
 import QuizCard from './QuizCard';
 // import { quizzes } from './stubs';
 import { getKey } from '../helpers';
+import './styles/QuizList.scss';
 
-const QuizList = (props) => {
-  // const quizzes = props.state.folders.find((folder) => folder.id === props.match.params.id);
-  // const quizzez = quizzes.map((quiz) => {
-  //   return (<QuizCard
-  //     key={getKey()}
-  //     title={quiz.name}
-  //     questionCount={quiz.questions.length}
-  //   />);
-  // });
-  // console.log(quizzes);
-  
+const QuizList = ({ selectedFolder }) => {
+  const { name, quizzes } = selectedFolder;
+  const quizArray = quizzes.map((quiz) => {
+    return <QuizCard key={getKey()} quizData={quiz} />;
+  });
+
   return (
-    <div>
-      hello
-    </div>
+    <section className="quiz-list">
+      <header>
+        <h2>{name}</h2>
+        <button>Create Quiz</button>
+      </header>
+      <section>
+        {quizArray}
+      </section>
+    </section>
   );
 };
+
+// QuizList.defaultProps = {
+//
+// };
+//
+// QuizList.propTypes = {
+//   id: string,
+//   onChange: func,
+//   value: string,
+// };
 
 export default QuizList;
