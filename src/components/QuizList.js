@@ -4,7 +4,8 @@ import QuizCard from './QuizCard';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
-const QuizList = ({ quizzes }) => {
+const QuizList = ({ selectedFolder }) => {
+  const { name, quizzes } = selectedFolder;
   const quizArray = quizzes.map((quiz) => {
     return <QuizCard key={getKey()} quizData={quiz} />;
   });
@@ -12,7 +13,7 @@ const QuizList = ({ quizzes }) => {
   return (
     <section className="quiz-list">
       <header>
-        <h2>{'foldername'}</h2>
+        <h2>{name}</h2>
         <button>Create Quiz</button>
       </header>
       <section>

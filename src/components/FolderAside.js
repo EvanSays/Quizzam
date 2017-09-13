@@ -13,7 +13,7 @@ class FolderAside extends Component {
       folders: [],
     };
 
-    this.displayQuizzes = this.displayQuizzes.bind(this);
+    this.getSelectedFolder = this.getSelectedFolder.bind(this);
     this.postFolder = this.postFolder.bind(this);
   }
 
@@ -30,11 +30,11 @@ class FolderAside extends Component {
     }
   }
 
-  displayQuizzes({ name, quizzes }) {
-    const { history, getQuizzes } = this.props;
+  getSelectedFolder(folder) {
+    const { history, selectFolder } = this.props;
 
-    getQuizzes(quizzes);
-    history.push(`/dashboard/folder/${name}`);
+    selectFolder(folder);
+    history.push(`/dashboard/folder/${folder.name}`);
   }
 
   postFolder(folder) {
@@ -48,7 +48,7 @@ class FolderAside extends Component {
     const { folders } = this.state;
 
     const foldersArray = folders.map((folder) => {
-      return <Folder key={getKey()} folder={folder} displayQuizzes={this.displayQuizzes} />;
+      return <Folder key={getKey()} folder={folder} getSelectedFolder={this.getSelectedFolder} />;
     });
 
     return (
@@ -65,7 +65,7 @@ class FolderAside extends Component {
 FolderAside.propTypes = {
   fetchFolders: func,
   folders: array,
-  getQuizzes: func,
+  selectFolder: func,
   history: object,
   createFolder: func,
 };

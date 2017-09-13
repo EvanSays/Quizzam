@@ -28,6 +28,10 @@ export const fetchFolders = (id) => {
   };
 };
 
+export const selectFolder = (folder) => {
+  return { type: constants.SELECT_FOLDER, folder };
+};
+
 export const addQuestion = (question) => {
   return { type: 'ADD_QUESTION', question };
 };
@@ -61,10 +65,6 @@ export const fetchQuiz = (room) => {
         quizFail(true);
       });
   };
-};
-
-export const getQuizzes = (quizzes) => {
-  return { type: constants.GET_QUIZZES, quizzes };
 };
 
 const getUser = (user) => {
