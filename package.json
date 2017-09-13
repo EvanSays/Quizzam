@@ -11,8 +11,8 @@
     "build": "webpack",
     "start": "webpack-dev-server --open",
     "server": "nodemon server.js",
-    "testBE": "./node_modules/.bin/mocha",
-    "testFE": "./node_modules/.bin/jest",
+    "testBE": "NODE_ENV=test ./node_modules/.bin/mocha test/*",
+    "testFE": "NODE_ENV=test ./node_modules/.bin/jest",
     "test": "npm run testBE & npm run testFE",
     "lint": "./node_modules/.bin/eslint ./"
   },
@@ -30,6 +30,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
+    "chai-http": "^3.0.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "history": "^4.7.2",
