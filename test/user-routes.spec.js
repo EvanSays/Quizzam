@@ -21,13 +21,22 @@ describe('Testing ________ API routes', () => {
       .catch(err => console.log(err));
   });
 
-  describe('Some Route', () => {
-    it('should do something', (done) => {
+  describe('POST /api/v1/users', () => {
+    it('shold respond with a success message and a user', (done) => {
       chai.request(app)
-        .get('/quizzes')
+        .post('/api/v1/users')
+        .send({
+          email: 'joe@joe.com',
+          password: 'password',
+        })
         .end((err, res) => {
+          console.log(res.body);
           should.not.exist(err);
-          res.status.should.equal(200);
+          res.status.should.equal(201);
+          res.type.should.equal('application/json');
+          res.body.message.should.equal(`Logged in successfully as ${res.body.data.first_name}`);
+          res.body.data.should.include.keys(
+            'id', 'email', 'first_name', 'last_name', 'token');
           done();
         });
     });
