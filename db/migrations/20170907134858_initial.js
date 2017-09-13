@@ -23,7 +23,7 @@ exports.up = (knex, Promise) => {
       table.integer('folder_id').unsigned();
       table.foreign('folder_id').references('folder.id');
       table.integer('user_id').unsigned();
-      table.foreign('user_id').references('user_account.id');
+      table.foreign('user_id').references('user_account.id').onDelete('CASCADE');
       table.string('subject', 64);
       table.string('type', 64);
       table.timestamps(true, true);
@@ -32,7 +32,7 @@ exports.up = (knex, Promise) => {
       table.increments('id').primary();
       table.string('question_text').notNullable();
       table.integer('quiz_id').unsigned();
-      table.foreign('quiz_id').references('quiz.id');
+      table.foreign('quiz_id').references('quiz.id').onDelete('CASCADE');
       table.string('subject', 64);
       table.enum('question_type', ['true/false', 'multiple choice', 'multiple choice-multiple answer', 'matching', 'short answer', 'essay']);
       table.integer('difficulty').unsigned();
@@ -42,7 +42,7 @@ exports.up = (knex, Promise) => {
       table.increments('id').primary();
       table.string('answer_text').notNullable();
       table.integer('question_id').unsigned();
-      table.foreign('question_id').references('question.id');
+      table.foreign('question_id').references('question.id').onDelete('CASCADE');
       table.integer('points').unsigned().defaultTo(0);
       table.boolean('correct').defaultTo(false);
       table.timestamps(true, true);
