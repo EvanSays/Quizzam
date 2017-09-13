@@ -4,6 +4,8 @@ export const foldersReducer = (state = [], action) => {
   switch (action.type) {
     case constants.GET_FOLDERS:
       return action.folders;
+    case constants.NEW_FOLDER:
+      return [...state, action.folder];
     default:
       return state;
   }
