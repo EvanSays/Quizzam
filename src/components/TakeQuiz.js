@@ -12,13 +12,9 @@ export default class TakeQuiz extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchQuiz('AAAA');
-  }
-
   handleClick(event) {
     const { textContent } = event.target;
-    const { questions } = this.props.getQuiz;
+    const { questions } = this.props.quiz;
     const { currentQuestion } = this.state;
 
     if (textContent === 'Next' && currentQuestion < questions.length - 1) {
@@ -31,21 +27,21 @@ export default class TakeQuiz extends Component {
   }
 
   render() {
-    if (!this.props.getQuiz.id) {
+    if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }
 
     return (
       <main>
         <header>
-          <h1>{this.props.getQuiz.name}</h1>
-          <h1>Subject: {this.props.getQuiz.subject}</h1>
-          <h1>Room: {this.props.getQuiz.id}</h1>
+          <h1>{this.props.quiz.name}</h1>
+          <h1>Subject: {this.props.quiz.subject}</h1>
+          <h1>Room: {this.props.quiz.id}</h1>
         </header>
         <section>
-          <h3>{this.props.getQuiz.questions[this.state.currentQuestion].question_text}</h3>
+          <h3>{this.props.quiz.questions[this.state.currentQuestion].question_text}</h3>
           <div>
-            {this.props.getQuiz.questions[this.state.currentQuestion].answers.map((answer) => {
+            {this.props.quiz.questions[this.state.currentQuestion].answers.map((answer) => {
               return <p>{answer.answer_text}</p>;
             })}
           </div>
