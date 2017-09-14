@@ -8,11 +8,19 @@ export default class TakeQuiz extends Component {
     super();
     this.state = {
       currentQuestion: 0,
-      answers: [],
+      answers: [{ selected_answers: null }],
     };
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
+  }
+
+  componentDidMount() {
+    const initialState = [];
+    for (let i = 0; i < this.props.quiz.questions.length; i += 1) {
+      initialState.push({ selected_answers: null });
+    }
+    this.setState({ answers: initialState });
   }
 
   handleClick(event) {
@@ -30,31 +38,28 @@ export default class TakeQuiz extends Component {
   }
 
   handleSelectAnswer(event) {
+    const newAnswer = {
+      selected_answers: event.target.id.charAt(event.target.id.length - 1),
+    };
     const newState = [...this.state.answers];
 
-    const newAnswer = {
-      answer: event.target.value,
-      answer_id: event.target.id,
-    };
-
     newState[this.state.currentQuestion] = newAnswer;
-
     this.setState({ answers: newState });
   }
 
-  determineInputType(answer) {
+  determineInputType(answer, index) {
     switch (this.props.quiz.questions[this.state.currentQuestion].question_type) {
       case 'multiple choice-multiple answer':
         return (
           <div key={`answer_${answer.id}`}>
             <input
               type="checkbox"
-              id={`answer_${answer.id}`}
-              name={this.props.quiz.questions[this.state.currentQuestion].question_text}
+              id={`answer_id_${answer.id}`}
+              name={index}
               value={answer.answer_text}
               onChange={this.handleSelectAnswer}
             />
-            <label htmlFor={`answer_${answer.id}`}>{answer.answer_text}</label>
+            <label htmlFor={`answer_id_${answer.id}`}>{answer.answer_text}</label>
           </div>
         );
       default:
@@ -62,12 +67,13 @@ export default class TakeQuiz extends Component {
           <div key={answer.answer_text}>
             <input
               type="radio"
-              id={answer.answer_text}
-              name={this.props.quiz.questions[this.state.currentQuestion].question_text}
+              id={`answer_id_${answer.id}`}
+              name={index}
               value={answer.answer_text}
               onChange={this.handleSelectAnswer}
+              checked={this.state.answers[this.state.currentQuestion].selected_answers == answer.id}
             />
-            <label htmlFor={answer.answer_text}>{answer.answer_text}</label>
+            <label htmlFor={`answer_id_${answer.id}`}>{answer.answer_text}</label>
           </div>
         );
     }
@@ -90,7 +96,7 @@ export default class TakeQuiz extends Component {
           <p>({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})</p>
           <form>
             {this.props.quiz.questions[this.state.currentQuestion].answers.map((answer, index) => {
-              return this.determineInputType(answer);
+              return this.determineInputType(answer, index);
             })}
           </form>
         </section>
