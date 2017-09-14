@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
-import { fetchFolders, createFolder } from '../actions';
+import { fetchFolders, createFolder, selectFolder } from '../actions';
 import FolderAside from '../components/FolderAside';
 
-const mapStateToProps = ({ folders }) => {
-  return { folders };
+const mapStateToProps = ({ folders, user }) => {
+  return { folders, user };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchFolders: id => dispatch(fetchFolders(id)),
-    addFolder: obj => dispatch(createFolder(obj)),
+    createFolder: obj => dispatch(createFolder(obj)),
+    selectFolder: obj => dispatch(selectFolder(obj)),
   };
 };
 

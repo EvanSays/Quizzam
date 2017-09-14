@@ -28,6 +28,10 @@ export const fetchFolders = (id) => {
   };
 };
 
+export const selectFolder = (folder) => {
+  return { type: constants.SELECT_FOLDER, folder };
+};
+
 export const addQuestion = (question) => {
   return { type: 'ADD_QUESTION', question };
 };
@@ -120,18 +124,58 @@ export const login = (body) => {
   };
 };
 
-export const createFolder = (obj) => {
-  const nameObj = { name: obj.name };
+const addFolder = (data) => {
+  const folder = Object.assign(data, { quizzes: [] });
+
+  return { type: constants.NEW_FOLDER, folder };
+};
+
+export const createFolder = ({ name, id}) => {
   return (dispatch) => {
-    fetch(`api/v1/users/${obj.id}/folders`, {
+    fetch(`api/v1/users/${id}/folders`, {
       method: 'POST',
-      body: JSON.stringify(nameObj),
+      body: JSON.stringify({ name }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
       .then((data) => {
+        dispatch(addFolder(data[0]));
         dispatch(foldersFail(false));
       })
       .catch(() => foldersFail(true));
+  };
+};
+
+const getRoom = (room) => {
+  console.log(room);
+  return { type: constants.GET_ROOM, room };
+};
+
+const roomFail = (bool) => {
+  return { type: constants.ROOM_FAIL, bool };
+};
+
+const roomLoading = (bool) => {
+  return { type: constants.ROOM_LOADING, bool };
+};
+
+export const createRoom = (id) => {
+  console.log(id, 'create room id');
+  return (dispatch) => {
+    dispatch(roomLoading(true));
+    fetch(`api/v1/room/${id}`, {
+      method: 'POST',
+      body: '',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        dispatch(roomLoading(false));
+        return res.json();
+      })
+      .then((data) => {
+        dispatch(roomFail(false));
+        dispatch(getRoom(data.id));
+      })
+      .catch(() => dispatch(roomFail(true)));
   };
 };

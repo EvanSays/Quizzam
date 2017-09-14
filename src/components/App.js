@@ -9,13 +9,14 @@ class App extends Component {
     return true;
   }
   render() {
-    console.log(this.props);
-    if (!this.props.user.id) {
+    const { user, history } = this.props;
+
+    if (!user.id) {
       return <Redirect to={'/'} />;
     }
     return (
       <section className="App">
-        <FolderAsideContainer />
+        <FolderAsideContainer history={history} />
         <Route path="/dashboard/folder/:id" component={QuizListContainer} />
         <Route path="/quiz" component={CreateQuiz} />
         {/* <Route path="/room/:id" component={Room} />; */}

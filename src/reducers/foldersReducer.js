@@ -4,6 +4,8 @@ export const foldersReducer = (state = [], action) => {
   switch (action.type) {
     case constants.GET_FOLDERS:
       return action.folders;
+    case constants.NEW_FOLDER:
+      return [...state, action.folder];
     default:
       return state;
   }
@@ -22,6 +24,15 @@ export const foldersFailReducer = (state = false, action) => {
   switch (action.type) {
     case constants.FOLDERS_FAIL:
       return action.bool;
+    default:
+      return state;
+  }
+};
+
+export const selectedFolderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case constants.SELECT_FOLDER:
+      return action.folder;
     default:
       return state;
   }
