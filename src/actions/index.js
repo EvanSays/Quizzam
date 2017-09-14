@@ -59,7 +59,7 @@ export const fetchQuiz = (room) => {
       })
       .then((quiz) => {
         dispatch(getQuiz(quiz));
-        dispatch(quizIsLoading(false));
+        dispatch(quizLoading(false));
       })
       .catch(() => {
         quizFail(true);

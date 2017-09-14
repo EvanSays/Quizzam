@@ -6,12 +6,14 @@ import { Route } from 'react-router-dom';
 import store, { history } from './store';
 import WelcomeViewContainer from './containers/WelcomeViewContainer';
 import AppContainer from './containers/AppContainer';
+import TakeQuizContainer from './containers/TakeQuizContainer';
 import './index.scss';
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <section>
+        <Route path="/room/:id" component={TakeQuizContainer} />
         <Route path="/dashboard" component={AppContainer} />
         <Route path="/login" component={WelcomeViewContainer} />
         <Route path="/signup" component={WelcomeViewContainer} />
