@@ -4,10 +4,12 @@ import QuizCard from './QuizCard';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
-const QuizList = ({ selectedFolder }) => {
+const QuizList = ({ selectedFolder, selectQuiz }) => {
+  // console.log('this.props', this.props);
+  
   const { name, quizzes } = selectedFolder;
   const quizArray = quizzes.map((quiz) => {
-    return <QuizCard key={getKey()} quizData={quiz} />;
+    return <QuizCard key={getKey()} quizData={quiz} selectedQuiz={selectQuiz} />;
   });
 
   return (

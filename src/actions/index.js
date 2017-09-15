@@ -145,3 +145,7 @@ export const createFolder = ({ name, id}) => {
       .catch(() => foldersFail(true));
   };
 };
+
+export const selectQuiz = (obj) => {
+  console.log('obj', obj);
+};
