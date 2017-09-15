@@ -1,7 +1,9 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 
-const Answer = ({ id, onChange, value }) => {
+const Answer = ({ id, onChange, value, correct, radioClick }) => {
+  const isCorrect = correct === id;
+
   return (
     <form>
       <input
@@ -10,6 +12,15 @@ const Answer = ({ id, onChange, value }) => {
         type="text"
         value={value}
       />
+      <label htmlFor={id}>
+        Correct
+        <input
+          name={id}
+          type="radio"
+          checked={isCorrect}
+          onClick={(e) => radioClick(e)}
+        />
+      </label>
     </form>
   );
 };

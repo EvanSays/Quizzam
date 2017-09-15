@@ -11,12 +11,14 @@ class Question extends Component {
     this.state = {
       title: '',
       answers: {},
+      correct: '',
     };
 
     this.handleQuestionInput = this.handleQuestionInput.bind(this);
     this.handleAddNewAnswer = this.handleAddNewAnswer.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.handleRadioClick = this.handleRadioClick.bind(this);
   }
 
   handleQuestionInput(e) {
@@ -44,6 +46,12 @@ class Question extends Component {
     addQuestion({ title, answers });
   }
 
+  handleRadioClick(event) {
+    const { name } = event.target;
+    console.log(name);
+    this.setState({ correct: name });
+  }
+
   render() {
     const answers = Object.keys(this.state.answers).map((answer) => {
       return (
@@ -52,6 +60,8 @@ class Question extends Component {
           id={answer}
           onChange={this.handleOnChange}
           value={this.state.answers[answer]}
+          correct={this.state.correct}
+          radioClick={this.handleRadioClick}
         />
       );
     });
