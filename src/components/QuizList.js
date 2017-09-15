@@ -17,13 +17,15 @@ class QuizList extends Component {
   }
 
   render() {
-    const { selectedFolder } = this.props;
+    const { selectedFolder, selectQuiz } = this.props;
+    
     const { name, quizzes } = selectedFolder;
     const quizArray = quizzes.map((quiz) => {
       return (<QuizCard
         key={getKey()}
         quizData={quiz}
         postRoom={this.postRoom}
+        selectQuiz={selectQuiz}
       />);
     });
     return (
