@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { fetchQuiz } from '../actions';
 import TakeQuiz from '../components/TakeQuiz';
 
-const mapStateToProps = ({ state }) => {
-  return { state };
+const mapStateToProps = ({ quiz }) => {
+  return { quiz };
 };
 
 const mapDispatchToProps = (dispatch) => {
