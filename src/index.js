@@ -13,7 +13,15 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <section>
-        <Route path="/room/:id" component={TakeQuizContainer} />
+        <Route
+          path="/room/:id"
+          render={(props) => {
+            if (!props.location.state.user) {
+              return <TakeQuizContainer />;
+            }
+            return <TakeQuizContainer />;
+          }}
+        />
         <Route path="/dashboard" component={AppContainer} />
         <Route path="/login" component={WelcomeViewContainer} />
         <Route path="/signup" component={WelcomeViewContainer} />
