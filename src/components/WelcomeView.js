@@ -10,7 +10,11 @@ const WelcomeView = ({ quiz, user }) => {
     return <Redirect to={'/dashboard'} />;
   }
   if (quiz.id) {
-    return <Redirect to={`/room/${quiz.id}`} />;
+    return (<Redirect to={{
+      pathname: `/room/${quiz.id}`,
+      state: { user: user.id },
+    }}
+    />);
   }
 
   return (

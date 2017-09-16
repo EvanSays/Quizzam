@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 // import {} from '../actions';
 import EditQuiz from '../components/EditQuiz';
 
-// const mapStateToProps = ({ folders, user }) => {
-//   return { folders, user };
-// };
+const mapStateToProps = ({ edit }) => {
+  return { edit };
+};
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
@@ -14,4 +14,5 @@ import EditQuiz from '../components/EditQuiz';
 //   };
 // };
 
-export default connect(null, null)(EditQuiz);
+
+export default connect(mapStateToProps, null)(EditQuiz);
