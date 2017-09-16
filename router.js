@@ -27,6 +27,7 @@ router.patch('/quizzes/:id/questions', question.editQuestion);
 // Answers
 router.get('/questions/:questionId/answers', answer.indexAnswers);
 router.post('/questions/:questionId/answers', answer.addAnswer);
+router.patch('/questions/:id/answers', answer.editAnswer);
 
 // Room
 router.get('/room/:id', room.quiz);
