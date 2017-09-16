@@ -19,7 +19,6 @@ class QuizList extends Component {
 
   editQuiz(data) {
     const { selectQuiz, history } = this.props;
-    console.log('data', data);
     history.push(`/edit/${data.id}`);
     selectQuiz(data);
   }
