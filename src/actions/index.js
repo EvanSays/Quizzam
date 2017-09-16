@@ -181,6 +181,6 @@ export const createRoom = (id) => {
 };
 
 export const selectQuiz = (obj) => {
-  console.log('obj', obj);
+  return { type: constants.EDIT_QUIZ, obj };
 };
 

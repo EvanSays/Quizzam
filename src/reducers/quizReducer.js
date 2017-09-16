@@ -9,6 +9,15 @@ export const getQuizReducer = (state = {}, action) => {
   }
 };
 
+export const editQuizReducer = (state = {}, action) => {
+  switch (action.type) {
+    case constants.EDIT_QUIZ:
+      return action.obj;
+    default:
+      return state;
+  }
+};
+
 export const quizLoadingReducer = (state = false, action) => {
   switch (action.type) {
     case constants.QUIZ_LOADING:
