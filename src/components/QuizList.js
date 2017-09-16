@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import QuizCard from './QuizCard';
+import EditQuiz from './EditQuiz';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
 class QuizList extends Component {
   constructor() {
     super();
-    this.postRoom = this.postRoom.bind(this);
-    this.editQuiz = this.editQuiz.bind(this);
-    this.deleteQuiz = this.deleteQuiz.bind(this);
     this.state = {
-      quizzes: [],
+      isEditing: false,
+      quizObj: {},
     };
+    this.postRoom = this.postRoom.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +29,9 @@ class QuizList extends Component {
     createRoom(quiz);
   }
 
-  editQuiz(data) {
-    const { selectQuiz, history } = this.props;
-    history.push(`/edit/${data.id}`);
-    selectQuiz(data);
+  toggleEdit(quizData) {
+    const { quizObj } = this.state;
+    this.setState({ isEditing: true, quizObj: quizData });
   }
 
   deleteQuiz(id) {
@@ -44,23 +45,36 @@ class QuizList extends Component {
 
   render() {
     const { selectedFolder, selectQuiz, history } = this.props;
-    const { name } = selectedFolder;
-    const { quizzes } = this.state;
-
+    const { quizObj } = this.state;
+    const { name, quizzes } = selectedFolder;
+    if (this.state.isEditing) {
+      return(
+        <div key={getKey()}>
+          <h1>edit quiz</h1>
+          <EditQuiz quizObj={quizObj}/>
+        </div>
+      )
+    }
     const quizArray = quizzes.map((quiz) => {
-      return (<QuizCard
-        key={getKey()}
-        quizData={quiz}
-        postRoom={this.postRoom}
-        editQuiz={this.editQuiz}
-        deleteQuiz={this.deleteQuiz}
-      />);
-    });
-    return (
-      <section className="quiz-list-wrapper">
-        <header className="quiz-list-header">
+      return (
+        <div key={getKey()}>
           <h2>{name}</h2>
-          <button onClick={() => history.push('/quiz')}>Create Quiz</button>
+          <QuizCard
+            key={getKey()}
+            quizData={quiz}
+            postRoom={this.postRoom}
+            toggleEdit={this.toggleEdit}
+            deleteQuiz={this.deleteQuiz}
+          />
+        </div>
+        );
+    });
+      
+      return (
+      <section className="quiz-list-wrapper">
+          <header className="quiz-list-header">
+            <h2>{name}</h2>
+            <button onClick={() => history.push('/quiz')}>Create Quiz</button>
         </header>
         <section className="quiz-list">
           {quizArray}
