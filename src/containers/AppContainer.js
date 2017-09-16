@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { createRoom } from '../actions';
 import App from '../components/App';
 
-const mapStateToProps = ({ user, room }) => {
-  return { user, room };
+const mapStateToProps = ({ user, room, quiz }) => {
+  return { user, room, quiz };
 };
 
 const mapDispatchToProps = (dispatch) => {

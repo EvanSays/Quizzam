@@ -12,14 +12,18 @@ class App extends Component {
   }
 
   render() {
-    const { user, history, room } = this.props;
+    const { user, history, room, quiz } = this.props;
 
     if (!user.id) {
       return <WelcomeViewContainer history={history} />;
     }
 
     if (room) {
-      return <Redirect to={`/room/${room}`} />;
+      return (<Redirect to={{
+        pathname: `/room/${room}`,
+        state: { user: user.id, quiz },
+      }}
+      />);
     }
 
     const aside = room ? null : <FolderAsideContainer history={history} />

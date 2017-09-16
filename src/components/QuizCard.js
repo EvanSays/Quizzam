@@ -15,7 +15,7 @@ const QuizCard = ({ quizData, postRoom, editQuiz }) => {
       </button>
       <button className="quiz-delete">Delete Quiz</button>
       <button
-        onClick={() => postRoom(quizData.id)}
+        onClick={() => postRoom(quizData)}
         className="quiz-launch-button"
       >Launch Quiz
       </button>

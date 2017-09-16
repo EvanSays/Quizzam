@@ -94,7 +94,7 @@ export default class TakeQuiz extends Component {
     }
   }
 
-  render() {
+  render() {   
     if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }

@@ -11,10 +11,10 @@ class QuizList extends Component {
     this.editQuiz = this.editQuiz.bind(this);
   }
 
-  postRoom(id) {
+  postRoom(quiz) {
     const { createRoom } = this.props;
 
-    createRoom(id);
+    createRoom(quiz);
   }
 
   editQuiz(data) {
