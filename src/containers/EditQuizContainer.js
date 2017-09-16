@@ -14,4 +14,5 @@ const mapStateToProps = ({ edit }) => {
 //   };
 // };
 
+
 export default connect(mapStateToProps, null)(EditQuiz);
