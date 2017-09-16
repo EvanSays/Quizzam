@@ -25,7 +25,7 @@ describe('Quiz API routes', () => {
   });
 
   describe('GET /api/v1/quizzes', () => {
-    it('return an array of all of the quizzes', (done) => {
+    it('Should return an array of all of the quizzes', (done) => {
       chai.request(app)
         .get('/api/v1/quizzes')
         .end((err, res) => {
@@ -69,6 +69,39 @@ describe('Quiz API routes', () => {
           res.body.should.have.property('id');
           res.body.id.should.be.a('number');
           done();
+        });
+    });
+
+    it('Should exist in the database after being posted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          should.not.exist(err);
+          res.status.should.equal(200);
+          res.body.should.have.length(1);
+
+          chai.request(app)
+            .post('/api/v1/quizzes')
+            .send({
+              name: 'Best Quiz!',
+              subject: 'Math',
+              type: 'Pop quiz',
+            })
+            .end((err1, res1) => {
+              should.not.exist(err);
+              res1.status.should.equal(201);
+
+              chai.request(app)
+                .get('/api/v1/quizzes')
+                .end((err2, res2) => {
+                  should.not.exist(err);
+                  res2.status.should.equal(200);
+                  res2.body.should.have.length(2);
+                  res2.body[1].should.have.property('name');
+                  res2.body[1].name.should.equal('Best Quiz!');
+                  done();
+                });
+            });
         });
     });
 
@@ -197,6 +230,48 @@ describe('Quiz API routes', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('error');
           res.body.error.should.equal('The quiz with ID# 0 was not found and could not be updated');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /api/v1/quizzes/:id', () => {
+    it('Should return a success message and an object containing the quiz that was deleted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          res.body[0].name.should.equal('First Quiz');
+          res.body[0].subject.should.equal('Javascript');
+          res.body[0].type.should.equal('Pop Quiz');
+
+          chai.request(app)
+            .delete(`/api/v1/quizzes/${id}`)
+            .end((err1, res1) => {
+              res1.body.should.have.property('success');
+              res1.body.success.should.equal(`Quiz #${id} was deleted.`);
+              res1.body.should.have.property('deletedQuiz');
+              res1.body.deletedQuiz.should.be.a('array');
+              res1.body.deletedQuiz[0].id.should.equal(id);
+              res1.body.deletedQuiz[0].name.should.equal('First Quiz');
+              res1.body.deletedQuiz[0].subject.should.equal('Javascript');
+              res1.body.deletedQuiz[0].type.should.equal('Pop Quiz');
+              done();
+            });
+        });
+    });
+
+    it('SAD PATH - Should return an error if the quiz does not exist', (done) => {
+      chai.request(app)
+        .delete('/api/v1/quizzes/0')
+        .end((err, res) => {
+          should.exist(res);
+          res.status.should.equal(404);
+          res.should.be.json; //eslint-disable-line
+          res.body.should.be.a('object');
+          res.body.should.have.property('error');
+          res.body.error.should.equal('The quiz with ID# 0 was not found and could not be deleted');
           done();
         });
     });

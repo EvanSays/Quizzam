@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+
 const { db } = require('../server');
 
 exports.index = (req, res) => {
@@ -8,9 +10,9 @@ exports.index = (req, res) => {
 
 exports.addQuiz = (req, res) => {
   const newQuiz = req.body;
-  for (let requiredParams of ['name', 'subject', 'type']) {
+  for (const requiredParams of ['name', 'subject', 'type']) {
     if (!req.body[requiredParams]) {
-      return res.status(422).json({ error: `You are missing the quiz ${requiredParams}!` })
+      return res.status(422).json({ error: `You are missing the quiz ${requiredParams}!` });
     }
   }
   return db('quiz')
@@ -42,12 +44,19 @@ exports.editQuiz = (req, res) => {
 
 
 exports.delQuiz = (req, res) => {
+  const { id } = req.params;
   db('quiz')
-    .where('id', req.params.id)
+    .where({ id })
     .del()
-    .then(data => res.status(200).json({
-      res: 'The folder was removed',
-      data,
-    }))
+    .returning('*')
+    .then((quiz) => {
+      if (!quiz.length) {
+        return res.status(404).json({ error: `The quiz with ID# ${id} was not found and could not be deleted` });
+      }
+      return res.status(200).json({
+        success: `Quiz #${id} was deleted.`,
+        deletedQuiz: quiz,
+      });
+    })
     .catch(error => res.status(500).json({ error }));
 };
