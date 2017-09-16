@@ -9,7 +9,7 @@ class Question extends Component {
   constructor() {
     super();
     this.state = {
-      title: '',
+      question_text: '',
       answers: {},
       correct: '',
     };
@@ -17,12 +17,12 @@ class Question extends Component {
     this.handleQuestionInput = this.handleQuestionInput.bind(this);
     this.handleAddNewAnswer = this.handleAddNewAnswer.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
   }
 
   handleQuestionInput(e) {
-    this.setState({ title: e.target.value });
+    this.setState({ question_text: e.target.value });
   }
 
   handleAddNewAnswer() {
@@ -38,13 +38,17 @@ class Question extends Component {
     this.setState({ answers });
   }
 
-  handleAddQuestion() {
-    const { addQuestion } = this.props;
-    const { title } = this.state;
-    const { answers } = this.state;
+  // handleAddQuestion() {
+  //   const { addQuestion } = this.props;
+  //   const { question_text } = this.state;
+  //   const { answers } = this.state;
+  //
+  //   addQuestion({ question_text, answers });
+  // }
 
-    addQuestion({ title, answers });
-  }
+  // handleSubmit() {
+  //   const Question = Object.assign;
+  // }
 
   handleRadioClick(event) {
     const { name } = event.target;
@@ -72,13 +76,13 @@ class Question extends Component {
         <h1>QUESTION</h1>
         <input
           type="text"
-          value={this.state.title}
+          value={this.state.question_text}
           onChange={this.handleQuestionInput}
           placeholder="Enter Question"
         />
         {answers}
         <button onClick={this.handleAddNewAnswer}>Add Answer</button>
-        <button onClick={this.handleAddQuestion}>Submit Question</button>
+        <button onClick={this.handleSubmit}>Submit Question</button>
       </section>
     );
   }
