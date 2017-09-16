@@ -7,6 +7,7 @@ import store, { history } from './store';
 import WelcomeViewContainer from './containers/WelcomeViewContainer';
 import AppContainer from './containers/AppContainer';
 import TakeQuizContainer from './containers/TakeQuizContainer';
+import CreateQuiz from './components/CreateQuiz';
 import './index.scss';
 
 render(
@@ -18,6 +19,7 @@ render(
         <Route path="/login" component={WelcomeViewContainer} />
         <Route path="/signup" component={WelcomeViewContainer} />
         <Route exact path="/" component={WelcomeViewContainer} />
+        <Route path="/quiz" component={CreateQuiz} />
       </section>
     </ConnectedRouter>
   </Provider>,
