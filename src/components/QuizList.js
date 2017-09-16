@@ -35,6 +35,14 @@ class QuizList extends Component {
     this.scrubSelectedQuiz(quizData);
   }
 
+  updateQuestion() {
+
+  }
+
+  updateAnswer() {
+
+  }
+
   scrubSelectedQuiz(quizData) {
     const answerArray = [];
     const questionArray = [];
@@ -66,7 +74,11 @@ class QuizList extends Component {
       return(
         <div key={getKey()}>
           <h1>edit quiz</h1>
-          <EditQuiz quizObj={quizObj}/>
+          <EditQuiz 
+          quizObj={quizObj}
+          updateQuestion={this.updateQuestion}
+          updateAnswer={this.updateAnswer}
+          />
         </div>
       )
     }
