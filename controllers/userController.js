@@ -75,7 +75,7 @@ exports.createUser = (req, res) => {
   const user = req.body;
 
   if (!user.email || !user.password || !user.first_name || !user.last_name) {
-    return res.status(422).json({ Error: 'Missing user name, password, or email' });
+    return res.status(422).json({ error: true });
   }
 
   auth(user).then((finalUser) => {
