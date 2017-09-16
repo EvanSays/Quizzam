@@ -1,26 +1,27 @@
+
 import React, { Component } from 'react';
 import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes } from '../helpers';
 
+function initializeState(quiz) {
+  const initialState = [];
+  for (let i = 0; i < quiz.questions.length; i += 1) {
+    initialState.push({ selectedAnswers: [] });
+  }
+  return initialState;
+}
+
 export default class TakeQuiz extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currentQuestion: 0,
-      answers: [{ selected_answers: null }],
+      answers: initializeState(this.props.quiz),
     };
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
-  }
-
-  componentDidMount() {
-    const initialState = [];
-    for (let i = 0; i < this.props.quiz.questions.length; i += 1) {
-      initialState.push({ selected_answers: null });
-    }
-    this.setState({ answers: initialState });
   }
 
   handleClick(event) {
@@ -38,13 +39,26 @@ export default class TakeQuiz extends Component {
   }
 
   handleSelectAnswer(event) {
-    const newAnswer = {
-      selected_answers: event.target.id.charAt(event.target.id.length - 1),
-    };
-    const newState = [...this.state.answers];
+    const prevState = this.state.answers[this.state.currentQuestion].selectedAnswers;
+    const newAnswer = event.target.id.charAt(event.target.id.length - 1);
 
-    newState[this.state.currentQuestion] = newAnswer;
-    this.setState({ answers: newState });
+    if (prevState.find(element => newAnswer === element)) {
+      const currentAnswers = prevState.filter(answer => newAnswer !== answer);
+      const newState = [...this.state.answers];
+
+      newState[this.state.currentQuestion] = currentAnswers;
+      this.setState({ answers: newState });
+    } else if (event.target.type === 'checkbox') {
+      const newState = [...this.state.answers];
+
+      newState[this.state.currentQuestion] = { selectedAnswers: [...prevState, newAnswer] };
+      this.setState({ answers: newState });
+    } else if (event.target.type === 'radio') {
+      const newState = [...this.state.answers];
+
+      newState[this.state.currentQuestion] = { selectedAnswers: [newAnswer] };
+      this.setState({ answers: newState });
+    }
   }
 
   determineInputType(answer, index) {
@@ -58,6 +72,7 @@ export default class TakeQuiz extends Component {
               name={index}
               value={answer.answer_text}
               onChange={this.handleSelectAnswer}
+              checked={this.state.answers[this.state.currentQuestion].selectedAnswers.find(element => element == answer.id)}
             />
             <label htmlFor={`answer_id_${answer.id}`}>{answer.answer_text}</label>
           </div>
@@ -71,7 +86,7 @@ export default class TakeQuiz extends Component {
               name={index}
               value={answer.answer_text}
               onChange={this.handleSelectAnswer}
-              checked={this.state.answers[this.state.currentQuestion].selected_answers == answer.id}
+              checked={this.state.answers[this.state.currentQuestion].selectedAnswers.find(element => element == answer.id)}
             />
             <label htmlFor={`answer_id_${answer.id}`}>{answer.answer_text}</label>
           </div>
@@ -100,7 +115,6 @@ export default class TakeQuiz extends Component {
             })}
           </form>
         </section>
-
         <footer>
           <button onClick={this.handleClick}>Prev</button>
           <button onClick={this.handleClick}>Next</button>
