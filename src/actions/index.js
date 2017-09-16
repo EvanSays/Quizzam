@@ -179,3 +179,8 @@ export const createRoom = (id) => {
       .catch(() => dispatch(roomFail(true)));
   };
 };
+
+export const selectQuiz = (obj) => {
+  console.log('obj', obj);
+};
+

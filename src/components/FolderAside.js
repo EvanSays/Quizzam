@@ -32,7 +32,7 @@ class FolderAside extends Component {
 
   getSelectedFolder(folder) {
     const { history, selectFolder } = this.props;
-
+    
     selectFolder(folder);
     history.push(`/dashboard/folder/${folder.name}`);
   }

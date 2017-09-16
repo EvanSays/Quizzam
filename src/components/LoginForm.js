@@ -7,8 +7,8 @@ class LoginForm extends Component {
     this.state = {
       first_name: '',
       last_name: '',
-      email: '',
-      password: '',
+      email: 'joe@joe.com',
+      password: 'password',
     };
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
