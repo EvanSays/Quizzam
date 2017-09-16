@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { func, string } from 'prop-types';
 
-const Answer = ({ id, onChange, value, correct, radioClick }) => {
-  const isCorrect = correct === id;
+ class Answer extends Component {
+  constructor(props) {
+    super(props)
+     this.state = {
+       answer_text: '',
+       correct: false
+     }
+     this.handleChange = this.handleChange.bind(this);
+   }
 
-  return (
-    <form>
-      <input
-        id={id}
-        onChange={onChange}
-        type="text"
-        value={value}
-      />
-      <label htmlFor={id}>
-        Correct
+  handleChange(event) {
+    this.setState({ answer_text: event.target.value })
+  }
+
+  handleRadioClick() {
+    this.setState({ correct: !this.state.correct })
+  }
+
+  render() {
+    return (
+      <form>
         <input
-          name={id}
-          type="radio"
-          checked={isCorrect}
-          onClick={(e) => radioClick(e)}
-        />
-      </label>
-    </form>
-  );
-};
+          id={id}
+          onChange={this.handleChange}
+          type="text"
+          value={this.state.answer_text}
+          />
+        <label htmlFor={id}>
+          Correct
+          <input
+            name={id}
+            type="radio"
+            checked={this.state.correct}
+            onClick={e => radioClick(e)}
+            />
+        </label>
+      </form>
+    );
+  };
+  }
 
 Answer.defaultProps = {
   id: '',

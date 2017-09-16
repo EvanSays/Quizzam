@@ -10,7 +10,7 @@ class Question extends Component {
     super();
     this.state = {
       question_text: '',
-      answers: {},
+      answers: [],
       correct: '',
     };
 
@@ -19,6 +19,7 @@ class Question extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
   }
 
   handleQuestionInput(e) {
@@ -46,9 +47,11 @@ class Question extends Component {
   //   addQuestion({ question_text, answers });
   // }
 
-  // handleSubmit() {
-  //   const Question = Object.assign;
-  // }
+  handleSubmit() {
+    const { handleAddQuestion } = this.props;
+
+    handleAddQuestion(this.state);
+  }
 
   handleRadioClick(event) {
     const { name } = event.target;
@@ -56,8 +59,13 @@ class Question extends Component {
     this.setState({ correct: name });
   }
 
+  addAnswer(answer) {
+    const newAnswers = [...this.state.answers, answer];
+    console.log('answeradd working');
+    this.setState({ answers: newAnswers });
+  }
+
   render() {
-    console.log(this.props);
     const answers = Object.keys(this.state.answers).map((answer) => {
       return (
         <Answer
@@ -67,6 +75,7 @@ class Question extends Component {
           value={this.state.answers[answer]}
           correct={this.state.correct}
           radioClick={this.handleRadioClick}
+          addAnswer={this.addAnswer}
         />
       );
     });
@@ -81,7 +90,7 @@ class Question extends Component {
           placeholder="Enter Question"
         />
         {answers}
-        <button onClick={this.handleAddNewAnswer}>Add Answer</button>
+        <button onClick={this.addAnswer}>Add Answer</button>
         <button onClick={this.handleSubmit}>Submit Question</button>
       </section>
     );
