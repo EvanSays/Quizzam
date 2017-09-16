@@ -32,6 +32,21 @@ class QuizList extends Component {
   toggleEdit(quizData) {
     const { quizObj } = this.state;
     this.setState({ isEditing: true, quizObj: quizData });
+    this.scrubSelectedQuiz(quizData);
+  }
+
+  scrubSelectedQuiz(quizData) {
+    const answerArray = [];
+    const questionArray = [];
+    const questions = quizData.questions;
+
+    questions.forEach((question) => {
+      questionArray.push({ id: question.id, question_text: question.question_text });
+      question.answers.forEach((quesAns) => {
+        answerArray.push(quesAns);
+      });
+    });
+    console.log('questionsArray, answersArray', questionArray, answerArray);
   }
 
   deleteQuiz(id) {
