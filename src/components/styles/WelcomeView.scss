@@ -30,8 +30,29 @@
   margin: 30px 0 0;
 }
 
+.welcome-logo-ink {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
 .welcome-logo {
-  margin-left: 20px;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.logo-title {
+  color: #FEC93E;
+  cursor: pointer;
+  font-size: 20px;
+  &:active {
+    color: #FEC93E;
+  }
 }
 
 .welcome-nav {
@@ -42,8 +63,12 @@
 
 .nav-link {
   margin: 0 10px;
-}
-
-.active-link {
-  color: red;
+  color: #353535;
+  text-decoration: none;
+  &:active {
+    color: #353535;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
 }

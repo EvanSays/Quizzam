@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { Link, NavLink, Route, Redirect } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
+import flash from '../assets/flash.svg';
 import LoginFormContainer from '../containers/LoginFormContainer';
 import CodeFormContainer from '../containers/CodeFormContainer';
 import './styles/WelcomeView.scss';
@@ -21,6 +22,7 @@ class WelcomeView extends Component {
   render() {
     const { quiz, user, location } = this.props;
     const { isHidden } = this.state;
+    const logo = { backgroundImage: `url(${flash})` };
     
     if (user.id) {
       return <Redirect to={'/'} />;
@@ -38,16 +40,18 @@ class WelcomeView extends Component {
       <section className="welcome-view">
         <LoginFormContainer location={location} isHidden={isHidden} />
         <header className="welcome-header">
-          <Link to="/" className="welcome-logo">Logo</Link>
+          <Link to="/" className="welcome-logo-ink">
+            <h1 className="logo-title">Quizzam</h1>
+            <div style={logo} className="welcome-logo"></div>
+          </Link>
           <nav className="welcome-nav">
-            <NavLink
+            <Link
               to="/login"
               id="login"
               className="nav-link"
-              activeClassName="active-link"
               onClick={this.handleOnClick}
             >Login/Register
-            </NavLink>
+            </Link>
           </nav>
         </header>
         <main className="welcome-main">
