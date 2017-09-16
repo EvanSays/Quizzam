@@ -25,7 +25,7 @@ describe('Quiz API routes', () => {
   });
 
   describe('GET /api/v1/quizzes', () => {
-    it('return an array of all of the quizzes', (done) => {
+    it('Should return an array of all of the quizzes', (done) => {
       chai.request(app)
         .get('/api/v1/quizzes')
         .end((err, res) => {
