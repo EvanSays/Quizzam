@@ -31,6 +31,6 @@ router.patch('/questions/:id/answers', answer.editAnswer);
 
 // Room
 router.get('/room/:id', room.quiz);
-router.post('/room/:quiz_id', room.addRoom);
+router.post('/room', room.addRoom);
 
 module.exports = router;

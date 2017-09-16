@@ -7,8 +7,9 @@ import './styles/WelcomeView.scss';
 
 const WelcomeView = ({ quiz, user }) => {
   if (user.id) {
-    return <Redirect to={'/dashboard'} />;
+    return <Redirect to={'/'} />;
   }
+
   if (quiz.id) {
     return (<Redirect to={{
       pathname: `/room/${quiz.id}`,

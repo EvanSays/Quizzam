@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { createRoom, selectQuiz } from '../actions';
 import QuizList from '../components/QuizList';
 
-const mapStateToProps = ({ selectedFolder }) => {
-  return { selectedFolder };
+const mapStateToProps = ({ selectedFolder, room }) => {
+  return { selectedFolder, room };
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import QuizCard from './QuizCard';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
@@ -6,15 +7,14 @@ import './styles/QuizList.scss';
 class QuizList extends Component {
   constructor() {
     super();
-
     this.postRoom = this.postRoom.bind(this);
     this.editQuiz = this.editQuiz.bind(this);
   }
 
-  postRoom(id) {
-    const { createRoom, history } = this.props;
-    createRoom(id);
-    history.push(`/room/${id}`);
+  postRoom(quiz) {
+    const { createRoom } = this.props;
+
+    createRoom(quiz);
   }
 
   editQuiz(data) {

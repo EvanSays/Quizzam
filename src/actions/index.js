@@ -147,7 +147,6 @@ export const createFolder = ({ name, id}) => {
 };
 
 const getRoom = (room) => {
-  console.log(room);
   return { type: constants.GET_ROOM, room };
 };
 
@@ -159,13 +158,12 @@ const roomLoading = (bool) => {
   return { type: constants.ROOM_LOADING, bool };
 };
 
-export const createRoom = (id) => {
-  console.log(id, 'create room id');
+export const createRoom = (quiz) => {
   return (dispatch) => {
     dispatch(roomLoading(true));
-    fetch(`api/v1/room/${id}`, {
+    fetch('api/v1/room', {
       method: 'POST',
-      body: '',
+      body: JSON.stringify({ quiz_id: quiz.id }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => {
@@ -173,6 +171,7 @@ export const createRoom = (id) => {
         return res.json();
       })
       .then((data) => {
+        dispatch(getQuiz(quiz));
         dispatch(roomFail(false));
         dispatch(getRoom(data.id));
       })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { func, array, object } from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import CreateFolder from './CreateFolder';
 import Folder from './Folder';
 import { getKey } from '../helpers';
@@ -32,9 +32,9 @@ class FolderAside extends Component {
 
   getSelectedFolder(folder) {
     const { history, selectFolder } = this.props;
-    
+
     selectFolder(folder);
-    history.push(`/dashboard/folder/${folder.name}`);
+    history.push('/folder');
   }
 
   postFolder(folder) {

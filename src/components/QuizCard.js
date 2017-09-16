@@ -4,6 +4,7 @@ import { string, number } from 'prop-types';
 const QuizCard = ({ quizData, postRoom, editQuiz }) => {
   
   const questionCount = quizData.questions.length;
+
   return (
     <section className="quiz-card">
       <p>{quizData.title}</p>
@@ -14,7 +15,7 @@ const QuizCard = ({ quizData, postRoom, editQuiz }) => {
       </button>
       <button className="quiz-delete">Delete Quiz</button>
       <button
-        onClick={() => postRoom(quizData.id)}
+        onClick={() => postRoom(quizData)}
         className="quiz-launch-button"
       >Launch Quiz
       </button>
