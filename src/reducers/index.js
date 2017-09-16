@@ -4,6 +4,7 @@ import { foldersReducer, foldersLoadingReducer, foldersFailReducer, selectedFold
 import { getQuizReducer, quizLoadingReducer, quizFailReducer } from './quizReducer';
 import { questionsReducer } from './questionsReducer';
 import { userReducer, userFailReducer, userLoadingReducer } from './userReducer';
+import { roomReducer, roomFailReducer, roomLoadingReducer } from './roomReducer';
 
 export default combineReducers({
   router: routerReducer,
@@ -16,7 +17,12 @@ export default combineReducers({
   user: userReducer,
   userLoading: userLoadingReducer,
   userFail: userFailReducer,
+
   quiz: getQuizReducer,
   quizLoading: quizLoadingReducer,
   quizFail: quizFailReducer,
+
+  room: roomReducer,
+  roomFail: roomFailReducer,
+  roomLoading: roomLoadingReducer,
 });

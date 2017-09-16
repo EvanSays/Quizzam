@@ -59,7 +59,7 @@ export const fetchQuiz = (room) => {
       })
       .then((quiz) => {
         dispatch(getQuiz(quiz));
-        dispatch(quizIsLoading(false));
+        dispatch(quizLoading(false));
       })
       .catch(() => {
         quizFail(true);
@@ -146,6 +146,41 @@ export const createFolder = ({ name, id}) => {
   };
 };
 
+const getRoom = (room) => {
+  console.log(room);
+  return { type: constants.GET_ROOM, room };
+};
+
+const roomFail = (bool) => {
+  return { type: constants.ROOM_FAIL, bool };
+};
+
+const roomLoading = (bool) => {
+  return { type: constants.ROOM_LOADING, bool };
+};
+
+export const createRoom = (id) => {
+  console.log(id, 'create room id');
+  return (dispatch) => {
+    dispatch(roomLoading(true));
+    fetch(`api/v1/room/${id}`, {
+      method: 'POST',
+      body: '',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        dispatch(roomLoading(false));
+        return res.json();
+      })
+      .then((data) => {
+        dispatch(roomFail(false));
+        dispatch(getRoom(data.id));
+      })
+      .catch(() => dispatch(roomFail(true)));
+  };
+};
+
 export const selectQuiz = (obj) => {
   console.log('obj', obj);
 };
+

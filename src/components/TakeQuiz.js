@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
+import { questionTypes } from '../helpers';
 
 export default class TakeQuiz extends Component {
   constructor() {
     super();
     this.state = {
       currentQuestion: 0,
-      answers: [],
+      answers: [{ selected_answers: null }],
     };
     this.handleClick = this.handleClick.bind(this);
+    this.determineInputType = this.determineInputType.bind(this);
+    this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
+  }
+
+  componentDidMount() {
+    const initialState = [];
+    for (let i = 0; i < this.props.quiz.questions.length; i += 1) {
+      initialState.push({ selected_answers: null });
+    }
+    this.setState({ answers: initialState });
   }
 
   handleClick(event) {
@@ -23,6 +34,48 @@ export default class TakeQuiz extends Component {
     } else if (textContent === 'Prev' && currentQuestion > 0) {
       const newState = this.state.currentQuestion - 1;
       this.setState({ currentQuestion: newState });
+    }
+  }
+
+  handleSelectAnswer(event) {
+    const newAnswer = {
+      selected_answers: event.target.id.charAt(event.target.id.length - 1),
+    };
+    const newState = [...this.state.answers];
+
+    newState[this.state.currentQuestion] = newAnswer;
+    this.setState({ answers: newState });
+  }
+
+  determineInputType(answer, index) {
+    switch (this.props.quiz.questions[this.state.currentQuestion].question_type) {
+      case 'multiple choice-multiple answer':
+        return (
+          <div key={`answer_${answer.id}`}>
+            <input
+              type="checkbox"
+              id={`answer_id_${answer.id}`}
+              name={index}
+              value={answer.answer_text}
+              onChange={this.handleSelectAnswer}
+            />
+            <label htmlFor={`answer_id_${answer.id}`}>{answer.answer_text}</label>
+          </div>
+        );
+      default:
+        return (
+          <div key={answer.answer_text}>
+            <input
+              type="radio"
+              id={`answer_id_${answer.id}`}
+              name={index}
+              value={answer.answer_text}
+              onChange={this.handleSelectAnswer}
+              checked={this.state.answers[this.state.currentQuestion].selected_answers == answer.id}
+            />
+            <label htmlFor={`answer_id_${answer.id}`}>{answer.answer_text}</label>
+          </div>
+        );
     }
   }
 
@@ -40,11 +93,12 @@ export default class TakeQuiz extends Component {
         </header>
         <section>
           <h3>{this.props.quiz.questions[this.state.currentQuestion].question_text}</h3>
-          <div>
-            {this.props.quiz.questions[this.state.currentQuestion].answers.map((answer) => {
-              return <p>{answer.answer_text}</p>;
+          <p>({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})</p>
+          <form>
+            {this.props.quiz.questions[this.state.currentQuestion].answers.map((answer, index) => {
+              return this.determineInputType(answer, index);
             })}
-          </div>
+          </form>
         </section>
 
         <footer>
