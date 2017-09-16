@@ -8,6 +8,7 @@ class QuizList extends Component {
     super();
 
     this.postRoom = this.postRoom.bind(this);
+    this.editQuiz = this.editQuiz.bind(this);
   }
 
   postRoom(id) {
@@ -16,16 +17,22 @@ class QuizList extends Component {
     history.push(`/room/${id}`);
   }
 
+  editQuiz(data) {
+    const { selectQuiz, history } = this.props;
+    console.log('data', data);
+    history.push(`/edit/${data.id}`);
+    selectQuiz(data);
+  }
+
   render() {
     const { selectedFolder, selectQuiz } = this.props;
-    
     const { name, quizzes } = selectedFolder;
     const quizArray = quizzes.map((quiz) => {
       return (<QuizCard
         key={getKey()}
         quizData={quiz}
         postRoom={this.postRoom}
-        selectQuiz={selectQuiz}
+        editQuiz={this.editQuiz}
       />);
     });
     return (

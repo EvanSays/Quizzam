@@ -5,6 +5,7 @@ export const NEW_FOLDER = 'NEW_FOLDER';
 export const SELECT_FOLDER = 'SELECT_FOLDER';
 
 export const GET_QUIZ = 'GET_QUIZ';
+export const EDIT_QUIZ = 'EDIT_QUIZ';
 export const QUIZ_FAIL = 'QUIZ_FAIL';
 export const QUIZ_LOADING = 'QUIZ_LOADING';
 

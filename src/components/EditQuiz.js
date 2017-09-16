@@ -4,7 +4,7 @@ class EditQuiz extends Component {
   render() {
     return (
       <div>
-        <h1>EDIT</h1>
+        <h1>EDIT QUIZ</h1>
       </div>
     );
   }
