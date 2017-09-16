@@ -23,11 +23,10 @@ render(
             return <TakeQuizContainer />;
           }}
         />
-        <Route path="/dashboard" component={AppContainer} />
         <Route path="/login" component={WelcomeViewContainer} />
         <Route path="/signup" component={WelcomeViewContainer} />
         <Route path="/edit" component={EditQuizContainer} />
-        <Route exact path="/" component={WelcomeViewContainer} />
+        <Route path="/" component={AppContainer} />
       </section>
     </ConnectedRouter>
   </Provider>,

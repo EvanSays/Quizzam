@@ -3,25 +3,32 @@ import { Redirect, Route } from 'react-router-dom';
 import CreateQuiz from './CreateQuiz';
 import EditQuiz from './EditQuiz';
 import QuizListContainer from '../containers/QuizListContainer';
+import WelcomeViewContainer from '../containers/WelcomeViewContainer';
 import FolderAsideContainer from '../containers/FolderAsideContainer';
 
 class App extends Component {
   shouldComponentUpdate() {
     return true;
   }
+
   render() {
-    const { user, history } = this.props;
+    const { user, history, room } = this.props;
 
     if (!user.id) {
-      return <Redirect to={'/'} />;
+      return <WelcomeViewContainer history={history} />;
     }
+
+    if (room) {
+      return <Redirect to={`/room/${room}`} />;
+    }
+
+    const aside = room ? null : <FolderAsideContainer history={history} />
     return (
       <section className="App">
-        <FolderAsideContainer history={history} />
-        <Route path="/dashboard/folder/:id" component={QuizListContainer} />
+        {aside}
+        <Route path="/folder" component={QuizListContainer} />
         <Route path="/quiz" component={CreateQuiz} />
         <Route path="/dashboard/quiz/:id" component={EditQuiz} />
-        {/* <Route path="/room/:id" component={Room} />; */}
       </section>
     );
   }

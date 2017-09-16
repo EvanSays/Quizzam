@@ -159,13 +159,12 @@ const roomLoading = (bool) => {
   return { type: constants.ROOM_LOADING, bool };
 };
 
-export const createRoom = (id) => {
-  console.log(id, 'create room id');
+export const createRoom = (quiz_id) => {
   return (dispatch) => {
     dispatch(roomLoading(true));
-    fetch(`api/v1/room/${id}`, {
+    fetch('api/v1/room', {
       method: 'POST',
-      body: '',
+      body: JSON.stringify({ quiz_id }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => {

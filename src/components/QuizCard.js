@@ -4,6 +4,7 @@ import { string, number } from 'prop-types';
 const QuizCard = ({ quizData, postRoom, editQuiz }) => {
   
   const questionCount = quizData.questions.length;
+
   return (
     <section className="quiz-card">
       <p>{quizData.title}</p>
