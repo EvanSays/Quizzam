@@ -16,19 +16,19 @@ render(
     <ConnectedRouter history={history}>
       <section>
         <Switch>
-        <Route
-          path="/room/:id"
-          render={(props) => {
-            if (!props.location.state.user) {
+          <Route
+            path="/room/:id"
+            render={(props) => {
+              if (!props.location.state.user) {
+                return <TakeQuizContainer />;
+              }
               return <TakeQuizContainer />;
-            }
-            return <TakeQuizContainer />;
-          }}
-        />
-        <Route path="/login" component={WelcomeViewContainer} />
-        <Route path="/signup" component={WelcomeViewContainer} />
-        <Route path="/edit" component={EditQuizContainer} />
-        <Route path="/" component={AppContainer} />
+            }}
+          />
+          <Route path="/login" component={WelcomeViewContainer} />
+          <Route path="/signup" component={WelcomeViewContainer} />
+          <Route path="/edit" component={EditQuizContainer} />
+          <Route path="/" component={AppContainer} />
         </Switch>
       </section>
     </ConnectedRouter>
