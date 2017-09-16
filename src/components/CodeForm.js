@@ -28,10 +28,9 @@ class CodeForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleOnSubmit} action="">
-        <h2>Enter Code</h2>
-        <input onChange={this.handleOnChange} type="text" value={this.state.code} />
-        <button>Submit</button>
+      <form className="code-form" onSubmit={this.handleOnSubmit} action="">
+        <input className="code-input" onChange={this.handleOnChange} type="text" value={this.state.code} placeholder="Enter Code!" />
+        <button className="code-btn">Press enter to start or <span>click here</span></button>
       </form>
     );
   }

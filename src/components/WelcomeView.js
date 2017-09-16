@@ -36,6 +36,7 @@ class WelcomeView extends Component {
 
     return (
       <section className="welcome-view">
+        <LoginFormContainer location={location} isHidden={isHidden} />
         <header className="welcome-header">
           <Link to="/" className="welcome-logo">Logo</Link>
           <nav className="welcome-nav">
@@ -50,7 +51,7 @@ class WelcomeView extends Component {
           </nav>
         </header>
         <main className="welcome-main">
-          <LoginFormContainer location={location} isHidden={isHidden} />
+          <h1 className="welcome-title">Quizzam</h1>
           <CodeFormContainer />
         </main>
       </section>
