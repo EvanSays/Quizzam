@@ -53,6 +53,7 @@ class Question extends Component {
   }
 
   render() {
+    console.log(this.props);
     const answers = Object.keys(this.state.answers).map((answer) => {
       return (
         <Answer
