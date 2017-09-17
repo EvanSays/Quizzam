@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import add from '../assets/add.svg';
+import './styles/CreateFolder.scss';
 
 class CreateFolder extends Component {
   constructor() {
@@ -27,15 +29,17 @@ class CreateFolder extends Component {
   }
 
   render() {
+    const style = { backgroundImage: `url(${add})` };
     return (
       <form onSubmit={this.handleOnSubmit} className="create-folder">
+        <button style={style} className="folder-submit" />
         <input
-          className="input-folder"
+          className="folder-input"
           onChange={this.handleOnChange}
           type="text"
           value={this.state.name}
+          placeholder="Create new folder"
         />
-        <button className="folder-submit">Submit</button>
       </form>
     );
   }

@@ -1,17 +1,18 @@
 import React from 'react';
 import { string, number } from 'prop-types';
+import './styles/QuizCard.scss';
 
 const QuizCard = ({ quizData, postRoom, editQuiz }) => {
-  
   const questionCount = quizData.questions.length;
 
   return (
     <section className="quiz-card">
       <p>{quizData.title}</p>
       <p>{questionCount}</p>
-      <button onClick={() => editQuiz(quizData)} 
-              className="quiz-edit-button"
-              >Edit Quiz
+      <button
+        onClick={() => editQuiz(quizData)}
+        className="quiz-edit-button"
+      >Edit Quiz
       </button>
       <button className="quiz-delete">Delete Quiz</button>
       <button

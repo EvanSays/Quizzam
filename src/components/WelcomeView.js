@@ -41,8 +41,8 @@ class WelcomeView extends Component {
         <LoginFormContainer location={location} isHidden={isHidden} />
         <header className="welcome-header">
           <Link to="/" className="welcome-logo-ink">
-            <h1 className="logo-title">Quizzam</h1>
             <div style={logo} className="welcome-logo"></div>
+            <h1 className="logo-title">Quizzam</h1>
           </Link>
           <nav className="welcome-nav">
             <Link

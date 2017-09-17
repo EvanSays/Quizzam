@@ -35,12 +35,12 @@ class QuizList extends Component {
       />);
     });
     return (
-      <section className="quiz-list">
+      <section className="quiz-list-wrapper">
         <header>
           <h2>{name}</h2>
           <button>Create Quiz</button>
         </header>
-        <section>
+        <section className="quiz-list">
           {quizArray}
         </section>
       </section>
