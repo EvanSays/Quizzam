@@ -19,7 +19,6 @@ class CreateQuiz extends Component {
   }
 
   handleInputChange(event) {
-    console.log('handleChange');
     const { name, value } = event.target;
 
     this.setState({ [name]: value });
