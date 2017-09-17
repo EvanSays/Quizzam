@@ -28,6 +28,7 @@ class CreateQuiz extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
+    this.handleAnswerChange = this.handleAnswerChange.bind(this);
   }
 
   addQuestion() {
@@ -53,6 +54,18 @@ class CreateQuiz extends Component {
     this.setState({ [name]: value });
   }
 
+  handleAnswerChange(index, event) {
+    const newQuestions = Object.assign({}, this.state.questions);
+    const { value, name } = event.target;
+    console.log('working', index, name, value);
+
+    newQuestions[index].answers[name].answerText = value;
+
+    console.log(newQuestions);
+
+    // this.setState({ questions { answers {} } });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const { name, type, subject } = this.state;
@@ -74,8 +87,12 @@ class CreateQuiz extends Component {
       .catch(err => console.error(err));
   }
 
+  // giveValue(index, name) {
+  //   return this.state.questions[index].answers[name].answerText
+  // }
+
   render() {
-    const { quizId } = this.state;
+    const { quizId, questions } = this.state;
 
     if (!quizId) {
       return (
@@ -109,11 +126,13 @@ class CreateQuiz extends Component {
         </form>
       );
     }
-    const Questions = Object.keys(this.state.questions)
+    const Questions = Object.keys(questions)
       .map((question, index) => {
         return (<QuestionContainer
           key={getKey()}
           index={index}
+          onAnswerChange={this.handleAnswerChange}
+          giveValue={this.giveValue}
         />);
       });
     return (
