@@ -87,6 +87,7 @@ class CreateQuiz extends Component {
               .catch(err => console.error(err));
           });
         })
+        .then(() => this.props.fetchFolders(this.props.selectedFolder.user_id))
         .catch(err => console.error(err));
     });
   }
