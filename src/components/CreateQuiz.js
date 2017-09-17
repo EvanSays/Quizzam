@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import QuestionContainer from '../containers/QuestionsContainer';
 import PropTypes from 'prop-types';
+import QuestionContainer from '../containers/QuestionsContainer';
+import { getKey } from '../helpers';
 
 
 class CreateQuiz extends Component {
@@ -11,11 +12,39 @@ class CreateQuiz extends Component {
       subject: '',
       type: '',
       quizId: '',
-      questions: [],
+      questions: {
+        0: {
+          question_text: '',
+          answers: {
+            a1: { answerText: '', correct: false },
+            a2: { answerText: '', correct: false },
+            a3: { answerText: '', correct: false },
+            a4: { answerText: '', correct: false },
+          },
+        },
+      },
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addQuestion = this.addQuestion.bind(this);
+  }
+
+  addQuestion() {
+    const { questions } = this.state;
+    const stateLength = Object.keys(questions).length;
+
+    const newQuestions = Object.assign({}, questions, { [stateLength]: {
+      question_text: '',
+      answers: {
+        a1: { answerText: '', correct: false },
+        a2: { answerText: '', correct: false },
+        a3: { answerText: '', correct: false },
+        a4: { answerText: '', correct: false },
+      },
+    } });
+
+    this.setState({ questions: newQuestions });
   }
 
   handleInputChange(event) {
@@ -80,9 +109,17 @@ class CreateQuiz extends Component {
         </form>
       );
     }
+    const Questions = Object.keys(this.state.questions)
+      .map((question, index) => {
+        return (<QuestionContainer
+          key={getKey()}
+          index={index}
+        />);
+      });
     return (
       <section>
-        <QuestionContainer />
+        {Questions}
+        <button onClick={this.addQuestion}>Add Question</button>
       </section>
     );
   }
