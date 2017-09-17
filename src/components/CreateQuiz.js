@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import QuestionContainer from '../containers/QuestionsContainer';
+// import QuestionContainer from '../containers/QuestionsContainer';
+import { Question } from '../components/Question';
 import PropTypes from 'prop-types';
+import { getKey } from '../helpers';
 
 
 class CreateQuiz extends Component {
@@ -13,31 +15,43 @@ class CreateQuiz extends Component {
       questions: [{
         question_text: '',
         answers: [],
+        key: getKey(),
       }],
       quizId: '',
     };
-    this.updateAnswer = this.updateAnswer.bind(this);
+    this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
+    this.handleAddAnswer = this.handleAddAnswer.bind(this);
+    this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.addQuestion = this.addQuestion.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateQuestion = this.updateQuestion.bind(this);
-    this.addAnswer = this.addAnswer.bind(this);
   }
 
-  updateQuestion(id, questionUpdate) {
+  handleUpdateQuestion(event, questionId) {
     const newState = [...this.state.questions];
+    const key = getKey();
 
-    newState[id] = questionUpdate;
+    const questionUpdate = {
+      question_text: event.target.value,
+      answers: [...newState[questionId].answers],
+      key,
+    };
+
+    newState[questionId] = questionUpdate;
 
     this.setState({ questions: newState });
   }
 
-  updateAnswer(questionId, answerId, answerUpdate) {
+  handleUpdateAnswer(event, questionId, answerId) {
     const newState = [...this.state.questions];
+
+    const answerUpdate = {
+      answer_text: event.target.value,
+      correct: false,
+    };
 
     newState[questionId].answers[answerId] = answerUpdate;
     this.setState({ questions: newState });
-    forceUpdate();
   }
 
   handleChange(event) {
@@ -46,25 +60,28 @@ class CreateQuiz extends Component {
     this.setState({ [name]: value });
   }
 
-  addQuestion() {
+  handleAddQuestion() {
+    const key = getKey();
     const question = {
       question_text: '',
       answers: [],
+      key,
     };
 
-    const newQuestions = [...this.state.questions, question];
-    this.setState({ questions: newQuestions });
+    const newState = [...this.state.questions, question];
+    this.setState({ questions: newState });
   }
 
-  addAnswer(questionId) {
+  handleAddAnswer(event, questionId) {
     const questions = [...this.state.questions];
+    const key = getKey();
     const answer = {
       answer_text: '',
       correct: false,
+      key,
     };
     const newAnswers = [...questions[questionId].answers, answer];
-
-    const newState = questions[questionId].answers = newAnswers;
+    questions[questionId].answers = newAnswers;
 
     this.setState({ questions });
   }
@@ -83,8 +100,10 @@ class CreateQuiz extends Component {
       }),
     })
       .then(blob => blob.json())
-      .then(data => this.setState({ quizId: data.id }))
-      .catch(err => console.log(err));
+      .then((data) => {
+        this.setState({ quizId: data.id });
+      })
+      .catch(err => err);
   }
 
   render() {
@@ -120,19 +139,18 @@ class CreateQuiz extends Component {
       );
     }
     return (
-
       <section>
-        <button onClick={this.addQuestion}>Add Question</button>
+        <button onClick={this.handleAddQuestion}>Add Question</button>
 
         {this.state.questions.map((question, index) => {
-          return (<QuestionContainer
-            key={question.questionText}
-            updateQuestion={this.updateQuestion}
-            updateAnswer={this.updateAnswer}
-            id={index}
+          return (<Question
+            questionKey={question.key}
+            handleUpdateQuestion={this.handleUpdateQuestion}
+            handleUpdateAnswer={this.handleUpdateAnswer}
+            questionId={index}
             questionText={question.question_text}
             answers={question.answers}
-            addAnswer={this.addAnswer}
+            handleAddAnswer={this.handleAddAnswer}
           />
           );
         })}
