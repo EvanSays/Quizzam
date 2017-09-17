@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import CreateQuiz from './CreateQuiz';
 import EditQuiz from './EditQuiz';
 import QuizListContainer from '../containers/QuizListContainer';
 import WelcomeViewContainer from '../containers/WelcomeViewContainer';
 import FolderAsideContainer from '../containers/FolderAsideContainer';
+import CreateQuizContainer from '../containers/CreateQuizContainer';
 
 class App extends Component {
   shouldComponentUpdate() {
@@ -26,12 +26,12 @@ class App extends Component {
       />);
     }
 
-    const aside = room ? null : <FolderAsideContainer history={history} />
+    const aside = room ? null : <FolderAsideContainer history={history} />;
     return (
       <section className="App">
         {aside}
         <Route path="/folder" component={QuizListContainer} />
-        <Route path="/quiz" component={CreateQuiz} />
+        <Route path="/quiz" component={CreateQuizContainer} />
         <Route path="/dashboard/quiz/:id" component={EditQuiz} />
       </section>
     );

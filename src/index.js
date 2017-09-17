@@ -9,7 +9,7 @@ import AppContainer from './containers/AppContainer';
 import TakeQuizContainer from './containers/TakeQuizContainer';
 import EditQuizContainer from './containers/EditQuizContainer';
 import QuizCard from './components/QuizCard';
-import CreateQuiz from './components/CreateQuiz';
+import CreateQuizContainer from './containers/CreateQuizContainer';
 import './index.scss';
 
 render(
@@ -30,7 +30,6 @@ render(
           <Route path="/signup" component={WelcomeViewContainer} />
           <Route path="/edit" component={EditQuizContainer} />
           <Route path="/" component={AppContainer} />
-          <Route path="/quiz" component={CreateQuiz} />
         </Switch>
       </section>
     </ConnectedRouter>

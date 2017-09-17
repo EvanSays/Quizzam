@@ -44,6 +44,7 @@ class CreateQuiz extends Component {
 
   render() {
     const { quizId } = this.state;
+    console.log(this.props);
 
     if (!quizId) {
       return (
