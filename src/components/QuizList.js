@@ -1,37 +1,57 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import QuizCard from './QuizCard';
+import EditQuiz from './EditQuiz';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
 class QuizList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+      selectedQuiz: this.props.editQuizData,
+      quizName: '',
+    };
     this.postRoom = this.postRoom.bind(this);
-    this.editQuiz = this.editQuiz.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.editQuizData !== nextProps.editQuizData) {
+      this.setState({ selectedQuiz: nextProps.editQuizData });
+    }
   }
 
   postRoom(quiz) {
     const { createRoom } = this.props;
-
     createRoom(quiz);
   }
 
-  editQuiz(data) {
-    const { selectQuiz, history } = this.props;
-    history.push(`/edit/${data.id}`);
-    selectQuiz(data);
+  toggleEdit(quizData) {
+    const { selectQuiz } = this.props;
+    selectQuiz(quizData);
+    this.setState({ isEditing: !this.state.isEditing });
   }
 
   render() {
-    const { selectedFolder, selectQuiz, history } = this.props;
+    const { selectedFolder, history, editQuizData } = this.props;
     const { name, quizzes } = selectedFolder;
+
+    if(this.state.isEditing) {
+      return (
+        <div>
+          <EditQuiz editQuizData={editQuizData} />
+        </div>
+      )
+    }
     const quizArray = quizzes.map((quiz) => {
       return (<QuizCard
         key={getKey()}
         quizData={quiz}
         postRoom={this.postRoom}
         editQuiz={this.editQuiz}
+        toggleEdit={this.toggleEdit}
       />);
     });
     return (

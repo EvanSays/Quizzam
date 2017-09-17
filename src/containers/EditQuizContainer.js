@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 // import {} from '../actions';
 import EditQuiz from '../components/EditQuiz';
 
-const mapStateToProps = ({ edit }) => {
-  return { edit };
+const mapStateToProps = ({ editQuizData }) => {
+  return { editQuizData };
 };
 
 // const mapDispatchToProps = (dispatch) => {

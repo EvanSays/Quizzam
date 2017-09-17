@@ -19,7 +19,7 @@ export default combineReducers({
   userFail: userFailReducer,
 
   quiz: getQuizReducer,
-  edit: editQuizReducer,
+  editQuizData: editQuizReducer,
   quizLoading: quizLoadingReducer,
   quizFail: quizFailReducer,
 
