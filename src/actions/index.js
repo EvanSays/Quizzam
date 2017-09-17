@@ -67,6 +67,27 @@ export const fetchQuiz = (room) => {
   };
 };
 
+const removeQuizFolder = (id) => {
+  return { type: constants.DELETE_QUIZ, id };
+};
+
+export const deleteQuiz = (id) => {
+  return (dispatch) => {
+    fetch(`api/v1/quizzes/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((quiz) => {
+        dispatch(removeQuizFolder(id));
+      })
+      .catch(() => {
+      });
+  };
+};
+
 const getUser = (user) => {
   return { type: constants.GET_USER, user };
 };

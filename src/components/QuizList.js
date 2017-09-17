@@ -9,6 +9,16 @@ class QuizList extends Component {
     super();
     this.postRoom = this.postRoom.bind(this);
     this.editQuiz = this.editQuiz.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
+    this.state = {
+      quizzes: [],
+    };
+  }
+
+  componentDidMount() {
+    const { quizzes } = this.props.selectedFolder;
+
+    this.setState({ quizzes });
   }
 
   postRoom(quiz) {
@@ -23,15 +33,27 @@ class QuizList extends Component {
     selectQuiz(data);
   }
 
+  deleteQuiz(id) {
+    const { deleteQuiz } = this.props;
+    const quizzes = this.state.quizzes.filter(quiz => quiz.id !== id);
+
+    deleteQuiz(id);
+    this.setState({ quizzes });
+  }
+
+
   render() {
     const { selectedFolder, selectQuiz, history } = this.props;
-    const { name, quizzes } = selectedFolder;
+    const { name } = selectedFolder;
+    const { quizzes } = this.state;
+
     const quizArray = quizzes.map((quiz) => {
       return (<QuizCard
         key={getKey()}
         quizData={quiz}
         postRoom={this.postRoom}
         editQuiz={this.editQuiz}
+        deleteQuiz={this.deleteQuiz}
       />);
     });
     return (

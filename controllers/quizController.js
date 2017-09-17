@@ -45,6 +45,7 @@ exports.editQuiz = (req, res) => {
 
 exports.delQuiz = (req, res) => {
   const { id } = req.params;
+
   db('quiz')
     .where({ id })
     .del()

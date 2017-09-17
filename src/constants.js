@@ -8,6 +8,7 @@ export const GET_QUIZ = 'GET_QUIZ';
 export const EDIT_QUIZ = 'EDIT_QUIZ';
 export const QUIZ_FAIL = 'QUIZ_FAIL';
 export const QUIZ_LOADING = 'QUIZ_LOADING';
+export const DELETE_QUIZ = 'DELETE_QUIZ';
 
 export const GET_USER = 'GET_USER';
 export const USER_FAIL = 'USER_FAIL';
