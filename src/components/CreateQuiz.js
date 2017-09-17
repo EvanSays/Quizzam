@@ -27,6 +27,7 @@ class CreateQuiz extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { name, type, subject } = this.state;
+    const { id, user_id } = this.props.selectedFolder;
 
     fetch('/api/v1/quizzes', {
       method: 'POST',
@@ -35,6 +36,8 @@ class CreateQuiz extends Component {
         name,
         subject,
         type,
+        user_id,
+        folder_id: id,
       }),
     })
       .then(blob => blob.json())
@@ -44,7 +47,6 @@ class CreateQuiz extends Component {
 
   render() {
     const { quizId } = this.state;
-    console.log(this.props);
 
     if (!quizId) {
       return (
