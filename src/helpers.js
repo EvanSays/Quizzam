@@ -1,4 +1,5 @@
 const getKey = () => Math.round(Math.random() * Date.now());
+const getKeyType = (index, identifier) => `${identifier}-${index}`;
 
 const genRoomNumber = () => {
   const alphaMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -19,4 +20,43 @@ const questionTypes = {
   essay: 'UNDETERMINED IMPLEMENTATION',
 };
 
-module.exports = { getKey, genRoomNumber, questionTypes };
+const colors = [
+  {
+    bg: '#FD9727',
+    dark: '#52300C',
+  },
+  {
+    bg: '#FEC93E',
+    dark: '#685013',
+  },
+  {
+    bg: '#557BB1',
+    dark: '#2C3D55',
+  },
+  {
+    bg: '#FD8A69',
+    dark: '#6E3B2D',
+  },
+  {
+    bg: '#288AE2',
+    dark: '#0E3A61',
+  },
+];
+
+const getRandomBetween = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const getFolderColor = () => {
+  const { bg, dark } = colors[getRandomBetween(0, 5)];
+
+  return { bg, dark };
+};
+
+const getFolderStyle = (backgroundColor) => {
+  return { backgroundColor };
+};
+
+const getFolderTop = (color) => {
+  return { borderBottom: `40px solid ${color}` };
+};
+
+module.exports = { getKey, genRoomNumber, questionTypes, getFolderColor, getFolderStyle, getFolderTop, getKeyType };

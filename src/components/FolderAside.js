@@ -3,7 +3,7 @@ import { func, array, object } from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import CreateFolder from './CreateFolder';
 import Folder from './Folder';
-import { getKey } from '../helpers';
+import { getKeyType } from '../helpers';
 import './styles/FolderAside.scss';
 
 class FolderAside extends Component {
@@ -46,9 +46,10 @@ class FolderAside extends Component {
 
   render() {
     const { folders } = this.state;
+    const { selectedFolder } = this.props;
 
-    const foldersArray = folders.map((folder) => {
-      return <Folder key={getKey()} folder={folder} getSelectedFolder={this.getSelectedFolder} />;
+    const foldersArray = folders.map((folder, i) => {
+      return <Folder key={getKeyType(i, 'folder')} folder={folder} getSelectedFolder={this.getSelectedFolder} />;
     });
 
     return (

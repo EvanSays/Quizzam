@@ -7,8 +7,9 @@ const Folder = ({ folder, getSelectedFolder }) => {
 
   return (
     <button onClick={() => getSelectedFolder(folder)} className="folder">
-      <h2>name: {name}</h2>
-      <p>{length}</p>
+      <div className="folder-top" />
+      <div className="folder-inside" />
+      <h2>{name}: {length}</h2>
     </button>
   );
 };
