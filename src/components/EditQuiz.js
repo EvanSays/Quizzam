@@ -1,16 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getKey } from '../helpers';
 
-const EditQuiz = ({ quizObj, updateQuestion, updateAnswer }) => {
-  const questions = quizObj.questions.map((question) => {
+const EditQuiz = ({ quizObj, updateAnswer, questionObj, handleUpdateQuestion }) => {
+  console.log('quizObj', quizObj);
+  
+  const questions = quizObj.questions.map((question, index) => {
+    const id = question.id;
+    // console.log('questionObj', questionObj[id].question_text);
     return (
       <div key={getKey()}>
-        <h2>{question.question_text}</h2>
+        <input
+          id={id}
+          data-index={index}
+          value='taco'
+          onChange={handleUpdateQuestion}
+        />
         {
           question.answers.map((answer) => {
             return (
               <div key={getKey()}>
-                <input 
+                <input
+                  key={answer.id} 
                   type="radio"
                   id={answer.answer_text}
                   name={answer.answer_text}
@@ -24,8 +34,12 @@ const EditQuiz = ({ quizObj, updateQuestion, updateAnswer }) => {
     )
   })
 
+
   return (
     <div>
+      <form action="submit">
+
+      </form>
       <h1>{quizObj.name}</h1>
       {questions}
       <button>submit changes</button>
