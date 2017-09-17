@@ -36,7 +36,7 @@ class QuizList extends Component {
     });
     return (
       <section className="quiz-list-wrapper">
-        <header>
+        <header className="quiz-list-header">
           <h2>{name}</h2>
           <button onClick={() => history.push('/quiz')}>Create Quiz</button>
         </header>
