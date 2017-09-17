@@ -46,8 +46,6 @@ class FolderAside extends Component {
 
   render() {
     const { folders } = this.state;
-    const { selectedFolder } = this.props;
-
     const foldersArray = folders.map((folder, i) => {
       return <Folder key={getKeyType(i, 'folder')} folder={folder} getSelectedFolder={this.getSelectedFolder} />;
     });

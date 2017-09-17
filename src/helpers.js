@@ -20,7 +20,7 @@ const questionTypes = {
   essay: 'UNDETERMINED IMPLEMENTATION',
 };
 
-const colors = [
+const folderColors = [
   {
     bg: '#FD9727',
     dark: '#52300C',
@@ -46,17 +46,9 @@ const colors = [
 const getRandomBetween = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const getFolderColor = () => {
-  const { bg, dark } = colors[getRandomBetween(0, 5)];
+  const { bg, dark } = folderColors[getRandomBetween(0, 4)];
 
   return { bg, dark };
 };
 
-const getFolderStyle = (backgroundColor) => {
-  return { backgroundColor };
-};
-
-const getFolderTop = (color) => {
-  return { borderBottom: `40px solid ${color}` };
-};
-
-module.exports = { getKey, genRoomNumber, questionTypes, getFolderColor, getFolderStyle, getFolderTop, getKeyType };
+module.exports = { getKey, genRoomNumber, questionTypes, getFolderColor, getKeyType, folderColors };
