@@ -4,11 +4,12 @@ import './styles/QuizCard.scss';
 
 const QuizCard = ({ quizData, postRoom, editQuiz }) => {
   const questionCount = quizData.questions.length;
+  console.log(quizData);
 
   return (
     <section className="quiz-card">
-      <p>{quizData.title}</p>
-      <p>{questionCount}</p>
+      <p>{quizData.name}</p>
+      <p>{questionCount} questions</p>
       <button
         onClick={() => editQuiz(quizData)}
         className="quiz-edit-button"
