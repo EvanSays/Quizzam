@@ -4,7 +4,6 @@ import './styles/QuizCard.scss';
 
 const QuizCard = ({ quizData, postRoom, editQuiz }) => {
   const questionCount = quizData.questions.length;
-  console.log(quizData);
 
   return (
     <section className="quiz-card">
