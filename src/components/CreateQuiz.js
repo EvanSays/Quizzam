@@ -10,13 +10,34 @@ class CreateQuiz extends Component {
       name: '',
       subject: '',
       type: '',
-      questions: [],
+      questions: [{
+        question_text: '',
+        answers: [],
+      }],
       quizId: '',
     };
-
+    this.updateAnswer = this.updateAnswer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateQuestion = this.updateQuestion.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
+  }
+
+  updateQuestion(id, questionUpdate) {
+    const newState = [...this.state.questions];
+
+    newState[id] = questionUpdate;
+
+    this.setState({ questions: newState });
+  }
+
+  updateAnswer(questionId, answerId, answerUpdate) {
+    const newState = [...this.state.questions];
+
+    newState[questionId].answers[answerId] = answerUpdate;
+    this.setState({ questions: newState });
+    forceUpdate();
   }
 
   handleChange(event) {
@@ -25,10 +46,27 @@ class CreateQuiz extends Component {
     this.setState({ [name]: value });
   }
 
-  addQuestion(question) {
+  addQuestion() {
+    const question = {
+      question_text: '',
+      answers: [],
+    };
+
     const newQuestions = [...this.state.questions, question];
-    console.log('addquestion working');
     this.setState({ questions: newQuestions });
+  }
+
+  addAnswer(questionId) {
+    const questions = [...this.state.questions];
+    const answer = {
+      answer_text: '',
+      correct: false,
+    };
+    const newAnswers = [...questions[questionId].answers, answer];
+
+    const newState = questions[questionId].answers = newAnswers;
+
+    this.setState({ questions });
   }
 
   handleSubmit(event) {
@@ -82,8 +120,22 @@ class CreateQuiz extends Component {
       );
     }
     return (
+
       <section>
-        <QuestionContainer handleAddQuestion={this.addQuestion} />
+        <button onClick={this.addQuestion}>Add Question</button>
+
+        {this.state.questions.map((question, index) => {
+          return (<QuestionContainer
+            key={question.questionText}
+            updateQuestion={this.updateQuestion}
+            updateAnswer={this.updateAnswer}
+            id={index}
+            questionText={question.question_text}
+            answers={question.answers}
+            addAnswer={this.addAnswer}
+          />
+          );
+        })}
       </section>
     );
   }

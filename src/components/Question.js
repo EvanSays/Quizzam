@@ -6,25 +6,29 @@ import PropTypes from 'prop-types';
 import Answer from './Answer';
 
 class Question extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      question_text: '',
-      answers: [],
-      correct: '',
+      id: this.props.id,
     };
-
-    this.handleQuestionInput = this.handleQuestionInput.bind(this);
+    this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
+    // this.handleQuestionInput = this.handleQuestionInput.bind(this);
     this.handleAddNewAnswer = this.handleAddNewAnswer.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
-    this.addAnswer = this.addAnswer.bind(this);
+    this.handleAddAnswer = this.handleAddAnswer.bind(this);
   }
 
-  handleQuestionInput(e) {
-    this.setState({ question_text: e.target.value });
+  handleUpdateQuestion(event) {
+    const newQuestionInfo = {
+      question_text: event.target.value,
+      answers: this.props.answers,
+    };
+    const id = this.state.id;
+    this.props.updateQuestion(id, newQuestionInfo);
   }
+
 
   handleAddNewAnswer() {
     const answers = Object.assign({}, this.state.answers, { [getKey()]: '' });
@@ -47,51 +51,62 @@ class Question extends Component {
   //   addQuestion({ question_text, answers });
   // }
 
-  handleSubmit() {
-    const { handleAddQuestion } = this.props;
-
-    handleAddQuestion(this.state);
-  }
+  // handleSubmit() {
+  //   const { handleAddQuestion } = this.props;
+  // 
+  //   handleAddQuestion(this.state);
+  // }
 
   handleRadioClick(event) {
     const { name } = event.target;
-    console.log(name);
     this.setState({ correct: name });
   }
 
-  addAnswer(answer) {
-    const newAnswers = [...this.state.answers, answer];
-    console.log('answeradd working');
-    this.setState({ answers: newAnswers });
+  handleAddAnswer(event) {
+    event.preventDefault();
+    this.props.addAnswer(this.state.id);
+  }
+  //   return (
+  //     <Answer
+  //       key={answer}
+  //       id={answer}
+  //       onChange={this.handleOnChange}
+  //       value={this.state.answers[answer]}
+  //       correct={this.state.correct}
+  //       radioClick={this.handleRadioClick}
+  //       addAnswer={this.addAnswer}
+  //       />
+  //   );
+  // });
+  // const answers = Object.keys(this.state.answers).map((answer) => {
+  // }
+  // {answers}
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps, nextState);
+    return true;
   }
 
   render() {
-    const answers = Object.keys(this.state.answers).map((answer) => {
-      return (
-        <Answer
-          key={answer}
-          id={answer}
-          onChange={this.handleOnChange}
-          value={this.state.answers[answer]}
-          correct={this.state.correct}
-          radioClick={this.handleRadioClick}
-          addAnswer={this.addAnswer}
-        />
-      );
-    });
-
     return (
       <section className="question">
         <h1>QUESTION</h1>
         <input
+          id={this.state.id}
           type="text"
-          value={this.state.question_text}
-          onChange={this.handleQuestionInput}
+          value={this.props.questionText}
+          onChange={this.handleUpdateQuestion}
           placeholder="Enter Question"
         />
-        {answers}
-        <button onClick={this.addAnswer}>Add Answer</button>
-        <button onClick={this.handleSubmit}>Submit Question</button>
+        <button onClick={this.handleAddAnswer}>Add Answer</button>
+        {this.props.answers.map((answer, index) => {
+          return (<Answer
+            id={index}
+            questionId={this.state.id}
+            answerText={answer.answer_text}
+            updateAnswer={this.props.updateAnswer}
+          />);
+        })}
       </section>
     );
   }
