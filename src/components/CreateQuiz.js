@@ -12,40 +12,13 @@ class CreateQuiz extends Component {
       subject: '',
       type: '',
       quizId: '',
-      questions: {
-        0: {
-          question_text: '',
-          answers: {
-            a1: { answerText: '', correct: false },
-            a2: { answerText: '', correct: false },
-            a3: { answerText: '', correct: false },
-            a4: { answerText: '', correct: false },
-          },
-        },
-      },
+      questions: [],
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.addQuestion = this.addQuestion.bind(this);
-    this.handleAnswerChange = this.handleAnswerChange.bind(this);
-  }
-
-  addQuestion() {
-    const { questions } = this.state;
-    const stateLength = Object.keys(questions).length;
-
-    const newQuestions = Object.assign({}, questions, { [stateLength]: {
-      question_text: '',
-      answers: {
-        a1: { answerText: '', correct: false },
-        a2: { answerText: '', correct: false },
-        a3: { answerText: '', correct: false },
-        a4: { answerText: '', correct: false },
-      },
-    } });
-
-    this.setState({ questions: newQuestions });
+    this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.postQuiz = this.postQuiz.bind(this);
   }
 
   handleInputChange(event) {
@@ -54,16 +27,10 @@ class CreateQuiz extends Component {
     this.setState({ [name]: value });
   }
 
-  handleAnswerChange(index, event) {
-    const newQuestions = Object.assign({}, this.state.questions);
-    const { value, name } = event.target;
-    console.log('working', index, name, value);
+  handleAddQuestion(question) {
+    const newQuestions = [...this.state.questions, question];
 
-    newQuestions[index].answers[name].answerText = value;
-
-    console.log(newQuestions);
-
-    // this.setState({ questions { answers {} } });
+    this.setState({ questions: newQuestions });
   }
 
   handleSubmit(event) {
@@ -87,12 +54,63 @@ class CreateQuiz extends Component {
       .catch(err => console.error(err));
   }
 
-  // giveValue(index, name) {
-  //   return this.state.questions[index].answers[name].answerText
-  // }
+  postQuiz() {
+    const { quizId } = this.state;
+    // questions - quiz_id, question_text, question_type, difficulty,
+    // answers - question_id, correct, answer_text
+
+    this.state.questions.map((question) => {
+      const { question_text } = question;
+
+      const answers = this.reduceAnswers(question);
+
+      fetch(`/api/v1/quizzes/${quizId}/questions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question_text,
+          quiz_id: quizId,
+        }),
+      })
+        .then(blob => blob.json())
+        .then((data) => {
+          console.log('data: ', data);
+          answers.answers.forEach((answer) => {
+            console.log('answer: ', answer);
+            fetch(`/api/v1/questions/${data.id}/answers`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(Object.assign(answer, { question_id: data.id })),
+            })
+              .then(blob => blob.json())
+              .then(data2 => console.log(data2))
+              .catch(err => console.error(err));
+          });
+        })
+        .catch(err => console.error(err));
+    });
+  }
+
+  reduceAnswers(object) {
+    const correct = object.correct;
+    return Object.keys(object).reduce((obj, e) => {
+      if (e !== 'question_text' && e !== 'correct') {
+        const answerObj = {};
+        answerObj.answer_text = object[e];
+        if (correct === e) {
+          answerObj.correct = true;
+        }
+        obj.answers.push(answerObj);
+      } else {
+        obj[e] = object[e];
+      }
+      return obj;
+    }, { answers: [] });
+  }
+
 
   render() {
-    const { quizId, questions } = this.state;
+    const { quizId } = this.state;
 
     if (!quizId) {
       return (
@@ -126,19 +144,16 @@ class CreateQuiz extends Component {
         </form>
       );
     }
-    const Questions = Object.keys(questions)
-      .map((question, index) => {
-        return (<QuestionContainer
-          key={getKey()}
-          index={index}
-          onAnswerChange={this.handleAnswerChange}
-          giveValue={this.giveValue}
-        />);
-      });
+
     return (
       <section>
-        {Questions}
+        <QuestionContainer
+          key={getKey()}
+          onAnswerChange={this.handleAnswerChange}
+          handleAddQuestion={this.handleAddQuestion}
+        />
         <button onClick={this.addQuestion}>Add Question</button>
+        <button onClick={this.postQuiz}>Add Quiz</button>
       </section>
     );
   }
