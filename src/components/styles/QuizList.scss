@@ -1,6 +1,5 @@
 .quiz-list-wrapper {
   margin-left: 256px;
-  border: 1px solid blue;
   height: 100vh;
 }
 
@@ -10,4 +9,12 @@
   padding: 20px;
   width: 100%;
   height: 100%;
+}
+
+.quiz-list-header {
+  padding: 5px 20px;
+  h2 {
+    font-weight: lighter;
+    font-size: 50px;
+  }
 }

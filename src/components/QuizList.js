@@ -36,9 +36,9 @@ class QuizList extends Component {
     });
     return (
       <section className="quiz-list-wrapper">
-        <header>
+        <header className="quiz-list-header">
           <h2>{name}</h2>
-          <button>Create Quiz</button>
+          <button className="quiz-list-add-quiz">Create Quiz</button>
         </header>
         <section className="quiz-list">
           {quizArray}
