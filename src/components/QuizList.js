@@ -24,7 +24,7 @@ class QuizList extends Component {
   }
 
   render() {
-    const { selectedFolder, selectQuiz } = this.props;
+    const { selectedFolder, selectQuiz, history } = this.props;
     const { name, quizzes } = selectedFolder;
     const quizArray = quizzes.map((quiz) => {
       return (<QuizCard
@@ -38,7 +38,7 @@ class QuizList extends Component {
       <section className="quiz-list-wrapper">
         <header className="quiz-list-header">
           <h2>{name}</h2>
-          <button className="quiz-list-add-quiz">Create Quiz</button>
+          <button onClick={() => history.push('/quiz')}>Create Quiz</button>
         </header>
         <section className="quiz-list">
           {quizArray}
