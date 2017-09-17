@@ -1,4 +1,13 @@
-.quiz-list {
+.quiz-list-wrapper {
   margin-left: 256px;
   border: 1px solid blue;
+  height: 100vh;
+}
+
+.quiz-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
 }
