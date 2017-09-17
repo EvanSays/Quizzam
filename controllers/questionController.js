@@ -36,7 +36,7 @@ exports.editQuestion = (req, res) => {
     .select()
     .update(newPatch, 'id')
     .then((question) => {
-      res.status(201).json({ id: question });
+      res.status(201).json({ id: question[0] });
     })
     .catch(error => res.status(500).json({ error }));
 };
