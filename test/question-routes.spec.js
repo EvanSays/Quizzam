@@ -74,4 +74,31 @@ describe('Question API routes', () => {
         });
     });
   });
+
+  describe('POST /api/v1/quizzes/:id/questions', () => {
+    it('Should return the new question\'s ID if a new question is inserted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          res.status.should.equal(200);
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .post(`/api/v1/quizzes/${id}/questions`)
+            .send({
+              question_text: 'How old is the Moon?',
+              subject: 'lunar studies',
+              question_type: 'multiple choice',
+              difficulty: 10,
+            })
+            .end((err1, res1) => {
+              res1.status.should.equal(201);
+              res1.should.be.json; //eslint-disable-line
+              res1.body.should.be.a('object');
+              res1.body.should.have.property('id');
+              done();
+            });
+        });
+    });
+  });
 });
