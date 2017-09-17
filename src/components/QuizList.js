@@ -11,6 +11,7 @@ class QuizList extends Component {
     this.state = {
       isEditing: false,
       quizObj: {},
+      questionObj: {},
     };
     this.postRoom = this.postRoom.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -32,29 +33,26 @@ class QuizList extends Component {
   toggleEdit(quizData) {
     const { quizObj } = this.state;
     this.setState({ isEditing: true, quizObj: quizData });
-    this.scrubSelectedQuiz(quizData);
+    // this.scrubSelectedQuiz(quizData);
   }
 
-  updateQuestion() {
+  // scrubSelectedQuiz(quizData) {
+  //   const answerArray = [];
+  //   const questionArray = [];
+  //   const questions = quizData.questions;
 
-  }
+    
+  //   const questionObj = questions.reduce((acc, question) => {
+  //     if(!acc[question.id]) {
+  //       acc[question.id] = question
+  //     }
+  //     return acc
+  //   }, {});
+  //   this.setState({ questionObj });
+  // }
 
-  updateAnswer() {
+  handleUpdateQuestion(e) {
 
-  }
-
-  scrubSelectedQuiz(quizData) {
-    const answerArray = [];
-    const questionArray = [];
-    const questions = quizData.questions;
-
-    questions.forEach((question) => {
-      questionArray.push({ id: question.id, question_text: question.question_text });
-      question.answers.forEach((quesAns) => {
-        answerArray.push(quesAns);
-      });
-    });
-    console.log('questionsArray, answersArray', questionArray, answerArray);
   }
 
   deleteQuiz(id) {
@@ -67,8 +65,8 @@ class QuizList extends Component {
 
 
   render() {
-    const { selectedFolder, selectQuiz, history } = this.props;
-    const { quizObj } = this.state;
+    const { selectedFolder } = this.props;
+    const { quizObj, questionObj, answerArray } = this.state;
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
       return(
@@ -78,6 +76,9 @@ class QuizList extends Component {
           quizObj={quizObj}
           updateQuestion={this.updateQuestion}
           updateAnswer={this.updateAnswer}
+          questionObj={questionObj}
+          answerArray={answerArray}
+          handleUpdateQuestion={this.handleUpdateQuestion}
           />
         </div>
       )
