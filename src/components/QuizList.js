@@ -38,7 +38,7 @@ class QuizList extends Component {
 
   handleUpdateQuestion(e, id) {
     const obj = this.state.quizObj;
-
+    
     const question = obj.questions.filter((array) => {
       return array.id === id;
     });
@@ -46,7 +46,6 @@ class QuizList extends Component {
     question[0].question_text = e.target.value;
 
     this.setState({ quizObj: obj });
-    console.log('newQuestion', obj);
   }
 
   deleteQuiz(id) {
@@ -62,19 +61,19 @@ class QuizList extends Component {
     const { quizObj, questionObj, answerArray } = this.state;
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
-      return(
+      return (
         <div>
           <h1>edit quiz</h1>
-          <EditQuiz 
-          quizObj={quizObj}
-          updateQuestion={this.updateQuestion}
-          updateAnswer={this.updateAnswer}
-          questionObj={questionObj}
-          answerArray={answerArray}
-          handleUpdateQuestion={this.handleUpdateQuestion}
+          <EditQuiz
+            updateQuestion={this.updateQuestion}
+            updateAnswer={this.updateAnswer}
+            handleUpdateQuestion={this.handleUpdateQuestion}
+            quizObj={quizObj}
+            questionObj={questionObj}
+            answerArray={answerArray}
           />
         </div>
-      )
+      );
     }
     const quizArray = quizzes.map((quiz) => {
       return (
@@ -87,14 +86,14 @@ class QuizList extends Component {
             deleteQuiz={this.deleteQuiz}
           />
         </div>
-        );
+      );
     });
-      
-      return (
+
+    return (
       <section className="quiz-list-wrapper">
-          <header className="quiz-list-header">
-            <h2>{name}</h2>
-            <button onClick={() => history.push('/quiz')}>Create Quiz</button>
+        <header className="quiz-list-header">
+          <h2>{name}</h2>
+          <button onClick={() => history.push('/quiz')}>Create Quiz</button>
         </header>
         <section className="quiz-list">
           {quizArray}

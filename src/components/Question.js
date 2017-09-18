@@ -17,6 +17,7 @@ export const Question = ({ questionText, handleUpdateQuestion, questionId, handl
       {answers.map((answer, index) => {
         return (
           <Answer
+            key={index}
             answerKey={answer.key}
             answerId={index}
             questionId={questionId}
