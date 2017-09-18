@@ -1,29 +1,37 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 
-const Answer = ({ id, onChange, value }) => {
+export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText }) => {
   return (
     <form>
       <input
-        id={id}
-        onChange={onChange}
+        id={answerKey}
         type="text"
-        value={value}
+        value={answerText}
+        onChange={event => handleUpdateAnswer(event, questionId, answerId)}
       />
+      <label htmlFor={answerKey}>
+          Correct
+        <input
+          name={answerText}
+          type="radio"
+          checked={false}
+        />
+      </label>
     </form>
   );
 };
 
-Answer.defaultProps = {
-  id: '',
-  onChange: () => '',
-  value: '',
-};
+// Answer.defaultProps = {
+//   id: '',
+//   onChange: () => '',
+//   value: '',
+// };
+// 
+// Answer.propTypes = {
+//   id: string,
+//   onChange: func,
+//   value: string,
+// };
 
-Answer.propTypes = {
-  id: string,
-  onChange: func,
-  value: string,
-};
-
-export default Answer;
+// export default Answer;
