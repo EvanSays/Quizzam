@@ -1,7 +1,7 @@
 import React from 'react';
 import { getKey } from '../helpers';
 
-const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAnswer }) => {
+const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAnswer, handleSubmitEdit }) => {
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
     return (
@@ -34,7 +34,7 @@ const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAns
     <div>
       <h1>{quizObj.name}</h1>
       {questions}
-      <button>submit changes</button>
+      <button onClick={handleSubmitEdit}>submit changes</button>
     </div>
   );
 };

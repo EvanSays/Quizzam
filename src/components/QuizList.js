@@ -10,12 +10,6 @@ class QuizList extends Component {
     super();
     this.state = {
       isEditing: false,
-    };
-    this.postRoom = this.postRoom.bind(this);
-    this.deleteQuiz = this.deleteQuiz.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.state = {
-      isEditing: false,
       quizObj: {},
     };
     this.postRoom = this.postRoom.bind(this);
@@ -23,6 +17,7 @@ class QuizList extends Component {
     this.deleteQuiz = this.deleteQuiz.bind(this);
     this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
     this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
+    this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +61,10 @@ class QuizList extends Component {
     this.setState({ quizObj: obj });
   }
 
+  handleSubmitEdit() {
+    const 
+  }
+
   deleteQuiz(id) {
     const { deleteQuiz } = this.props;
     const quizzes = this.state.quizzes.filter(quiz => quiz.id !== id);
@@ -87,6 +86,7 @@ class QuizList extends Component {
             updateAnswer={this.updateAnswer}
             handleUpdateQuestion={this.handleUpdateQuestion}
             handleUpdateAnswer={this.handleUpdateAnswer}
+            handleSubmitEdit={this.handleSubmitEdit}
             quizObj={quizObj}
             answerArray={answerArray}
           />
