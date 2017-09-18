@@ -1,7 +1,7 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 
-export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText }) => {
+export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText, handleRadioClick, isCorrect }) => {
   return (
     <form>
       <input
@@ -15,7 +15,8 @@ export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, an
         <input
           name={answerText}
           type="radio"
-          checked={false}
+          checked={isCorrect}
+          onClick={event => handleRadioClick(event, questionId, answerId, answerText)}
         />
       </label>
     </form>
@@ -27,7 +28,7 @@ export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, an
 //   onChange: () => '',
 //   value: '',
 // };
-// 
+//
 // Answer.propTypes = {
 //   id: string,
 //   onChange: func,
