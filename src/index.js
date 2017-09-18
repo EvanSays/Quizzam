@@ -29,7 +29,6 @@ render(
           />
           <Route path="/login" component={WelcomeViewContainer} />
           <Route path="/signup" component={WelcomeViewContainer} />
-          <Route path="/edit" component={EditQuizContainer} />
           <Route path="/" component={AppContainer} />
           <Route path="/quiz" component={CreateQuiz} />
         </Switch>

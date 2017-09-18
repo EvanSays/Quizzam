@@ -10,6 +10,12 @@ class QuizList extends Component {
     super();
     this.state = {
       isEditing: false,
+    };
+    this.postRoom = this.postRoom.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.state = {
+      isEditing: false,
       quizObj: {},
     };
     this.postRoom = this.postRoom.bind(this);
@@ -27,7 +33,6 @@ class QuizList extends Component {
 
   postRoom(quiz) {
     const { createRoom } = this.props;
-
     createRoom(quiz);
   }
 

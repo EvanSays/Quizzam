@@ -14,7 +14,7 @@ const Folder = ({ folder, getSelectedFolder }) => {
     <button style={bgStyle} onClick={() => getSelectedFolder(folder)} className="folder">
       <div style={topStyle} className="folder-top" />
       <div style={insideStyle} className="folder-inside" />
-      <h2>{name}: {length}</h2>
+       <h2>{name}: {length}</h2>
     </button>
   );
 };

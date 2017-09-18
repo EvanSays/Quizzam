@@ -5,7 +5,7 @@ import pencil from '../assets/pencil.svg';
 import trash from '../assets/trash.svg';
 import './styles/QuizCard.scss';
 
-const QuizCard = ({ quizData, postRoom, toggleEdit, deleteQuiz }) => {
+const QuizCard = ({ quizData, postRoom, deleteQuiz, toggleEdit }) => {
   const { name, questions } = quizData;
   const questionCount = questions.length;
   const playBg = { backgroundImage: `url(${play})` };
