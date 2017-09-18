@@ -5,7 +5,7 @@ import pencil from '../assets/pencil.svg';
 import trash from '../assets/trash.svg';
 import './styles/QuizCard.scss';
 
-const QuizCard = ({ quizData, postRoom, editQuiz, deleteQuiz }) => {
+const QuizCard = ({ quizData, postRoom, toggleEdit, deleteQuiz }) => {
   const { name, questions } = quizData;
   const questionCount = questions.length;
   const playBg = { backgroundImage: `url(${play})` };
@@ -27,7 +27,7 @@ const QuizCard = ({ quizData, postRoom, editQuiz, deleteQuiz }) => {
         <div className="quiz-card-controls">
           <button
             style={editBg}
-            onClick={() => editQuiz(quizData)}
+            onClick={() => toggleEdit(quizData)}
             className="quiz-button"
           />
           <button

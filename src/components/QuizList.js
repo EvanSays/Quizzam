@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import QuizCard from './QuizCard';
+import EditQuiz from './EditQuiz';
 import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
 class QuizList extends Component {
   constructor() {
     super();
-    this.postRoom = this.postRoom.bind(this);
-    this.editQuiz = this.editQuiz.bind(this);
-    this.deleteQuiz = this.deleteQuiz.bind(this);
     this.state = {
-      quizzes: [],
+      isEditing: false,
+      quizObj: {},
+      questionObj: {},
     };
+    this.postRoom = this.postRoom.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
+    this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +31,21 @@ class QuizList extends Component {
     createRoom(quiz);
   }
 
-  editQuiz(data) {
-    const { selectQuiz, history } = this.props;
-    history.push(`/edit/${data.id}`);
-    selectQuiz(data);
+  toggleEdit(quizData) {
+    const { quizObj } = this.state;
+    this.setState({ isEditing: true, quizObj: quizData });
+  }
+
+  handleUpdateQuestion(e, id) {
+    const obj = this.state.quizObj;
+    
+    const question = obj.questions.filter((array) => {
+      return array.id === id;
+    });
+
+    question[0].question_text = e.target.value;
+
+    this.setState({ quizObj: obj });
   }
 
   deleteQuiz(id) {
@@ -41,21 +56,39 @@ class QuizList extends Component {
     this.setState({ quizzes });
   }
 
-
   render() {
-    const { selectedFolder, selectQuiz, history } = this.props;
-    const { name } = selectedFolder;
-    const { quizzes } = this.state;
-
+    const { selectedFolder, history } = this.props;
+    const { quizObj, questionObj, answerArray } = this.state;
+    const { name, quizzes } = selectedFolder;
+    if (this.state.isEditing) {
+      return (
+        <div>
+          <h1>edit quiz</h1>
+          <EditQuiz
+            updateQuestion={this.updateQuestion}
+            updateAnswer={this.updateAnswer}
+            handleUpdateQuestion={this.handleUpdateQuestion}
+            quizObj={quizObj}
+            questionObj={questionObj}
+            answerArray={answerArray}
+          />
+        </div>
+      );
+    }
     const quizArray = quizzes.map((quiz) => {
-      return (<QuizCard
-        key={getKey()}
-        quizData={quiz}
-        postRoom={this.postRoom}
-        editQuiz={this.editQuiz}
-        deleteQuiz={this.deleteQuiz}
-      />);
+      return (
+        <div key={quiz.id}>
+          <h2>{name}</h2>
+          <QuizCard
+            quizData={quiz}
+            postRoom={this.postRoom}
+            toggleEdit={this.toggleEdit}
+            deleteQuiz={this.deleteQuiz}
+          />
+        </div>
+      );
     });
+
     return (
       <section className="quiz-list-wrapper">
         <header className="quiz-list-header">
