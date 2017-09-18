@@ -47,7 +47,7 @@ class QuizList extends Component {
     const question = obj.questions.filter((array) => {
       return array.id === id;
     });
-
+    question[0].edited = true;
     question[0].question_text = e.target.value;
     this.setState({ quizObj: obj });
   }
@@ -61,7 +61,7 @@ class QuizList extends Component {
     const answer = question[0].answers.filter((array) => {
       return array.id === ansId;
     });
-
+    answer[0].edited = true;
     answer[0].answer_text = e.target.value;
     this.setState({ quizObj: obj });
   }
