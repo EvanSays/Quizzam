@@ -17,6 +17,7 @@ class QuizList extends Component {
     this.toggleEdit = this.toggleEdit.bind(this);
     this.deleteQuiz = this.deleteQuiz.bind(this);
     this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
+    this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -38,13 +39,26 @@ class QuizList extends Component {
 
   handleUpdateQuestion(e, id) {
     const obj = this.state.quizObj;
-    
+
     const question = obj.questions.filter((array) => {
       return array.id === id;
     });
 
     question[0].question_text = e.target.value;
+    this.setState({ quizObj: obj });
+  }
 
+  handleUpdateAnswer(e, quesId, ansId) {
+    const obj = this.state.quizObj;
+    const question = obj.questions.filter((array) => {
+      return array.id === quesId;
+    });
+
+    const answer = question[0].answers.filter((array) => {
+      return array.id === ansId;
+    });
+
+    answer[0].answer_text = e.target.value;
     this.setState({ quizObj: obj });
   }
 
@@ -68,6 +82,7 @@ class QuizList extends Component {
             updateQuestion={this.updateQuestion}
             updateAnswer={this.updateAnswer}
             handleUpdateQuestion={this.handleUpdateQuestion}
+            handleUpdateAnswer={this.handleUpdateAnswer}
             quizObj={quizObj}
             questionObj={questionObj}
             answerArray={answerArray}
