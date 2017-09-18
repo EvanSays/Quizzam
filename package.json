@@ -9,9 +9,9 @@
   ],
   "scripts": {
     "build": "webpack",
+    "server": "webpack-dev-server --open",
+    "start": "nodemon server.js",
     "heroku-postbuild": "npm install --only=dev && npm install && npm run build",
-    "start": "webpack-dev-server --open",
-    "server": "nodemon server.js",
     "testBE": "NODE_ENV=test ./node_modules/.bin/mocha test/*",
     "testFE": "NODE_ENV=test ./node_modules/.bin/jest",
     "test": "npm run testBE & npm run testFE",
