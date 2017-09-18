@@ -20,9 +20,10 @@ exports.indexQuestions = (req, res) => {
 exports.addQuestion = (req, res) => {
   const newQuestion = req.body;
   return db('question')
-    .insert(newQuestion, 'id')
+    .returning('id')
+    .insert(newQuestion)
     .then(question => res.status(201).json({
-      id: question[0],
+      id: question,
     }))
     .catch(error => res.status(500).json({
       error,
