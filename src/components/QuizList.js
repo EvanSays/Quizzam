@@ -10,12 +10,6 @@ class QuizList extends Component {
     super();
     this.state = {
       isEditing: false,
-    };
-    this.postRoom = this.postRoom.bind(this);
-    this.deleteQuiz = this.deleteQuiz.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.state = {
-      isEditing: false,
       quizObj: {},
     };
     this.postRoom = this.postRoom.bind(this);
@@ -23,6 +17,7 @@ class QuizList extends Component {
     this.deleteQuiz = this.deleteQuiz.bind(this);
     this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
     this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
+    this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
   }
 
   componentDidMount() {
@@ -43,10 +38,10 @@ class QuizList extends Component {
 
   handleUpdateQuestion(e, id) {
     const obj = this.state.quizObj;
-    const question = obj.questions.filter((array) => {
-      return array.id === id;
+    const question = obj.questions.filter((el) => {
+      return el.id === id;
     });
-
+    question[0].edited = true;
     question[0].question_text = e.target.value;
 
     this.setState({ quizObj: obj });
@@ -54,17 +49,31 @@ class QuizList extends Component {
 
   handleUpdateAnswer(e, quesId, ansId) {
     const obj = this.state.quizObj;
-    const question = obj.questions.filter((array) => {
-      return array.id === quesId;
+    const question = obj.questions.filter((el) => {
+      return el.id === quesId;
     });
 
-    const answer = question[0].answers.filter((array) => {
-      return array.id === ansId;
+    const answer = question[0].answers.filter((el) => {
+      return el.id === ansId;
     });
-
+    answer[0].edited = true;
     answer[0].answer_text = e.target.value;
 
     this.setState({ quizObj: obj });
+  }
+
+  handleSubmitEdit() {
+    const obj = this.state.quizObj;
+
+    const question = obj.questions.filter((el) => {
+      return el.edited === true;
+    });
+    const answer = obj.questions.reduce((acc, el) => {
+      const filtered = el.answers.filter((ele) => {
+        return ele.edited === true;
+      });
+      return [...acc, ...filtered];
+    }, []);    
   }
 
   deleteQuiz(id) {
@@ -88,6 +97,7 @@ class QuizList extends Component {
             updateAnswer={this.updateAnswer}
             handleUpdateQuestion={this.handleUpdateQuestion}
             handleUpdateAnswer={this.handleUpdateAnswer}
+            handleSubmitEdit={this.handleSubmitEdit}
             quizObj={quizObj}
             answerArray={answerArray}
           />
