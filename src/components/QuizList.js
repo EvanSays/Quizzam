@@ -39,8 +39,8 @@ class QuizList extends Component {
   handleUpdateQuestion(e, id) {
     const obj = this.state.quizObj;
 
-    const question = obj.questions.filter((array) => {
-      return array.id === id;
+    const question = obj.questions.filter((el) => {
+      return el.id === id;
     });
     question[0].edited = true;
     question[0].question_text = e.target.value;
@@ -49,12 +49,12 @@ class QuizList extends Component {
 
   handleUpdateAnswer(e, quesId, ansId) {
     const obj = this.state.quizObj;
-    const question = obj.questions.filter((array) => {
-      return array.id === quesId;
+    const question = obj.questions.filter((el) => {
+      return el.id === quesId;
     });
 
-    const answer = question[0].answers.filter((array) => {
-      return array.id === ansId;
+    const answer = question[0].answers.filter((el) => {
+      return el.id === ansId;
     });
     answer[0].edited = true;
     answer[0].answer_text = e.target.value;
@@ -62,7 +62,19 @@ class QuizList extends Component {
   }
 
   handleSubmitEdit() {
-    const 
+    const obj = this.state.quizObj;
+
+    const question = obj.questions.filter((el) => {
+      return el.edited === true;
+    });
+    const answer = obj.questions.reduce((acc, el) => {
+      const filtered = el.answers.filter((ele) => {
+        return ele.edited === true;
+      });
+      return [...acc, ...filtered];
+    }, []);
+    console.log('answer', answer);
+    
   }
 
   deleteQuiz(id) {
