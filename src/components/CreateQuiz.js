@@ -26,6 +26,43 @@ class CreateQuiz extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
+    this.handleSubmitNewQuiz = this.submitNewQuiz.bind(this);
+  }
+
+  submitNewQuiz() {
+    const { questions, quizId } = this.state;
+
+    return Promise.all(questions.map((question) => {
+      return fetch(`/api/v1/quizzes/${quizId}/questions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question_text: question.question_text,
+          quiz_id: quizId,
+        }),
+      });
+    }))
+      .then((response) => {
+        return response[0].json();
+      })
+      .then((questionIds) => {
+        for (let i = 0; i < questions.length; i += 1) {
+          Promise.all(questions[i].answers.map((answer, index) => {
+            fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                question_id: questionIds.id[i],
+                answer_text: answer.answer_text,
+                correct: answer.correct,
+              }),
+            });
+          }))
+            .catch(error => console.log(error));
+        }
+      })
+      .then(() => this.props.fetchFolders(this.props.selectedFolder.user_id))
+      .catch(error => error);
   }
 
   handleUpdateQuestion(event, questionId) {
@@ -158,6 +195,7 @@ class CreateQuiz extends Component {
     return (
       <section>
         <button onClick={this.handleAddQuestion}>Add Question</button>
+        <button onClick={this.handleSubmitNewQuiz}>Save Quiz</button>
 
         {this.state.questions.map((question, index) => {
           return (<Question
