@@ -9,6 +9,15 @@ const router = require('./router');
 
 const app = express();
 
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  socket.on('test', (data) => {
+    io.emit('test', data);
+  });
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, './build')));
@@ -25,7 +34,7 @@ app.get('/*', (req, res) => {
 });
 
 /* eslint-disable no-console */
-app.listen(app.get('port'), () => {
+server.listen(app.get('port'), () => {
   console.log(`Quizzam is running on ${app.get('port')}.`);
 });
 /* eslint-enable */

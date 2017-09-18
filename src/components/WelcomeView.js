@@ -23,11 +23,11 @@ class WelcomeView extends Component {
     const { quiz, user, location } = this.props;
     const { isHidden } = this.state;
     const logo = { backgroundImage: `url(${flash})` };
-    
+
     if (user.id) {
       return <Redirect to={'/'} />;
     }
-    
+
     if (quiz.id) {
       return (<Redirect to={{
         pathname: `/room/${quiz.id}`,
