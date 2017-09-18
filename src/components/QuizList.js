@@ -16,6 +16,7 @@ class QuizList extends Component {
     this.postRoom = this.postRoom.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.deleteQuiz = this.deleteQuiz.bind(this);
+    this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -35,8 +36,17 @@ class QuizList extends Component {
     this.setState({ isEditing: true, quizObj: quizData });
   }
 
-  handleUpdateQuestion(e) {
+  handleUpdateQuestion(e, id) {
+    const obj = this.state.quizObj;
 
+    const question = obj.questions.filter((array) => {
+      return array.id === id;
+    });
+
+    question[0].question_text = e.target.value;
+
+    this.setState({ quizObj: obj });
+    console.log('newQuestion', obj);
   }
 
   deleteQuiz(id) {
@@ -47,14 +57,13 @@ class QuizList extends Component {
     this.setState({ quizzes });
   }
 
-
   render() {
-    const { selectedFolder } = this.props;
+    const { selectedFolder, history } = this.props;
     const { quizObj, questionObj, answerArray } = this.state;
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
       return(
-        <div key={getKey()}>
+        <div>
           <h1>edit quiz</h1>
           <EditQuiz 
           quizObj={quizObj}
@@ -69,10 +78,9 @@ class QuizList extends Component {
     }
     const quizArray = quizzes.map((quiz) => {
       return (
-        <div key={getKey()}>
+        <div key={quiz.id}>
           <h2>{name}</h2>
           <QuizCard
-            key={getKey()}
             quizData={quiz}
             postRoom={this.postRoom}
             toggleEdit={this.toggleEdit}

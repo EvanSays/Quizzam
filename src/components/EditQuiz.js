@@ -2,25 +2,22 @@ import React from 'react';
 import { getKey } from '../helpers';
 
 const EditQuiz = ({ quizObj, updateAnswer, questionObj, handleUpdateQuestion }) => {
-  console.log('quizObj', quizObj);
   
   const questions = quizObj.questions.map((question, index) => {
     const id = question.id;
-    // console.log('questionObj', questionObj[id].question_text);
+    console.log('questionObj', quizObj);
     return (
-      <div key={getKey()}>
+      <div key={id}>
         <input
           id={id}
-          data-index={index}
-          value='taco'
-          onChange={handleUpdateQuestion}
+          value={quizObj.questions[index].question_text}
+          onChange={e => handleUpdateQuestion(e, id)}
         />
         {
           question.answers.map((answer) => {
             return (
-              <div key={getKey()}>
+              <div key={answer.id}>
                 <input
-                  key={answer.id} 
                   type="radio"
                   id={answer.answer_text}
                   name={answer.answer_text}
