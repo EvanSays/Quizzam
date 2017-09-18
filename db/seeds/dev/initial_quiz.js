@@ -4,6 +4,7 @@ exports.seed = (knex, Promise) => {
   // Deletes ALL existing entries
   return knex('answer').del()
     .then(() => knex('question').del())
+    .then(() => knex('room').del())
     .then(() => knex('quiz').del())
     .then(() => knex('folder').del())
     .then(() => knex('user_account').del())

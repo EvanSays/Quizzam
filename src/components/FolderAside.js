@@ -25,7 +25,10 @@ class FolderAside extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.folders.length !== this.props.folders.length) {
+      this.setState({ folders: nextProps.folders });
+    }
 
+    if (nextProps.folders.quizzes.length !== this.props.folders.quizzes.length) {
       this.setState({ folders: nextProps.folders });
     }
   }

@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { addQuestion } from '../actions';
 import Question from '../components/Question';
 
-const mapStateToProps = ({ questions }) => {
-  return { questions };
+const mapStateToProps = ({ questions, folders, selectedFolder }) => {
+  return { questions, folders, selectedFolder };
 };
 
 const mapDispatchToProps = (dispatch) => {
