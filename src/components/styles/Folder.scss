@@ -1,4 +1,42 @@
 .folder {
-  width: 95%;
-  background-color: blue;
+  position: relative;
+  width: 70%;
+  height: 90px;
+  margin: 30px auto;
+  // background-color: #22C4FC;
+  border: none;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1), 0 14px 45px rgba(0, 0, 0, 0.1);
+  color: #FFF;
+  transition: ALL 0.2s;
+  &:focus {
+    outline: none;
+    transform: scale(1.2);
+    .folder-top {
+      top: -15px;
+    }
+  }
+}
+
+.folder-top {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  z-index: 1;
+  display: block;
+	height: 0;
+	width: 50%;
+  // border-bottom: 40px solid #22C4FC;
+	border-right: 40px solid transparent;
+  border-top-right-radius: none;
+}
+
+.folder-inside {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  z-index: -1;
+  width: 90%;
+  height: 20px;
+  // background-color: #126D8B;
+  border-top-right-radius: 5px;
 }

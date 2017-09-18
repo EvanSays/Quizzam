@@ -67,6 +67,27 @@ export const fetchQuiz = (room) => {
   };
 };
 
+const removeQuizFolder = (id) => {
+  return { type: constants.DELETE_QUIZ, id };
+};
+
+export const deleteQuiz = (id) => {
+  return (dispatch) => {
+    fetch(`api/v1/quizzes/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((quiz) => {
+        dispatch(removeQuizFolder(id));
+      })
+      .catch(() => {
+      });
+  };
+};
+
 const getUser = (user) => {
   return { type: constants.GET_USER, user };
 };
@@ -75,7 +96,7 @@ const userLoading = (bool) => {
   return { type: constants.USER_LOADING, bool };
 };
 
-const userFail = (bool) => {
+export const userFail = (bool) => {
   return { type: constants.USER_FAIL, bool };
 };
 
@@ -89,14 +110,17 @@ export const signUp = (body) => {
     })
       .then((res) => {
         dispatch(userLoading(false));
+        dispatch(userFail(false));
         return res.json();
       })
       .then((user) => {
-        dispatch(getUser(user));
-        dispatch(userFail(true));
+        if (user.error) {
+          return dispatch(userFail(true));
+        }
+        return dispatch(getUser(user));
       })
       .catch(() => {
-        userFail(true);
+        dispatch(userFail(true));
       });
   };
 };
@@ -116,10 +140,10 @@ export const login = (body) => {
       .then((user) => {
         dispatch(getUser(user.data));
         dispatch(fetchFolders(user.data.id));
-        dispatch(userFail(true));
+        dispatch(userFail(false));
       })
       .catch(() => {
-        userFail(true);
+        dispatch(userFail(true));
       });
   };
 };
@@ -147,7 +171,6 @@ export const createFolder = ({ name, id}) => {
 };
 
 const getRoom = (room) => {
-  console.log(room);
   return { type: constants.GET_ROOM, room };
 };
 
@@ -159,13 +182,12 @@ const roomLoading = (bool) => {
   return { type: constants.ROOM_LOADING, bool };
 };
 
-export const createRoom = (id) => {
-  console.log(id, 'create room id');
+export const createRoom = (quiz) => {
   return (dispatch) => {
     dispatch(roomLoading(true));
-    fetch(`api/v1/room/${id}`, {
+    fetch('api/v1/room', {
       method: 'POST',
-      body: '',
+      body: JSON.stringify({ quiz_id: quiz.id }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => {
@@ -173,9 +195,15 @@ export const createRoom = (id) => {
         return res.json();
       })
       .then((data) => {
+        dispatch(getQuiz(quiz));
         dispatch(roomFail(false));
         dispatch(getRoom(data.id));
       })
       .catch(() => dispatch(roomFail(true)));
   };
 };
+
+export const selectQuiz = (obj) => {
+  return { type: constants.EDIT_QUIZ, obj };
+};
+

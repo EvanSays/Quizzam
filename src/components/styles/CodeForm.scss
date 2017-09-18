@@ -1,0 +1,48 @@
+.code-input {
+  background-color: transparent;
+  border: 1px solid #FFF;
+  border-radius: 5px;
+  color: #FFF;
+  font-size: 60px;
+  text-align: center;
+  &::-webkit-input-placeholder {
+    color: #FFF;
+  }
+  &::-moz-placeholder {
+    color: #FFF;
+  }
+  &:-ms-input-placeholder {
+    color: #FFF;
+  }
+  &:-moz-placeholder {
+    color: #FFF;
+  }
+}
+
+.code-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.code-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 0;
+  background-color: transparent;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 30px;
+
+  span {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: underline;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.57);
+    }
+  }
+}

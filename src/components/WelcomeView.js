@@ -1,47 +1,67 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { Link, NavLink, Route, Redirect } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
+import flash from '../assets/flash.svg';
 import LoginFormContainer from '../containers/LoginFormContainer';
 import CodeFormContainer from '../containers/CodeFormContainer';
 import './styles/WelcomeView.scss';
 
-const WelcomeView = ({ quiz, user }) => {
-  if (user.id) {
-    return <Redirect to={'/dashboard'} />;
-  }
-  if (quiz.id) {
-    return <Redirect to={`/room/${quiz.id}`} />;
+class WelcomeView extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isHidden: false,
+    };
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
-  return (
-    <section className="welcome-view">
-      <header className="welcome-header">
-        <Link to="/" className="welcome-logo">Logo</Link>
-        <nav className="welcome-nav">
-          <NavLink
-            to="/login"
-            id="login"
-            className="nav-link"
-            activeClassName="active-link"
-          >Log In
-          </NavLink>
-          <NavLink
-            to="/signup"
-            id="signup"
-            className="nav-link"
-            activeClassName="active-link"
-          >Sign Up
-          </NavLink>
-        </nav>
-      </header>
-      <main className="welcome-main">
-        <Route path="/login" component={LoginFormContainer} />
-        <Route path="/signup" component={LoginFormContainer} />
-        <CodeFormContainer />
-      </main>
-    </section>
-  );
-};
+  handleOnClick() {
+    this.setState({ isHidden: !this.state.isHidden });
+  }
+
+  render() {
+    const { quiz, user, location } = this.props;
+    const { isHidden } = this.state;
+    const logo = { backgroundImage: `url(${flash})` };
+    
+    if (user.id) {
+      return <Redirect to={'/'} />;
+    }
+    
+    if (quiz.id) {
+      return (<Redirect to={{
+        pathname: `/room/${quiz.id}`,
+        state: { user: user.id },
+      }}
+      />);
+    }
+
+    return (
+      <section className="welcome-view">
+        <LoginFormContainer location={location} isHidden={isHidden} />
+        <header className="welcome-header">
+          <Link to="/" className="welcome-logo-ink">
+            <div style={logo} className="welcome-logo"></div>
+            <h1 className="logo-title">Quizzam</h1>
+          </Link>
+          <nav className="welcome-nav">
+            <Link
+              to="/login"
+              id="login"
+              className="nav-link"
+              onClick={this.handleOnClick}
+            >Login/Register
+            </Link>
+          </nav>
+        </header>
+        <main className="welcome-main">
+          <h1 className="welcome-title">Quizzam</h1>
+          <CodeFormContainer />
+        </main>
+      </section>
+    );
+  }
+}
 
 WelcomeView.PropTypes = {
   quiz: object,

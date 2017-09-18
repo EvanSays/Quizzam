@@ -49,7 +49,9 @@ module.exports = {
     inline: true,
     stats: 'errors-only',
     proxy: {
-      '/': 'http://localhost:3000',
+      '/': {
+        target: 'http://localhost:3000',
+      },
     },
   },
 };

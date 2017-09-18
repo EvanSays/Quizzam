@@ -14,14 +14,14 @@ exports.up = (knex, Promise) => {
       table.increments('id').primary();
       table.string('name', 64).unique().notNullable();
       table.integer('user_id').unsigned();
-      table.foreign('user_id').references('user_account.id');
+      table.foreign('user_id').references('user_account.id').onDelete('CASCADE');
       table.timestamps(true, true);
     }),
     knex.schema.createTable('quiz', (table) => {
       table.increments('id').primary();
       table.string('name', 64).notNullable();
       table.integer('folder_id').unsigned();
-      table.foreign('folder_id').references('folder.id');
+      table.foreign('folder_id').references('folder.id').onDelete('CASCADE');
       table.integer('user_id').unsigned();
       table.foreign('user_id').references('user_account.id').onDelete('CASCADE');
       table.string('subject', 64);

@@ -28,3 +28,15 @@ exports.addQuestion = (req, res) => {
       error,
     }));
 };
+
+exports.editQuestion = (req, res) => {
+  const newPatch = req.body;
+  db('question')
+    .where('id', req.params.id)
+    .select()
+    .update(newPatch, 'id')
+    .then((question) => {
+      res.status(201).json({ id: question[0] });
+    })
+    .catch(error => res.status(500).json({ error }));
+};
