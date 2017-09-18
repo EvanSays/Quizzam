@@ -199,6 +199,7 @@ class CreateQuiz extends Component {
 
         {this.state.questions.map((question, index) => {
           return (<Question
+            key={index}
             handleUpdateQuestion={this.handleUpdateQuestion}
             handleUpdateAnswer={this.handleUpdateAnswer}
             questionId={index}
