@@ -1,8 +1,8 @@
-
 import React, { Component } from 'react';
 import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes } from '../helpers';
+import socket from '../socket';
 
 function initializeState(quiz) {
   const initialState = [];
@@ -19,9 +19,19 @@ export default class TakeQuiz extends Component {
       currentQuestion: 0,
       answers: initializeState(this.props.quiz),
     };
+
+    socket.on('test', (data) => {
+      console.log(data);
+    });
+
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
+    this.sendSocket = this.sendSocket.bind(this);
+  }
+
+  sendSocket() {
+    socket.emit('test', this.state)
   }
 
   handleClick(event) {
@@ -105,6 +115,7 @@ export default class TakeQuiz extends Component {
           <h1>{this.props.quiz.name}</h1>
           <h1>Subject: {this.props.quiz.subject}</h1>
           <h1>Room: {this.props.quiz.id}</h1>
+          <button onClick={this.sendSocket}>Click</button>
         </header>
         <section>
           <h3>{this.props.quiz.questions[this.state.currentQuestion].question_text}</h3>
