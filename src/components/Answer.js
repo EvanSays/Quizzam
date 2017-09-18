@@ -1,16 +1,16 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 
-export const Answer = ({ key, answerId, questionId, handleUpdateAnswer, answerText }) => {
+export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText }) => {
   return (
-    <form key={key}>
+    <form>
       <input
-        id={key}
+        id={answerKey}
         type="text"
         value={answerText}
         onChange={event => handleUpdateAnswer(event, questionId, answerId)}
       />
-      <label htmlFor={key}>
+      <label htmlFor={answerKey}>
           Correct
         <input
           name={answerText}
