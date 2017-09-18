@@ -1,26 +1,42 @@
-import React, { Component } from 'react';
-import EditQuestion from './EditQuestion';
+import React from 'react';
 import { getKey } from '../helpers';
 
-class EditQuiz extends Component {
-  constructor() {
-    super();
-    this.state = {
-
-    };
-  }
-  
-  render() {
-    const { editQuizData } = this.props;
-    console.log('editQuizData', editQuizData);
-    
-
+const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAnswer }) => {
+  const questions = quizObj.questions.map((question, index) => {
+    const quesId = question.id;
     return (
-      <div>
-        <EditQuestion />
+      <div key={quesId}>
+        <input
+          id={quesId}
+          value={quizObj.questions[index].question_text}
+          onChange={e => handleUpdateQuestion(e, quesId)}
+        />
+        {
+          question.answers.map((answer, i) => {
+            const ansId = answer.id;
+            return (
+              <div key={ansId}>
+                <input
+                  id={ansId}
+                  name={answer.answer_text}
+                  value={quizObj.questions[index].answers[i].answer_text}
+                  onChange={e => handleUpdateAnswer(e, quesId, ansId)}
+                />
+              </div>
+            );
+          })
+        }
       </div>
     );
-  }
-}
+  });
+
+  return (
+    <div>
+      <h1>{quizObj.name}</h1>
+      {questions}
+      <button>submit changes</button>
+    </div>
+  );
+};
 
 export default EditQuiz;

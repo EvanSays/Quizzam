@@ -15,8 +15,14 @@ class QuizList extends Component {
     this.deleteQuiz = this.deleteQuiz.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.state = {
-      quizzes: [],
+      isEditing: false,
+      quizObj: {},
     };
+    this.postRoom = this.postRoom.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
+    this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
+    this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -31,11 +37,33 @@ class QuizList extends Component {
   }
 
   toggleEdit(quizData) {
-    console.log('this.props', this.props);
-    
-    const { selectQuiz } = this.props;
-    selectQuiz(quizData);
-    this.setState({ isEditing: !this.state.isEditing });
+    const { quizObj } = this.state;
+    this.setState({ isEditing: true, quizObj: quizData });
+  }
+
+  handleUpdateQuestion(e, id) {
+    const obj = this.state.quizObj;
+
+    const question = obj.questions.filter((array) => {
+      return array.id === id;
+    });
+
+    question[0].question_text = e.target.value;
+    this.setState({ quizObj: obj });
+  }
+
+  handleUpdateAnswer(e, quesId, ansId) {
+    const obj = this.state.quizObj;
+    const question = obj.questions.filter((array) => {
+      return array.id === quesId;
+    });
+
+    const answer = question[0].answers.filter((array) => {
+      return array.id === ansId;
+    });
+
+    answer[0].answer_text = e.target.value;
+    this.setState({ quizObj: obj });
   }
 
   deleteQuiz(id) {
@@ -46,29 +74,39 @@ class QuizList extends Component {
     this.setState({ quizzes });
   }
 
-
   render() {
-    const { selectedFolder, history, editQuizData } = this.props;
-    const { name } = selectedFolder;
-    const { quizzes } = this.state;
-
-    if(this.state.isEditing) {
+    const { selectedFolder, history } = this.props;
+    const { quizObj, questionObj, answerArray } = this.state;
+    const { name, quizzes } = selectedFolder;
+    if (this.state.isEditing) {
       return (
         <div>
-          <EditQuiz editQuizData={editQuizData} />
+          <h1>edit quiz</h1>
+          <EditQuiz
+            updateQuestion={this.updateQuestion}
+            updateAnswer={this.updateAnswer}
+            handleUpdateQuestion={this.handleUpdateQuestion}
+            handleUpdateAnswer={this.handleUpdateAnswer}
+            quizObj={quizObj}
+            answerArray={answerArray}
+          />
         </div>
-      )
+      );
     }
     const quizArray = quizzes.map((quiz) => {
-      return (<QuizCard
-        key={getKey()}
-        quizData={quiz}
-        postRoom={this.postRoom}
-        editQuiz={this.editQuiz}
-        toggleEdit={this.toggleEdit}
-        deleteQuiz={this.deleteQuiz}
-      />);
+      return (
+        <div key={quiz.id}>
+          <h2>{name}</h2>
+          <QuizCard
+            quizData={quiz}
+            postRoom={this.postRoom}
+            toggleEdit={this.toggleEdit}
+            deleteQuiz={this.deleteQuiz}
+          />
+        </div>
+      );
     });
+
     return (
       <section className="quiz-list-wrapper">
         <header className="quiz-list-header">
