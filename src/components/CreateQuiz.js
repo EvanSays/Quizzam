@@ -25,6 +25,7 @@ class CreateQuiz extends Component {
     this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRadioClick = this.handleRadioClick.bind(this);
   }
 
   handleUpdateQuestion(event, questionId) {
@@ -48,6 +49,19 @@ class CreateQuiz extends Component {
     const answerUpdate = {
       answer_text: event.target.value,
       correct: false,
+    };
+
+    newState[questionId].answers[answerId] = answerUpdate;
+    this.setState({ questions: newState });
+  }
+
+  handleRadioClick(event, questionId, answerId, answerText) {
+    const newState = [...this.state.questions];
+    const isCorrect = !newState[questionId].answers[answerId].correct;
+
+    const answerUpdate = {
+      answer_text: newState[questionId].answers[answerId].answer_text,
+      correct: isCorrect,
     };
 
     newState[questionId].answers[answerId] = answerUpdate;
@@ -150,6 +164,7 @@ class CreateQuiz extends Component {
             questionText={question.question_text}
             answers={question.answers}
             handleAddAnswer={this.handleAddAnswer}
+            handleRadioClick={this.handleRadioClick}
           />
           );
         })}

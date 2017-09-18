@@ -3,7 +3,7 @@ import { func } from 'prop-types';
 import PropTypes from 'prop-types';
 import { Answer } from './Answer';
 
-export const Question = ({ questionText, handleUpdateQuestion, questionId, handleAddAnswer, answers, handleUpdateAnswer }) => {
+export const Question = ({ questionText, handleUpdateQuestion, questionId, handleAddAnswer, answers, handleUpdateAnswer, handleRadioClick }) => {
   return (
     <section className="question">
       <h1>QUESTION</h1>
@@ -22,6 +22,8 @@ export const Question = ({ questionText, handleUpdateQuestion, questionId, handl
             questionId={questionId}
             answerText={answer.answer_text}
             handleUpdateAnswer={handleUpdateAnswer}
+            handleRadioClick={handleRadioClick}
+            isCorrect={answer.correct}
           />
         );
       })}
