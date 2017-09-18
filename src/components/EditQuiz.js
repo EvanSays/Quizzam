@@ -2,10 +2,8 @@ import React from 'react';
 import { getKey } from '../helpers';
 
 const EditQuiz = ({ quizObj, updateAnswer, questionObj, handleUpdateQuestion }) => {
-  
   const questions = quizObj.questions.map((question, index) => {
     const id = question.id;
-    console.log('questionObj', quizObj);
     return (
       <div key={id}>
         <input
@@ -24,24 +22,20 @@ const EditQuiz = ({ quizObj, updateAnswer, questionObj, handleUpdateQuestion }) 
                   value={answer.answer_text} />
                 <label htmlFor={answer.answer_text}>{answer.answer_text}</label>
               </div>
-            )
+            );
           })
         }
       </div>
-    )
-  })
-
+    );
+  });
 
   return (
     <div>
-      <form action="submit">
-
-      </form>
       <h1>{quizObj.name}</h1>
       {questions}
       <button>submit changes</button>
     </div>
   );
-}
+};
 
 export default EditQuiz;
