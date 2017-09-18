@@ -1,7 +1,7 @@
 import React from 'react';
 import { getKey } from '../helpers';
 
-const EditQuiz = ({ quizObj, updateAnswer, questionObj, handleUpdateQuestion, handleUpdateAnswer }) => {
+const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAnswer }) => {
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
     return (

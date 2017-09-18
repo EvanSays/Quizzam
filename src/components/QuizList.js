@@ -11,7 +11,6 @@ class QuizList extends Component {
     this.state = {
       isEditing: false,
       quizObj: {},
-      questionObj: {},
     };
     this.postRoom = this.postRoom.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -84,7 +83,6 @@ class QuizList extends Component {
             handleUpdateQuestion={this.handleUpdateQuestion}
             handleUpdateAnswer={this.handleUpdateAnswer}
             quizObj={quizObj}
-            questionObj={questionObj}
             answerArray={answerArray}
           />
         </div>
