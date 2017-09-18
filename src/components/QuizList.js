@@ -38,12 +38,12 @@ class QuizList extends Component {
 
   handleUpdateQuestion(e, id) {
     const obj = this.state.quizObj;
-
     const question = obj.questions.filter((array) => {
       return array.id === id;
     });
 
     question[0].question_text = e.target.value;
+
     this.setState({ quizObj: obj });
   }
 
@@ -58,6 +58,7 @@ class QuizList extends Component {
     });
 
     answer[0].answer_text = e.target.value;
+
     this.setState({ quizObj: obj });
   }
 
