@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ResultsChart from './ResultsChart';
+import QuizResultsAside from './QuizResultsAside';
 import socket from '../socket';
 
 export default class QuizResults extends Component {
@@ -19,6 +20,7 @@ export default class QuizResults extends Component {
     return (
       <section className="quiz-results">
         <ResultsChart />
+        <QuizResultsAside />
       </section>
     );
   }
