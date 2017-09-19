@@ -123,19 +123,34 @@ export default class TakeQuiz extends Component {
           <h1>Subject: {this.props.quiz.subject}</h1>
           <h1>Room: {this.props.quiz.id}</h1>
         </header>
-        <section className="tak-quiz-question">
-          <h3>{this.props.quiz.questions[this.state.currentQuestion].question_text}</h3>
-          <p>({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})</p>
-          <form>
-            {quiz.questions[currentQuestion].answers.map((answer, index) => {
-              return this.determineInputType(answer, index);
-            })}
-          </form>
+        <section className="take-quiz-question">
+          <h3 className="take-quiz-question-title">
+            {this.props.quiz.questions[this.state.currentQuestion].question_text}
+          </h3>
+          <div className="question-wrapper">
+            <p className="take-quiz-question-type">
+              ({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})
+            </p>
+            <form className="take-quiz-form">
+              {this.props.quiz.questions[this.state.currentQuestion].answers
+                .map((answer, index) => {
+                  return this.determineInputType(answer, index);
+                })}
+            </form>
+            <nav className="take-quiz-nav">
+              <button
+                className="take-quiz-btn"
+                onClick={this.handleClick}
+              >Prev
+              </button>
+              <button
+                className="take-quiz-btn"
+                onClick={this.handleClick}
+              >Next
+              </button>
+            </nav>
+          </div>
         </section>
-        <footer>
-          <button onClick={this.handleClick}>Prev</button>
-          <button onClick={this.handleClick}>Next</button>
-        </footer>
       </main>
     );
   }
