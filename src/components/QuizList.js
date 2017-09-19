@@ -106,7 +106,7 @@ class QuizList extends Component {
     }
     const quizArray = quizzes.map((quiz) => {
       return (
-        <div key={quiz.id}>
+        <div className="quiz-card-wrapper" key={quiz.id}>
           <h2>{name}</h2>
           <QuizCard
             quizData={quiz}
