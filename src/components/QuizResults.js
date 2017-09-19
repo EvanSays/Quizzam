@@ -34,6 +34,7 @@ export default class QuizResults extends Component {
       });
     });
     return this.setState({ answerKey });
+  }
 
   handleIncomingAnswer(answerObj) {
     const { answer, name, questionId } = answerObj;
