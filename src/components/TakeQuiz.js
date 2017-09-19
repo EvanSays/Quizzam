@@ -31,7 +31,7 @@ export default class TakeQuiz extends Component {
     socket.emit('selectAnswer', {
       name: this.state.name,
       answer: this.state.answers[this.state.currentQuestion],
-      questionId: this.props.quiz.questions[this.state.currentQuestion],
+      questionId: this.props.quiz.questions[this.state.currentQuestion].id,
       room: this.props.code,
     });
   }
@@ -48,6 +48,7 @@ export default class TakeQuiz extends Component {
       const newState = this.state.currentQuestion - 1;
       this.setState({ currentQuestion: newState });
     }
+    this.sendSocket();
   }
 
   handleSelectAnswer(event) {
@@ -130,7 +131,7 @@ export default class TakeQuiz extends Component {
         </section>
         <footer>
           <button onClick={this.handleClick}>Prev</button>
-          <button onClick={this.sendSocket} onClick={this.handleClick}>Next</button>
+          <button onClick={this.handleClick}>Next</button>
         </footer>
       </main>
     );

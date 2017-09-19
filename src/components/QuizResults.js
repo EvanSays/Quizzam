@@ -7,13 +7,12 @@ export default class QuizResults extends Component {
     this.state = {
       results: {},
     };
+    socket.on('selectAnswer', (data) => {
+      console.log(data);
+    });
   }
 
   render() {
-    socket.on('test', (data) => {
-      console.log(data);
-    });
-    console.log(this.props.room);
     return (
       <section>
         hi, I am a quiz result
