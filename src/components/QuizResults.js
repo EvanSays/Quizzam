@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import QuizResultsAside from './QuizResultsAside';
 import socket from '../socket';
 
 export default class QuizResults extends Component {
@@ -17,7 +18,7 @@ export default class QuizResults extends Component {
   render() {
     return (
       <section>
-        hi, I am a quiz result
+        <QuizResultsAside />
       </section>
     );
   }
