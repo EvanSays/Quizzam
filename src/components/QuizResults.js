@@ -11,6 +11,7 @@ export default class QuizResults extends Component {
       quiz: props.quiz,
       results: {},
       users: {},
+      answerKey: [],
     };
 
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
@@ -19,6 +20,20 @@ export default class QuizResults extends Component {
       this.handleIncomingAnswer(data);
     });
   }
+
+  componentDidMount() {
+    this.answerKeyGenerator(this.state.quiz);
+  }
+
+  answerKeyGenerator(obj) {
+    const answerKey = [];
+
+    obj.questions.map((answer) => {
+      return answer.answers.map((correct) => {
+        return correct.correct ? answerKey.push(correct.id.toString()) : null;
+      });
+    });
+    return this.setState({ answerKey });
 
   handleIncomingAnswer(answerObj) {
     const { answer, name, questionId } = answerObj;
