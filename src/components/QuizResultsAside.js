@@ -7,7 +7,7 @@ const QuizResultsAside = ({ handleOnClick, quizData }) => {
     return (
       <button
         key={getKey()}
-        onClick={handleOnClick}
+        onClick={() => handleOnClick(quesObj)}
       >Q{index + 1}<span>25%</span>
       </button>);
   });

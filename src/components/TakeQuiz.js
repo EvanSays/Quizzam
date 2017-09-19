@@ -115,6 +115,11 @@ export default class TakeQuiz extends Component {
       return <h3>LOADING</h3>;
     }
 
+    console.log(this.state);
+    console.log(this.props.quiz);
+    
+    
+
     return (
       <main>
         <header className="take-quiz-header">

@@ -17,9 +17,6 @@ export default class QuizResults extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
     
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
-      console.log('here');
-      console.log(data);
-      
       this.handleIncomingAnswer(data);
     });
   }
@@ -52,18 +49,16 @@ export default class QuizResults extends Component {
     this.setState({ users: newState });
   }
 
-  handleOnClick() {
-    console.log('this.state.quiz',this.state.quiz );
-    
-    // this.setState({selectedQuiz})
-    
+  handleOnClick(selectedQuestion) {
+    this.setState({ selectedQuestion });
   }
 
   render() {
-    const { quizData } = this.state;
+    const { quizData, selectedQuestion, users } = this.state;
+
     return (
       <section className="quiz-results">
-        <ResultsChart />
+        <ResultsChart selectedQuestion={selectedQuestion} users={users} />
         <QuizResultsAside 
           handleOnClick={this.handleOnClick} 
           quizData={quizData}
