@@ -16,9 +16,9 @@ export default class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: `${this.props.username}_${getKey()}`
+      name: `${props.username}_${getKey()}`,
       currentQuestion: 0,
-      answers: initializeState(this.props.quiz),
+      answers: initializeState(props.quiz),
     };
 
     this.handleClick = this.handleClick.bind(this);
