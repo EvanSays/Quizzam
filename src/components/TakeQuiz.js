@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
-import { questionTypes } from '../helpers';
+import { questionTypes, getKey } from '../helpers';
 import socket from '../socket';
 
 function initializeState(quiz) {
@@ -16,13 +16,10 @@ export default class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: `${this.props.username}_${getKey()}`
       currentQuestion: 0,
       answers: initializeState(this.props.quiz),
     };
-
-    socket.on('test', (data) => {
-      console.log(data);
-    });
 
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
@@ -31,7 +28,12 @@ export default class TakeQuiz extends Component {
   }
 
   sendSocket() {
-    socket.emit('test', this.state)
+    socket.emit('selectAnswer', {
+      name: this.state.name,
+      answer: this.state.answers[this.state.currentQuestion].selectedAnswers[0],
+      questionId: this.props.quiz.questions[this.state.currentQuestion].id,
+      room: this.props.code,
+    });
   }
 
   handleClick(event) {
@@ -46,6 +48,7 @@ export default class TakeQuiz extends Component {
       const newState = this.state.currentQuestion - 1;
       this.setState({ currentQuestion: newState });
     }
+    this.sendSocket();
   }
 
   handleSelectAnswer(event) {
@@ -104,7 +107,7 @@ export default class TakeQuiz extends Component {
     }
   }
 
-  render() {   
+  render() {
     if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }

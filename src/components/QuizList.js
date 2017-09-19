@@ -73,7 +73,7 @@ class QuizList extends Component {
         return ele.edited === true;
       });
       return [...acc, ...filtered];
-    }, []);    
+    }, []);
   }
 
   deleteQuiz(id) {

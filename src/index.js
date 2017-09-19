@@ -11,7 +11,7 @@ import TakeQuizContainer from './containers/TakeQuizContainer';
 import EditQuizContainer from './containers/EditQuizContainer';
 import QuizCard from './components/QuizCard';
 import CreateQuiz from './components/CreateQuiz';
-import QuizResults from './components/QuizResults';
+import QuizResultsContainer from './containers/QuizResultsContainer';
 import './index.scss';
 
 render(
@@ -25,7 +25,7 @@ render(
               if (!props.location.state.user) {
                 return <TakeQuizContainer />;
               }
-              return <QuizResults />;
+              return <QuizResultsContainer />;
             }}
           />
           <Route path="/login" component={WelcomeViewContainer} />

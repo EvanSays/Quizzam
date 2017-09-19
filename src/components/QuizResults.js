@@ -4,10 +4,12 @@ import socket from '../socket';
 export default class QuizResults extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
+      quiz: props.quiz,
       results: {},
     };
-    socket.on('test', (data) => {
+    socket.on(`${this.props.room}submittedAnswer`, (data) => {
       console.log(data);
     });
   }

@@ -13,8 +13,8 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  socket.on('test', (data) => {
-    io.emit('test', data);
+  socket.on('selectAnswer', (data) => {
+    io.emit(`${data.room}submittedAnswer`, data);
   });
 });
 
