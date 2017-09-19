@@ -4,7 +4,12 @@ import './styles/QuizResultsAside.scss';
 
 const QuizResultsAside = ({ handleOnClick, quizData }) => {
   const question = quizData.questions.map((quesObj, index) => {
-    return <button key={getKey()} onClick={handleOnClick}>Q{index + 1}<span>25%</span></button>;
+    return (
+      <button
+        key={getKey()}
+        onClick={handleOnClick}
+      >Q{index + 1}<span>25%</span>
+      </button>);
   });
   return (
     <aside className="quiz-result-wrapper">
