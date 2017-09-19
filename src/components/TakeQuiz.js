@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
-import { questionTypes } from '../helpers';
+import { questionTypes, getKey } from '../helpers';
 import socket from '../socket';
 
 function initializeState(quiz) {
@@ -16,7 +16,7 @@ export default class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.username,
+      name: `${this.props.username}_${getKey()}`
       currentQuestion: 0,
       answers: initializeState(this.props.quiz),
     };
@@ -30,7 +30,7 @@ export default class TakeQuiz extends Component {
   sendSocket() {
     socket.emit('selectAnswer', {
       name: this.state.name,
-      answer: this.state.answers[this.state.currentQuestion],
+      answer: this.state.answers[this.state.currentQuestion].selectedAnswers[0],
       questionId: this.props.quiz.questions[this.state.currentQuestion].id,
       room: this.props.code,
     });

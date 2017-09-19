@@ -14,8 +14,7 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
   socket.on('selectAnswer', (data) => {
-    console.log(data, 'DATA TO SERVER');
-    socket.emit('selectAnswer', data);
+    io.emit(`${data.room}submittedAnswer`, data);
   });
 });
 
