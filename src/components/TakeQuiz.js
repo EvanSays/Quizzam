@@ -16,13 +16,10 @@ export default class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: this.props.username,
       currentQuestion: 0,
       answers: initializeState(this.props.quiz),
     };
-
-    socket.on('test', (data) => {
-      console.log(data);
-    });
 
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
@@ -31,7 +28,12 @@ export default class TakeQuiz extends Component {
   }
 
   sendSocket() {
-    socket.emit('test', this.state)
+    socket.emit('selectAnswer', {
+      name: this.state.name,
+      answer: this.state.answers[this.state.currentQuestion],
+      questionId: this.props.quiz.questions[this.state.currentQuestion],
+      room: this.props.code,
+    });
   }
 
   handleClick(event) {
@@ -104,7 +106,7 @@ export default class TakeQuiz extends Component {
     }
   }
 
-  render() {   
+  render() {
     if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }
@@ -128,7 +130,7 @@ export default class TakeQuiz extends Component {
         </section>
         <footer>
           <button onClick={this.handleClick}>Prev</button>
-          <button onClick={this.handleClick}>Next</button>
+          <button onClick={this.sendSocket} onClick={this.handleClick}>Next</button>
         </footer>
       </main>
     );
