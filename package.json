@@ -8,7 +8,7 @@
     "app.bundle.js.map"
   ],
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --watch",
     "heroku-postbuild": "npm install --only=dev && npm install && npm run build",
     "start": "webpack-dev-server --open",
     "server": "nodemon server.js",
