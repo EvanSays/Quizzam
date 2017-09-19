@@ -8,10 +8,27 @@ export default class QuizResults extends Component {
     this.state = {
       quiz: props.quiz,
       results: {},
+      users: {},
     };
+
+    this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
+
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
-      console.log(data);
+      this.handleIncomingAnswer(data);
     });
+  }
+
+  handleIncomingAnswer(answerObj) {
+    const { answer, name, questionId } = answerObj;
+    const newState = Object.assign({}, this.state.users);
+
+    if (!newState[name]) {
+      newState[name] = { [questionId]: answer };
+    } else {
+      newState[name] = Object.assign(newState[name], { [questionId]: answer });
+    }
+
+    this.setState({ users: newState });
   }
 
   render() {
