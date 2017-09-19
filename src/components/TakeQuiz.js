@@ -118,14 +118,14 @@ export default class TakeQuiz extends Component {
 
     return (
       <main>
-        <header>
+        <header className="take-quiz-header">
           <h1>{this.props.quiz.name}</h1>
           <h1>Subject: {this.props.quiz.subject}</h1>
           <h1>Room: {this.props.quiz.id}</h1>
         </header>
-        <section>
-          <h3>{quiz.questions[currentQuestion].question_text}</h3>
-          <p>({questionTypes[quiz.questions[currentQuestion].question_type]})</p>
+        <section className="tak-quiz-question">
+          <h3>{this.props.quiz.questions[this.state.currentQuestion].question_text}</h3>
+          <p>({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})</p>
           <form>
             {quiz.questions[currentQuestion].answers.map((answer, index) => {
               return this.determineInputType(answer, index);
