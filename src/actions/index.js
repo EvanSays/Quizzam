@@ -49,12 +49,22 @@ const quizFail = (bool) => {
   return { type: constants.QUIZ_FAIL, bool };
 };
 
-export const fetchQuiz = (room) => {
+const roomCode = (code) => {
+  return { type: constants.ROOM_CODE, code };
+};
+
+const userName = (name) => {
+  return { type: constants.USER_NAME, name };
+};
+
+export const fetchQuiz = (room, name) => {
   return (dispatch) => {
     dispatch(quizLoading(true));
     fetch(`api/v1/room/${room}`)
       .then((res) => {
         dispatch(quizLoading(false));
+        dispatch(roomCode(room));
+        dispatch(userName(name));
         return res.json();
       })
       .then((quiz) => {
@@ -80,7 +90,7 @@ export const deleteQuiz = (id) => {
       .then((res) => {
         return res.json();
       })
-      .then((quiz) => {
+      .then(() => {
         dispatch(removeQuizFolder(id));
       })
       .catch(() => {
@@ -154,7 +164,7 @@ const addFolder = (data) => {
   return { type: constants.NEW_FOLDER, folder };
 };
 
-export const createFolder = ({ name, id}) => {
+export const createFolder = ({ name, id }) => {
   return (dispatch) => {
     fetch(`api/v1/users/${id}/folders`, {
       method: 'POST',
@@ -206,4 +216,3 @@ export const createRoom = (quiz) => {
 export const selectQuiz = (obj) => {
   return { type: constants.EDIT_QUIZ, obj };
 };
-

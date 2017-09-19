@@ -6,9 +6,11 @@ class CodeForm extends Component {
     super();
     this.state = {
       code: '',
+      name: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    this.handleNameInput = this.handleNameInput.bind(this);
   }
 
   handleOnChange(event) {
@@ -17,20 +19,40 @@ class CodeForm extends Component {
     this.setState({ code });
   }
 
+  handleNameInput(event) {
+    const name = event.target.value;
+
+    this.setState({ name });
+  }
+
   handleOnSubmit(event) {
     event.preventDefault();
-    const { code } = this.state;
+    const { code, name } = this.state;
     const { fetchQuiz } = this.props;
 
-    fetchQuiz(code);
-    this.setState({ code: '' });
+    fetchQuiz(code, name);
+    this.setState({ code: '', name: '' });
   }
 
   render() {
     return (
       <form className="code-form" onSubmit={this.handleOnSubmit} action="">
-        <input className="code-input" onChange={this.handleOnChange} type="text" value={this.state.code} placeholder="Enter Code!" />
-        <button className="code-btn">Press enter to start or <span>click here</span></button>
+        <input
+          className="code-input"
+          onChange={this.handleOnChange}
+          type="text"
+          value={this.state.code}
+          placeholder="Enter Code!"
+          maxLength="4"
+        />
+        <input
+          className="name-input"
+          onChange={this.handleNameInput}
+          type="text"
+          value={this.state.name}
+          placeholder="Enter your name!"
+        />
+        <button className="code-btn">Press enter or<span>click here</span> to start</button>
       </form>
     );
   }

@@ -5,6 +5,7 @@ import { getQuizReducer, editQuizReducer, quizLoadingReducer, quizFailReducer } 
 import { questionsReducer } from './questionsReducer';
 import { userReducer, userFailReducer, userLoadingReducer } from './userReducer';
 import { roomReducer, roomFailReducer, roomLoadingReducer } from './roomReducer';
+import { codeReducer, userNameReducer } from './codeFormReducer';
 
 export default combineReducers({
   router: routerReducer,
@@ -26,4 +27,7 @@ export default combineReducers({
   room: roomReducer,
   roomFail: roomFailReducer,
   roomLoading: roomLoadingReducer,
+
+  code: codeReducer,
+  username: userNameReducer,
 });
