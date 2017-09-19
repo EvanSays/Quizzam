@@ -18,9 +18,15 @@ export default class TakeQuiz extends Component {
     this.state = {
       currentQuestion: 0,
       answers: initializeState(this.props.quiz),
+      users: {},
     };
 
     socket.on('test', (data) => {
+      console.log(data);
+      this.handleIncomingAnswer(data);
+    });
+
+    socket.on('connection', (data) => {
       console.log(data);
     });
 
@@ -28,10 +34,25 @@ export default class TakeQuiz extends Component {
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
     this.sendSocket = this.sendSocket.bind(this);
+    this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
   }
 
   sendSocket() {
-    socket.emit('test', this.state)
+    socket.emit('test', this.state);
+  }
+
+  handleIncomingAnswer(answerObj) {
+    console.log(answerObj);
+    const { answer, name, question_id } = answerObj;
+    const newState = Object.assign({}, this.state.users);
+
+    if (!newState[name]) {
+      newState[name] = { [question_id]: answer };
+    } else {
+      newState[name] = Object.assign(newState[name], { [question_id]: answer });
+    }
+
+    this.setState({ users: newState });
   }
 
   handleClick(event) {
@@ -104,7 +125,7 @@ export default class TakeQuiz extends Component {
     }
   }
 
-  render() {   
+  render() {
     if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }

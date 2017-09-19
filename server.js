@@ -14,7 +14,13 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
   socket.on('test', (data) => {
-    io.emit('test', data);
+    const sampleAnswer = {
+      answer: 3,
+      name: 'Bob',
+      room: 'QUID',
+      question_id: 2,
+    };
+    io.emit('test', sampleAnswer);
   });
 });
 
