@@ -6,15 +6,15 @@ import socket from '../socket';
 export default class QuizResults extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      quiz: props.quiz,
+      quizData: props.quiz,
       results: {},
       users: {},
+      selectedQuestion: {},
     };
-
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
-
+    this.handleOnClick = this.handleOnClick.bind(this);
+    
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
       this.handleIncomingAnswer(data);
     });
@@ -33,11 +33,22 @@ export default class QuizResults extends Component {
     this.setState({ users: newState });
   }
 
+  handleOnClick() {
+    console.log('this.state.quiz',this.state.quiz );
+    
+    // this.setState({selectedQuiz})
+    
+  }
+
   render() {
+    const { quizData } = this.state;
     return (
       <section className="quiz-results">
         <ResultsChart />
-        <QuizResultsAside />
+        <QuizResultsAside 
+          handleOnClick={this.handleOnClick} 
+          quizData={quizData}
+        />
       </section>
     );
   }

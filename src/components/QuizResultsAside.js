@@ -1,7 +1,16 @@
 import React from 'react';
+import { getKey } from '../helpers';
 import './styles/QuizResultsAside.scss';
 
-const QuizResultsAside = () => {
+const QuizResultsAside = ({ handleOnClick, quizData }) => {
+  const question = quizData.questions.map((quesObj, index) => {
+    return (
+      <button
+        key={getKey()}
+        onClick={handleOnClick}
+      >Q{index + 1}<span>25%</span>
+      </button>);
+  });
   return (
     <aside className="quiz-result-wrapper">
       <h1>Quiz Name</h1>
@@ -16,11 +25,7 @@ const QuizResultsAside = () => {
           <h3>All Questions</h3>
           <p>sort</p>
         </div>
-        <button>Q1<span>25%</span></button>
-        <button>Q2<span>5%</span></button>
-        <button>Q3<span>90%</span></button>
-        <button>Q4<span>95%</span></button>
-        <button>Q5<span>100%</span></button>
+        {question}
       </section>
     </aside>
   );
