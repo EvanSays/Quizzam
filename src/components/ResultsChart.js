@@ -2,7 +2,11 @@ import React from 'react';
 import Bar from './Bar';
 import './styles/ResultsChart.scss';
 
-const ResultsChart = () => {
+const ResultsChart = ({ results }) => {
+console.log(results);
+
+  
+  
   return (
     <section className="results-chart">
       <h2>Question Name</h2>

@@ -17,6 +17,9 @@ export default class QuizResults extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
     
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
+      console.log('here');
+      console.log(data);
+      
       this.handleIncomingAnswer(data);
     });
   }
