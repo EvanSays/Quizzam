@@ -17,3 +17,6 @@ export const USER_LOADING = 'USER_LOADING';
 export const GET_ROOM = 'GET_ROOM';
 export const ROOM_FAIL = 'ROOM_FAIL';
 export const ROOM_LOADING = 'ROOM_LOADING';
+
+export const ROOM_CODE = 'ROOM_CODE';
+export const USER_NAME = 'USER_NAME';
