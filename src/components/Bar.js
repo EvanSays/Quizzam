@@ -7,7 +7,7 @@ const Bar = ({ name, width, index }) => {
 
   return (
     <article className="bar">
-      <h3 className="bar-label">{`a${index}`}</h3>
+      <h3 className="bar-label">{`A${index + 1}`}</h3>
       <div className="bar-wrapper">
         <div style={style} className="bar-color" />
         <p className="bar-result">{result}</p>

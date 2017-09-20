@@ -5,6 +5,7 @@
   color: #FFF;
   font-size: 60px;
   text-align: center;
+  text-transform: uppercase;
   &::-webkit-input-placeholder {
     color: #FFF;
   }
@@ -17,6 +18,10 @@
   &:-moz-placeholder {
     color: #FFF;
   }
+}
+
+.code-input::placeholder {
+  text-transform: capitalize;
 }
 
 .code-form {
