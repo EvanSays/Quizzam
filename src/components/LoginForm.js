@@ -109,12 +109,12 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  isHidden: PropTypes.object,
+  isHidden: PropTypes.bool,
   location: PropTypes.object,
-  login: PropTypes.object,
-  signUp: PropTypes.object,
-  updateUserFail: PropTypes.object,
-  userFail: PropTypes.object,
+  login: PropTypes.func,
+  signUp: PropTypes.func,
+  updateUserFail: PropTypes.func,
+  userFail: PropTypes.bool,
 };
 
 export default LoginForm;

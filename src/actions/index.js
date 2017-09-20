@@ -13,7 +13,9 @@ export const foldersFail = (bool) => {
 };
 
 export const fetchFolders = (id) => {
+  
   return (dispatch) => {
+    console.log('id', id);
     dispatch(foldersLoading(true));
     fetch(`api/v1/users/${id}/folders`)
       .then((res) => {
@@ -21,6 +23,8 @@ export const fetchFolders = (id) => {
         return res.json();
       })
       .then((folders) => {
+        console.log('folders', folders);
+        
         dispatch(getFolders(folders));
         dispatch(foldersFail(false));
       })
@@ -108,7 +112,7 @@ export const login = (body) => {
         dispatch(userLoading(false));
         return res.json();
       })
-      .then((user) => {
+      .then((user) => {      
         dispatch(getUser(user.data));
         dispatch(fetchFolders(user.data.id));
         dispatch(userFail(false));
