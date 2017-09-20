@@ -56,7 +56,7 @@ exports.editAnswer = (req, res) => {
 exports.delAnswer = (req, res) => {
   const { answerId } = req.params;
 
-  db('question')
+  db('answer')
     .where('id', answerId)
     .del()
     .returning('*')
