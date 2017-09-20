@@ -1,4 +1,5 @@
 import React from 'react';
+import { func, object } from 'prop-types';
 import './styles/Folder.scss';
 
 const Folder = ({ folder, getSelectedFolder }) => {
@@ -12,6 +13,16 @@ const Folder = ({ folder, getSelectedFolder }) => {
       <h2>{name}: {length}</h2>
     </button>
   );
+};
+
+Folder.defaultProps = {
+  folder: {},
+  getSelectedFolder: func,
+};
+
+Folder.propTypes = {
+  folder: object,
+  getSelectedFolder: func,
 };
 
 export default Folder;

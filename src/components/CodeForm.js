@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func } from 'prop-types';
 import socket from '../socket';
 import './styles/CodeForm.scss';
 
@@ -64,5 +65,13 @@ class CodeForm extends Component {
     );
   }
 }
+
+CodeForm.defaultProps = {
+  fetchQuiz: func,
+};
+
+CodeForm.propTypes = {
+  fetchQuiz: func,
+};
 
 export default CodeForm;
