@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number } from 'prop-types';
+import PropTypes from 'prop-types';
 import './styles/Bar.scss';
 
 const Bar = ({ name, width, index }) => {
@@ -19,9 +19,9 @@ const Bar = ({ name, width, index }) => {
 };
 
 Bar.propTypes = {
-  index: number,
-  name: string,
-  width: string,
+  index: PropTypes.number,
+  name: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default Bar;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import flash from '../assets/flash.svg';
 import LoginFormContainer from '../containers/LoginFormContainer';
@@ -29,11 +29,13 @@ class WelcomeView extends Component {
     }
 
     if (quiz.id) {
-      return (<Redirect to={{
-        pathname: `/room/${quiz.id}`,
-        state: { user: user.id },
-      }}
-      />);
+      return (
+        <Redirect to={{
+          pathname: `/room/${quiz.id}`,
+          state: { user: user.id },
+        }}
+        />
+      );
     }
 
     return (
@@ -63,8 +65,10 @@ class WelcomeView extends Component {
   }
 }
 
-WelcomeView.PropTypes = {
-  quiz: object,
+WelcomeView.propTypes = {
+  location: PropTypes.object,
+  quiz: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default WelcomeView;

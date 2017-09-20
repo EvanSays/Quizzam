@@ -1,5 +1,5 @@
 import React from 'react';
-import { func, object } from 'prop-types';
+import PropTypes from 'prop-types';
 import './styles/Folder.scss';
 
 const Folder = ({ folder, getSelectedFolder }) => {
@@ -16,8 +16,8 @@ const Folder = ({ folder, getSelectedFolder }) => {
 };
 
 Folder.propTypes = {
-  folder: object,
-  getSelectedFolder: func,
+  folder: PropTypes.object,
+  getSelectedFolder: PropTypes.func,
 };
 
 export default Folder;
