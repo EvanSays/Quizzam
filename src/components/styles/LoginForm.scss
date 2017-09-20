@@ -6,7 +6,7 @@
 .login {
   #first_name {
     display: none;
-  } 
+  }
   #last_name {
     display: none;
   }
@@ -15,6 +15,7 @@
 .login-title {
   color: #00C3FF;
   letter-spacing: 0.5px;
+  margin-left: 30px;
   text-transform: capitalize;
 }
 
@@ -153,4 +154,18 @@
 .error-msg {
   color: #F37474;
   font-size: 14px;
+}
+
+@media only screen and (max-width: 400px) {
+  .login-form {
+    width: 220px;
+  }
+
+  .login-title {
+    margin-left: 25px;
+  }
+
+  .login-btn {
+    width: 80px;
+  }
 }
