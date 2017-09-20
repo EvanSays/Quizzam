@@ -34,11 +34,6 @@ const ResultsChart = ({ selectedQuestion, users }) => {
   );
 };
 
-ResultsChart.defaultProps = {
-  selectedQuestion: {},
-  users: {},
-};
-
 ResultsChart.propTypes = {
   selectedQuestion: object,
   users: object,

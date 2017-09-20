@@ -15,6 +15,7 @@ module.exports = {
       "react/no-set-state": [0],
       "react/require-optimization": [0],
       "react/forbid-prop-types": [0],
+      "react/require-default-props": [0],
     },
     "env": {
       "browser": true,

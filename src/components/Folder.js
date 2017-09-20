@@ -15,11 +15,6 @@ const Folder = ({ folder, getSelectedFolder }) => {
   );
 };
 
-Folder.defaultProps = {
-  folder: {},
-  getSelectedFolder: func,
-};
-
 Folder.propTypes = {
   folder: object,
   getSelectedFolder: func,

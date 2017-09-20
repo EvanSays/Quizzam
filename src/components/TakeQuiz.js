@@ -12,7 +12,7 @@ function initializeState(quiz) {
   return initialState;
 }
 
-export default class TakeQuiz extends Component {
+class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,6 @@ export default class TakeQuiz extends Component {
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
     this.sendSocket = this.sendSocket.bind(this);
   }
-  
   sendSocket() {
     socket.emit('selectAnswer', {
       name: this.state.name,
@@ -115,11 +114,6 @@ export default class TakeQuiz extends Component {
       return <h3>LOADING</h3>;
     }
 
-    console.log(this.state);
-    console.log(this.props.quiz);
-    
-    
-
     return (
       <main>
         <header className="take-quiz-header">
@@ -159,3 +153,11 @@ export default class TakeQuiz extends Component {
     );
   }
 }
+
+TakeQuiz.propTypes = {
+  code: object,
+  quiz: object,
+  username: object,
+};
+
+export default TakeQuiz;
