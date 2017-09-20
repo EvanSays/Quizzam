@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { func, string } from 'prop-types';
+import './styles/Answer.scss';
 
 export const Answer = (props) => {
   const {
@@ -15,6 +17,7 @@ export const Answer = (props) => {
   return (
     <form>
       <input
+        className="answer-text-input"
         id={answerKey}
         type="text"
         value={answerText}
@@ -23,6 +26,7 @@ export const Answer = (props) => {
       <label htmlFor={answerKey}>
           Correct
         <input
+          className="answer-radio"
           name={answerText}
           type="radio"
           checked={isCorrect}
