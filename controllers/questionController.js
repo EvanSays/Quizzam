@@ -39,15 +39,15 @@ exports.addQuestion = (req, res) => {
 
 exports.editQuestion = (req, res) => {
   const newPatch = req.body;
-  const { id } = req.params;
+  const { questionId } = req.params;
 
   db('question')
-    .where({ id })
+    .where('id', questionId)
     .select()
     .update(newPatch, 'id')
     .then((question) => {
       if (!question.length) {
-        return res.status(404).json({ error: `The question with ID# ${id} was not found and could not be updated` });
+        return res.status(404).json({ error: `The question with ID# ${questionId} was not found and could not be updated` });
       }
       return res.status(201).json({ id: question[0] });
     })
@@ -55,19 +55,19 @@ exports.editQuestion = (req, res) => {
 };
 
 exports.delQuestion = (req, res) => {
-  const { id } = req.params;
+  const { questionId } = req.params;
 
   db('question')
-    .where({ id })
+    .where('id', questionId)
     .del()
     .returning('*')
     .then((question) => {
       if (!question.length) {
-        return res.status(404).json({ error: `The question with ID# ${id} was not found and could not be deleted` });
+        return res.status(404).json({ error: `The question with ID# ${questionId} was not found and could not be deleted` });
       }
       return res.status(200).json({
-        success: `Question #${id} was deleted.`,
-        deletedQquestion: question,
+        success: `Question #${questionId} was deleted.`,
+        deletedQuestion: question,
       });
     })
     .catch(error => res.status(500).json({ error }));
