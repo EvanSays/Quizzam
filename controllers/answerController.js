@@ -12,7 +12,7 @@ exports.indexAnswers = (req, res) => {
         res.status(200).json(answer);
       } else {
         res.status(404).json({
-          error: `Could not find answers with the question id of ${questionId}`,
+          error: `Could not find answers attached to the question id of ${questionId}`,
         });
       }
     })
