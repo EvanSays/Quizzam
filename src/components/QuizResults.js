@@ -67,13 +67,14 @@ export default class QuizResults extends Component {
   }
 
   render() {
-    const { quizData } = this.state;
+    const { quizData, connectedUsers } = this.state;
     return (
       <section className="quiz-results">
         <ResultsChart />
         <QuizResultsAside 
           handleOnClick={this.handleOnClick} 
           quizData={quizData}
+          connectedUsers={connectedUsers}
         />
       </section>
     );

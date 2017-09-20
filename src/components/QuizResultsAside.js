@@ -2,7 +2,10 @@ import React from 'react';
 import { getKey } from '../helpers';
 import './styles/QuizResultsAside.scss';
 
-const QuizResultsAside = ({ handleOnClick, quizData }) => {
+const QuizResultsAside = ({ handleOnClick, quizData, connectedUsers }) => {
+  const user = connectedUsers.map((str) => {
+    return (<div key={getKey()} className="circle green"><p>{str}</p></div>);
+  });
   const question = quizData.questions.map((quesObj, index) => {
     return (
       <button
@@ -16,9 +19,7 @@ const QuizResultsAside = ({ handleOnClick, quizData }) => {
       <h1>Quiz Name</h1>
       <section className="names">
         <h3>Connected</h3>
-        <div className="circle red"><p>Juan</p></div>
-        <div className="circle red"><p>James</p></div>
-        <div className="circle green"><p>George</p></div>
+        {user}
       </section>
       <section className="questions">
         <div className="header">
