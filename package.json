@@ -16,7 +16,7 @@
     "testBE": "NODE_ENV=test ./node_modules/.bin/mocha test/*",
     "testFE": "NODE_ENV=test ./node_modules/.bin/jest ./src/*",
     "testRedux": "NODE_ENV=test ./node_modules/.bin/jest ./src/test-redux/*",
-    "testComp": "NODE_ENV=test ./node_modules/.bin/jest ./src/components/test/Folder.test.js",
+    "testComp": "NODE_ENV=test ./node_modules/.bin/jest ./src/components/test/CodeForm.test.js",
     "test": "npm run testBE & npm run testFE",
     "lint": "./node_modules/.bin/eslint ./"
   },
