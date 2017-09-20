@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import QuestionContainer from '../containers/QuestionsContainer';
 import PropTypes from 'prop-types';
 import { Question } from '../components/Question';
 import { getKey } from '../helpers';
@@ -48,7 +47,7 @@ class CreateQuiz extends Component {
       .then((questionIds) => {
         for (let i = 0; i < questions.length; i += 1) {
           Promise.all(questions[i].answers.map((answer) => {
-            fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
+            return fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -58,7 +57,7 @@ class CreateQuiz extends Component {
               }),
             });
           }))
-            .catch(error => console.log(error));
+            .catch(error => error);
         }
       })
       .then(() => this.props.fetchFolders(this.props.selectedFolder.user_id))

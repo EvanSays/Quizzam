@@ -1,9 +1,14 @@
 import React from 'react';
-import { func } from 'prop-types';
 import PropTypes from 'prop-types';
 import { Answer } from './Answer';
 
-export const Question = ({ questionText, onHandleUpdateQuestion, questionId, onHandleAddAnswer, answers, onHandleUpdateAnswer, onHandleRadioClick }) => {
+export const Question = ({ questionText,
+  onHandleUpdateQuestion,
+  questionId,
+  onHandleAddAnswer,
+  answers,
+  onHandleUpdateAnswer,
+  onHandleRadioClick }) => {
   return (
     <section className="question">
       <h1>QUESTION</h1>
@@ -32,6 +37,12 @@ export const Question = ({ questionText, onHandleUpdateQuestion, questionId, onH
   );
 };
 
-// Question.propTypes = {
-//   addQuestion: func,
-// };
+Question.propTypes = {
+  answers: PropTypes.array,
+  onHandleAddAnswer: PropTypes.func,
+  onHandleRadioClick: PropTypes.func,
+  onHandleUpdateAnswer: PropTypes.func,
+  onHandleUpdateQuestion: PropTypes.func,
+  questionId: PropTypes.object,
+  questionText: PropTypes.object,
+};

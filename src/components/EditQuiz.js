@@ -1,7 +1,10 @@
 import React from 'react';
-import { getKey } from '../helpers';
+import PropTypes from 'prop-types';
 
-const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAnswer, handleSubmitEdit }) => {
+const EditQuiz = ({ quizObj,
+  handleUpdateQuestion,
+  handleUpdateAnswer,
+  handleSubmitEdit }) => {
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
     return (
@@ -37,6 +40,13 @@ const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAns
       <button onClick={handleSubmitEdit}>submit changes</button>
     </div>
   );
+};
+
+EditQuiz.propTypes = {
+  handleSubmitEdit: PropTypes.func,
+  handleUpdateAnswer: PropTypes.func,
+  handleUpdateQuestion: PropTypes.func,
+  quizObj: PropTypes.object,
 };
 
 export default EditQuiz;
