@@ -54,69 +54,9 @@ export const createFolder = ({ name, id }) => {
   };
 };
 
-export const addQuestion = (question) => {
-  return { type: 'ADD_QUESTION', question };
-};
-
-export const quizLoading = (bool) => {
-  return { type: constants.QUIZ_LOADING, bool };
-};
-
-export const getQuiz = (quiz) => {
-  return { type: constants.GET_QUIZ, quiz };
-};
-
-export const quizFail = (bool) => {
-  return { type: constants.QUIZ_FAIL, bool };
-};
-
-export const roomCode = (code) => {
-  return { type: constants.ROOM_CODE, code };
-};
 
 export const userName = (name) => {
   return { type: constants.USER_NAME, name };
-};
-
-export const fetchQuiz = (room, name) => {
-  return (dispatch) => {
-    dispatch(quizLoading(true));
-    fetch(`api/v1/room/${room}`)
-      .then((res) => {
-        dispatch(quizLoading(false));
-        dispatch(roomCode(room));
-        dispatch(userName(name));
-        return res.json();
-      })
-      .then((quiz) => {
-        dispatch(getQuiz(quiz));
-        dispatch(quizLoading(false));
-      })
-      .catch(() => {
-        quizFail(true);
-      });
-  };
-};
-
-export const removeQuizFolder = (id) => {
-  return { type: constants.DELETE_QUIZ, id };
-};
-
-export const deleteQuiz = (id) => {
-  return (dispatch) => {
-    fetch(`api/v1/quizzes/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(() => {
-        dispatch(removeQuizFolder(id));
-      })
-      .catch(() => {
-      });
-  };
 };
 
 export const getUser = (user) => {
@@ -191,6 +131,14 @@ export const roomLoading = (bool) => {
   return { type: constants.ROOM_LOADING, bool };
 };
 
+export const roomCode = (code) => {
+  return { type: constants.ROOM_CODE, code };
+};
+
+export const getQuiz = (quiz) => {
+  return { type: constants.GET_QUIZ, quiz };
+};
+
 export const createRoom = (quiz) => {
   return (dispatch) => {
     dispatch(roomLoading(true));
@@ -212,6 +160,60 @@ export const createRoom = (quiz) => {
   };
 };
 
+
+export const quizLoading = (bool) => {
+  return { type: constants.QUIZ_LOADING, bool };
+};
+
+export const quizFail = (bool) => {
+  return { type: constants.QUIZ_FAIL, bool };
+};
+
+export const fetchQuiz = (room, name) => {
+  return (dispatch) => {
+    dispatch(quizLoading(true));
+    fetch(`api/v1/room/${room}`)
+      .then((res) => {
+        dispatch(quizLoading(false));
+        dispatch(roomCode(room));
+        dispatch(userName(name));
+        return res.json();
+      })
+      .then((quiz) => {
+        dispatch(getQuiz(quiz));
+        dispatch(quizLoading(false));
+      })
+      .catch(() => {
+        quizFail(true);
+      });
+  };
+};
+
 export const selectQuiz = (obj) => {
   return { type: constants.EDIT_QUIZ, obj };
+};
+
+export const removeQuizFolder = (id) => {
+  return { type: constants.DELETE_QUIZ, id };
+};
+
+export const deleteQuiz = (id) => {
+  return (dispatch) => {
+    fetch(`api/v1/quizzes/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then(() => {
+        dispatch(removeQuizFolder(id));
+      })
+      .catch(() => {
+      });
+  };
+};
+
+export const addQuestion = (question) => {
+  return { type: 'ADD_QUESTION', question };
 };
