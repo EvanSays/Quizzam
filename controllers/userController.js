@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
+/* eslint-disable camelcase */
 const { db } = require('../server');
 const bcrypt = require('bcrypt');
 const { auth } = require('../jwt-helper');
