@@ -53,24 +53,21 @@ export default class QuizResults extends Component {
 
     this.setState({ users: newState });
   }
+  
+  handleOnClick(selectedQuestion) {
+    this.setState({ selectedQuestion });
+  }
 
   handleIncomingUser(data) {
     const { connectedUsers } = this.state;
     this.setState({ connectedUsers: [...connectedUsers, data.name] });
   }
 
-  handleOnClick() {
-    console.log('this.state.quiz',this.state.quiz );
-    
-    // this.setState({selectedQuiz})
-
-  }
-
   render() {
-    const { quizData, connectedUsers } = this.state;
+    const { quizData, selectedQuestion, users, connectedUsers } = this.state;
     return (
       <section className="quiz-results">
-        <ResultsChart />
+        <ResultsChart selectedQuestion={selectedQuestion} users={users} />
         <QuizResultsAside 
           handleOnClick={this.handleOnClick} 
           quizData={quizData}

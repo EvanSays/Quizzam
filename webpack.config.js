@@ -50,7 +50,8 @@ module.exports = {
     stats: 'errors-only',
     proxy: {
       '/': {
-        target: 'http://localhost:3000',
+        target: 'ws://localhost:3000',
+        ws: true,
       },
     },
   },

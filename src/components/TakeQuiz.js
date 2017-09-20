@@ -20,13 +20,12 @@ export default class TakeQuiz extends Component {
       currentQuestion: 0,
       answers: initializeState(props.quiz),
     };
-
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
     this.sendSocket = this.sendSocket.bind(this);
   }
-
+  
   sendSocket() {
     socket.emit('selectAnswer', {
       name: this.state.name,
@@ -115,6 +114,11 @@ export default class TakeQuiz extends Component {
     if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }
+
+    console.log(this.state);
+    console.log(this.props.quiz);
+    
+    
 
     return (
       <main>
