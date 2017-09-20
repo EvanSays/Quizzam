@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable array-callback-return */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ResultsChart from './ResultsChart';

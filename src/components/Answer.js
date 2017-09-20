@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { func, string } from 'prop-types';
 import './styles/Answer.scss';
 
 export const Answer = (props) => {
