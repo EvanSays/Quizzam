@@ -3,7 +3,6 @@ import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes, getKey } from '../helpers';
 import socket from '../socket';
-import { object } from 'prop-types';
 
 function initializeState(quiz) {
   const initialState = [];
@@ -13,7 +12,7 @@ function initializeState(quiz) {
   return initialState;
 }
 
-export default class TakeQuiz extends Component {
+class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +25,6 @@ export default class TakeQuiz extends Component {
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
     this.sendSocket = this.sendSocket.bind(this);
   }
-  
   sendSocket() {
     socket.emit('selectAnswer', {
       name: this.state.name,
@@ -155,3 +153,11 @@ export default class TakeQuiz extends Component {
     );
   }
 }
+
+TakeQuiz.propTypes = {
+  code: object,
+  quiz: object,
+  username: object,
+};
+
+export default TakeQuiz;

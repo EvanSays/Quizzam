@@ -18,12 +18,6 @@ const Bar = ({ name, width, index }) => {
   );
 };
 
-Bar.defaultProps = {
-  index: 0,
-  name: {},
-  width: {},
-};
-
 Bar.propTypes = {
   index: number,
   name: string,

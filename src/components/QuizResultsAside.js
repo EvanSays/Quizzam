@@ -34,9 +34,9 @@ const QuizResultsAside = ({ handleOnClick, quizData, connectedUsers }) => {
 };
 
 QuizResultsAside.propTypes = {
-  quizData: PropTypes.object,
   connectedUsers: PropTypes.array,
   handleOnClick: PropTypes.func,
+  quizData: PropTypes.object,
 };
 
 export default QuizResultsAside;
