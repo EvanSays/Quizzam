@@ -1,15 +1,14 @@
 /* eslint-disable no-console */
 const chai = require('chai');
-
-const should = chai.should();
 const chaiHttp = require('chai-http');
-
 const knex = require('../src/knex');
 const { app } = require('../server');
 
+const should = chai.should();
+
 chai.use(chaiHttp);
 
-describe('Testing ________ API routes', () => {
+describe.only('Testing ________ API routes', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => done())
@@ -31,7 +30,6 @@ describe('Testing ________ API routes', () => {
           password: 'password',
         })
         .end((err, res) => {
-          console.log(res.body);
           should.not.exist(err);
           res.status.should.equal(201);
           res.type.should.equal('application/json');
@@ -39,6 +37,81 @@ describe('Testing ________ API routes', () => {
           res.body.data.should.include.keys(
             'id', 'email', 'first_name', 'last_name', 'token');
           done();
+        });
+    });
+    it('should return a 422 if email or password are not included', (done) => {
+      chai.request(app)
+        .post('/api/v1/users')
+        .send({
+          // Omitting email and password
+        })
+        .end((err, res) => {
+          res.should.have.status(422);
+          res.type.should.equal('application/json');
+          res.text.should.equal('"Missing user name or password"');
+          done();
+        });
+    });
+  });
+  describe('POST /api/v1/users/new', () => {
+    it('should create and return a new user with a token', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/new')
+        .send({
+          email: 'gary@thegary.com',
+          password: 'garyrulez',
+          first_name: 'steve',
+          last_name: 'smith',
+        }).end((err, res) => {
+          should.not.exist(err);
+          res.should.have.status(201);
+          res.type.should.equal('application/json');
+          res.body.should.include.keys('id', 'first_name', 'last_name', 'email', 'token');
+          done();
+        });
+    });
+    it('should return a 422 status and end error message if insufficient data is provided', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/new')
+        .send({
+          email: 'gary@thegary.com',
+          // omitting password
+          first_name: 'steve',
+          last_name: 'smith',
+        })
+        .end((err, res) => {
+          res.should.have.status(422);
+          res.type.should.equal('application/json');
+          res.body.error.should.equal('Missing params');
+          done();
+        });
+    });
+  });
+  describe('POST /api/v1/users/:userId/folders', () => {
+    it('should create a new folder', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/new')
+        .send({
+          email: 'gary@thegary.com',
+          password: 'garyrulez',
+          first_name: 'steve',
+          last_name: 'smith',
+        })
+        .end((err, res) => {
+          const id = res.body.id;
+          should.not.exist(err);
+          chai.request(app)
+            .post(`/api/v1/users/${id}/folders`)
+            .send({
+              name: 'garyrulez',
+            })
+            .end((error, response) => {
+              should.not.exist(err);
+              response.should.have.status(201);
+              response.type.should.equal('application/json');
+              response.body[0].should.include.keys('id', 'name', 'user_id', 'created_at', 'updated_at');
+              done();
+            });
         });
     });
   });
