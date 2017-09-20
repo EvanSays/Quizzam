@@ -4,6 +4,7 @@ const { db } = require('../server');
 const { genRoomNumber } = require('../src/helpers');
 
 exports.quiz = (req, res) => {
+  console.log(req.params.id);
   db('room').join('quiz', 'room.quiz_id', '=', 'quiz.id')
     .select('name', 'subject', 'type', 'room.id', 'quiz_id')
     .where('room.id', req.params.id)
@@ -21,10 +22,19 @@ exports.quiz = (req, res) => {
                 return questArray[questIndex];
               });
           }))
-            .then(() => quizWithQuestions);
-        });
+            .then(() => quizWithQuestions)
+            .catch(error => res.status(500).json({
+              error,
+            }));
+        })
+        .catch(error => res.status(500).json({
+          error,
+        }));
     })
-    .then(data => res.status(200).json(data[0]));
+    .then(data => res.status(200).json(data[0]))
+    .catch(error => res.status(500).json({
+      error,
+    }));
 };
 
 exports.addRoom = (req, res) => {
