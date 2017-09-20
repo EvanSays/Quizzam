@@ -5,7 +5,6 @@ import { Question } from '../components/Question';
 import { getKey } from '../helpers';
 import './styles/CreateQuiz.scss';
 
-
 class CreateQuiz extends Component {
   constructor() {
     super();
