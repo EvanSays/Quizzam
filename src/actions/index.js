@@ -32,6 +32,28 @@ export const selectFolder = (folder) => {
   return { type: constants.SELECT_FOLDER, folder };
 };
 
+export const addFolder = (data) => {
+  const folder = Object.assign(data, { quizzes: [] });
+
+  return { type: constants.NEW_FOLDER, folder };
+};
+
+export const createFolder = ({ name, id }) => {
+  return (dispatch) => {
+    fetch(`api/v1/users/${id}/folders`, {
+      method: 'POST',
+      body: JSON.stringify({ name }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      .then((data) => {
+        dispatch(addFolder(data[0]));
+        dispatch(foldersFail(false));
+      })
+      .catch(() => foldersFail(true));
+  };
+};
+
 export const addQuestion = (question) => {
   return { type: 'ADD_QUESTION', question };
 };
@@ -154,28 +176,6 @@ export const login = (body) => {
       .catch(() => {
         dispatch(userFail(true));
       });
-  };
-};
-
-export const addFolder = (data) => {
-  const folder = Object.assign(data, { quizzes: [] });
-
-  return { type: constants.NEW_FOLDER, folder };
-};
-
-export const createFolder = ({ name, id }) => {
-  return (dispatch) => {
-    fetch(`api/v1/users/${id}/folders`, {
-      method: 'POST',
-      body: JSON.stringify({ name }),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(res => res.json())
-      .then((data) => {
-        dispatch(addFolder(data[0]));
-        dispatch(foldersFail(false));
-      })
-      .catch(() => foldersFail(true));
   };
 };
 
