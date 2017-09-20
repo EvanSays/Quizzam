@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 const getKey = () => Math.round(Math.random() * Date.now());
 const getKeyType = (index, identifier) => `${identifier}-${index}`;
 

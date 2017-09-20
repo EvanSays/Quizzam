@@ -1,10 +1,13 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
+/* eslint-disable consistent-return */
 const { db } = require('../server');
 const bcrypt = require('bcrypt');
 const { auth } = require('../jwt-helper');
 
 exports.indexFolders = (req, res) => {
-  const user_id = req.params.id;
-  db('folder').where({ user_id }).select()
+  const userId = req.params.id;
+  db('folder').where({ userId }).select()
     .then((folders) => {
       return Promise.all(folders.map((folder, index, array) => {
         return db('quiz').where('folder_id', folder.id).select()
@@ -63,7 +66,7 @@ exports.indexFolders = (req, res) => {
 exports.addFolder = (req, res) => {
   const name = req.body;
   const userId = req.params.userId;
-  const newFolder = Object.assign({}, name, { user_id: parseInt(userId, 10) });
+  const newFolder = Object.assign({}, name, { userId: parseInt(userId, 10) });
 
   return db('folder')
     .insert(newFolder, '*')
