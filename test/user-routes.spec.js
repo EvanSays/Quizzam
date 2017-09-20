@@ -87,4 +87,32 @@ describe.only('Testing ________ API routes', () => {
         });
     });
   });
+  describe('POST /api/v1/users/:userId/folders', () => {
+    it('should create a new folder', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/new')
+        .send({
+          email: 'gary@thegary.com',
+          password: 'garyrulez',
+          first_name: 'steve',
+          last_name: 'smith',
+        })
+        .end((err, res) => {
+          const id = res.body.id;
+          should.not.exist(err);
+          chai.request(app)
+            .post(`/api/v1/users/${id}/folders`)
+            .send({
+              name: 'garyrulez',
+            })
+            .end((error, response) => {
+              should.not.exist(err);
+              response.should.have.status(201);
+              response.type.should.equal('application/json');
+              response.body[0].should.include.keys('id', 'name', 'user_id', 'created_at', 'updated_at');
+              done();
+            });
+        });
+    });
+  });
 });

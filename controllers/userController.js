@@ -66,7 +66,7 @@ exports.indexFolders = (req, res) => {
 
 exports.addFolder = (req, res) => {
   const name = req.body;
-  const user_id = req.params.user_id;
+  const user_id = req.params.userId;
   const newFolder = Object.assign({}, name, { user_id: parseInt(user_id, 10) });
 
   return db('folder')
