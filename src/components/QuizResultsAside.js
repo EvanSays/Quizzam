@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getKey } from '../helpers';
 import './styles/QuizResultsAside.scss';
 
-const QuizResultsAside = ({ handleOnClick, quizData, connectedUsers }) => {
+const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers }) => {
   const user = connectedUsers.map((str) => {
     return (<div key={getKey()} className="circle green"><p>{str}</p></div>);
   });
@@ -11,7 +11,7 @@ const QuizResultsAside = ({ handleOnClick, quizData, connectedUsers }) => {
     return (
       <button
         key={getKey()}
-        onClick={() => handleOnClick(quesObj)}
+        onClick={() => onHandleOnClick(quesObj)}
       >Q{index + 1}<span>25%</span>
       </button>);
   });
@@ -35,7 +35,7 @@ const QuizResultsAside = ({ handleOnClick, quizData, connectedUsers }) => {
 
 QuizResultsAside.propTypes = {
   connectedUsers: PropTypes.array,
-  handleOnClick: PropTypes.func,
+  onHandleOnClick: PropTypes.func,
   quizData: PropTypes.object,
 };
 
