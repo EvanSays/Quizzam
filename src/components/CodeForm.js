@@ -53,7 +53,7 @@ class CodeForm extends Component {
           maxLength="4"
         />
         <input
-          className="name-input"
+          className="code-input"
           onChange={this.handleNameInput}
           type="text"
           value={this.state.name}
