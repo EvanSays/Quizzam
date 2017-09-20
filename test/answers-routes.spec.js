@@ -81,6 +81,131 @@ describe('Answer API routes', () => {
     });
   });
 
+  describe('PATCH api/v1/questions/:questionId/answers/:answerId', () => {
+    it('Should return the answer\'s ID if an existing answer is updated', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+              const questionId = testQuestion.id;
+
+              chai.request(app)
+                .get(`/api/v1/questions/${questionId}/answers`)
+                .end((err2, res2) => {
+                  const testAnswer = res2.body.find(array => array.answer_text === 'Blue');
+                  const answerId = testAnswer.id;
+
+                  chai.request(app)
+                    .patch(`/api/v1/questions/${questionId}/answers/${answerId}`)
+                    .send({
+                      correct: true,
+                    })
+                    .end((err3, res3) => {
+                      should.not.exist(err3);
+                      res3.status.should.equal(201);
+                      res3.should.be.json; //eslint-disable-line
+                      res3.body.should.be.a('object');
+                      res3.body.should.have.property('id');
+                      res3.body.id.should.be.a('number');
+                      res3.body.id.should.equal(answerId);
+                      done();
+                    });
+                });
+            });
+        });
+    });
+
+    it('Should update the property of the answer that is sent in the request', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+              const questionId = testQuestion.id;
+
+              chai.request(app)
+                .get(`/api/v1/questions/${questionId}/answers`)
+                .end((err2, res2) => {
+                  const testAnswer = res2.body.find(array => array.answer_text === 'Blue');
+                  const answerId = testAnswer.id;
+                  testAnswer.correct.should.equal(false);
+
+                  chai.request(app)
+                    .patch(`/api/v1/questions/${questionId}/answers/${answerId}`)
+                    .send({
+                      correct: true,
+                    })
+                    .end((err3, res3) => {
+                      should.exist(res3);
+
+                      chai.request(app)
+                        .get(`/api/v1/questions/${questionId}/answers`)
+                        .end((err4, res4) => {
+                          const testAnswer2 = res4.body.find(array => array.answer_text === 'Blue');
+                          testAnswer2.correct.should.equal(true);
+                          done();
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('SAD PATH - Should return an error if the quiz does not exist', (done) => {
+      chai.request(app)
+        .patch('/api/v1/quizzes/0')
+        .send({
+          name: 'New Name',
+        })
+        .end((err, res) => {
+          should.exist(res);
+          res.status.should.equal(404);
+          res.should.be.json; //eslint-disable-line
+          res.body.should.be.a('object');
+          res.body.should.have.property('error');
+          res.body.error.should.equal('The quiz with ID# 0 was not found and could not be updated');
+          done();
+        });
+    });
+  });
+  
+//   chai.request(app)
+//     .get('/api/v1/quizzes')
+//     .end((err, res) => {
+//       const id = res.body[0].id;
+// 
+//       chai.request(app)
+//         .get(`/api/v1/quizzes/${id}/questions`)
+//         .end((err1, res1) => {
+//           const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+//           const questionId = testQuestion.id;
+// 
+//           chai.request(app)
+//             .get(`/api/v1/questions/${questionId}/answers`)
+//             .end((err2, res2) => {
+//               const testAnswer = res2.body.find(array => array.answer_text === 'Blue');
+//               const answerId = testAnswer.id;
+// 
+//               chai.request(app)
+//                 .delete(`/api/v1/questions/${questionId}/answers/${answerId}`)
+//                 .end((err3, res3) => {
+// 
+//                   done();
+//                 });
+//             });
+//         });
+//     });
+// });
+
   describe('DELETE /api/v1/questions/:questionId/answers/:answerId', () => {
     it('Should return a success message and an object containing the answer that was deleted', (done) => {
       chai.request(app)
