@@ -15,6 +15,7 @@ class QuizResults extends Component {
       answerKey: {},
       selectedQuestion: {},
       connectedUsers: [],
+      activeIndex: null,
     };
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
     this.handleIncomingUser = this.handleIncomingUser.bind(this);
@@ -56,8 +57,9 @@ class QuizResults extends Component {
 
     this.setState({ users: newState });
   }
-  handleOnClick(selectedQuestion) {
-    this.setState({ selectedQuestion });
+
+  handleOnClick(selectedQuestion, index) {
+    this.setState({ selectedQuestion, activeIndex: index });
   }
 
   handleIncomingUser(data) {
@@ -66,13 +68,14 @@ class QuizResults extends Component {
   }
 
   render() {
-    const { quizData, selectedQuestion, users, connectedUsers } = this.state;
+    const { quizData, selectedQuestion, users, connectedUsers, activeIndex } = this.state;
     return (
       <section className="quiz-results">
         <ResultsChart selectedQuestion={selectedQuestion} users={users} />
         <QuizResultsAside
           onHandleOnClick={this.handleOnClick}
           quizData={quizData}
+          activeIndex={activeIndex}
           connectedUsers={connectedUsers}
         />
       </section>
