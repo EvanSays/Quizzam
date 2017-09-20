@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const EditQuiz = ({ quizObj,
-  handleUpdateQuestion,
-  handleUpdateAnswer,
-  handleSubmitEdit }) => {
+  onHandleUpdateQuestion,
+  onHandleUpdateAnswer,
+  onHandleSubmitEdit }) => {
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
     return (
@@ -12,7 +12,7 @@ const EditQuiz = ({ quizObj,
         <input
           id={quesId}
           value={quizObj.questions[index].question_text}
-          onChange={e => handleUpdateQuestion(e, quesId)}
+          onChange={e => onHandleUpdateQuestion(e, quesId)}
         />
         {
           question.answers.map((answer, i) => {
@@ -23,7 +23,7 @@ const EditQuiz = ({ quizObj,
                   id={ansId}
                   name={answer.answer_text}
                   value={quizObj.questions[index].answers[i].answer_text}
-                  onChange={e => handleUpdateAnswer(e, quesId, ansId)}
+                  onChange={e => onHandleUpdateAnswer(e, quesId, ansId)}
                 />
               </div>
             );
@@ -37,15 +37,15 @@ const EditQuiz = ({ quizObj,
     <div>
       <h1>{quizObj.name}</h1>
       {questions}
-      <button onClick={handleSubmitEdit}>submit changes</button>
+      <button onClick={onHandleSubmitEdit}>submit changes</button>
     </div>
   );
 };
 
 EditQuiz.propTypes = {
-  handleSubmitEdit: PropTypes.func,
-  handleUpdateAnswer: PropTypes.func,
-  handleUpdateQuestion: PropTypes.func,
+  onHandleSubmitEdit: PropTypes.func,
+  onHandleUpdateAnswer: PropTypes.func,
+  onHandleUpdateQuestion: PropTypes.func,
   quizObj: PropTypes.object,
 };
 

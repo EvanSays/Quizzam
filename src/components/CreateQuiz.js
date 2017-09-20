@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Question } from '../components/Question';
@@ -195,7 +196,6 @@ class CreateQuiz extends Component {
       <section>
         <button onClick={this.handleAddQuestion}>Add Question</button>
         <button onClick={this.handleSubmitNewQuiz}>Save Quiz</button>
-
         {this.state.questions.map((question, index) => {
           return (<Question
             key={index}
