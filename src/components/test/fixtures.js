@@ -15,3 +15,8 @@ export const selectedQuestion = {
     },
   ],
 };
+
+export const folder = {
+  name: 'Pop Quiz',
+  quizzes: ['quiz1', 'quiz2'],
+};
