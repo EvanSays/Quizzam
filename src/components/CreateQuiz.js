@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import QuestionContainer from '../containers/QuestionsContainer';
-import { Question } from '../components/Question';
 import PropTypes from 'prop-types';
+import { Question } from '../components/Question';
 import { getKey } from '../helpers';
 
 
@@ -47,7 +47,7 @@ class CreateQuiz extends Component {
       })
       .then((questionIds) => {
         for (let i = 0; i < questions.length; i += 1) {
-          Promise.all(questions[i].answers.map((answer, index) => {
+          Promise.all(questions[i].answers.map((answer) => {
             fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -92,7 +92,7 @@ class CreateQuiz extends Component {
     this.setState({ questions: newState });
   }
 
-  handleRadioClick(event, questionId, answerId, answerText) {
+  handleRadioClick(event, questionId, answerId) {
     const newState = [...this.state.questions];
     const isCorrect = !newState[questionId].answers[answerId].correct;
 
@@ -200,13 +200,13 @@ class CreateQuiz extends Component {
         {this.state.questions.map((question, index) => {
           return (<Question
             key={index}
-            handleUpdateQuestion={this.handleUpdateQuestion}
-            handleUpdateAnswer={this.handleUpdateAnswer}
+            onHandleUpdateQuestion={this.handleUpdateQuestion}
+            onHandleUpdateAnswer={this.handleUpdateAnswer}
             questionId={index}
             questionText={question.question_text}
             answers={question.answers}
-            handleAddAnswer={this.handleAddAnswer}
-            handleRadioClick={this.handleRadioClick}
+            onHandleAddAnswer={this.handleAddAnswer}
+            onHandleRadioClick={this.handleRadioClick}
           />
           );
         })}
@@ -216,7 +216,8 @@ class CreateQuiz extends Component {
 }
 
 CreateQuiz.propTypes = {
-
+  fetchFolders: PropTypes.func,
+  selectedFolder: PropTypes.func,
 };
 
 export default CreateQuiz;
