@@ -17,7 +17,7 @@ class CodeForm extends Component {
   }
 
   handleOnChange(event) {
-    const code = event.target.value;
+    const code = event.target.value.toUpperCase();
 
     this.setState({ code });
   }
