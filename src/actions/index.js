@@ -125,7 +125,7 @@ export const signUp = (body) => {
       })
       .then((user) => {
         if (user.error) {
-          return dispatch(userFail(true));
+          return dispatch(userFail(false));
         }
         return dispatch(getUser(user));
       })

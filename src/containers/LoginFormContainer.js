@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import { login, signUp, userFail } from '../actions';
 import LoginForm from '../components/LoginForm';
 
-const mapStateToProps = ({ userFail }) => {
-  return { userFail };
+const mapStateToProps = (state) => {
+  return { userFail: state.userFail };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return { 
+  return {
     signUp: body => dispatch(signUp(body)),
     login: body => dispatch(login(body)),
     updateUserFail: bool => dispatch(userFail(bool)),
