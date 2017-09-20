@@ -5,7 +5,6 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('TAKE QUIZ COMPONENT TEST', () => {
   const mockFn = jest.fn();
-  const middlewares = [];
   const mockQuiz = {
     name: 'First Quiz',
     subject: 'Javascript',
