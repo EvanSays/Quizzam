@@ -17,6 +17,12 @@
     "test": "npm run testBE & npm run testFE",
     "lint": "./node_modules/.bin/eslint ./"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(scss|css)$": "identity-obj-proxy"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jdiejim/Quizzam.git"
@@ -40,7 +46,6 @@
     "pg": "^7.3.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
@@ -69,9 +74,13 @@
     "eslint-plugin-react": "^7.3.0",
     "fetch-mock": "^5.12.2",
     "file-loader": "^0.11.2",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^21.1.0",
+    "jest-cli": "^21.1.0",
     "mocha": "^3.5.3",
     "node-sass": "^4.5.3",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
