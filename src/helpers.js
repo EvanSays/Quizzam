@@ -51,4 +51,12 @@ const getFolderColor = () => {
   return { bg, dark };
 };
 
-module.exports = { getKey, genRoomNumber, questionTypes, getFolderColor, getKeyType, folderColors };
+const initializeState = (quiz) => {
+  const initialState = [];
+  for (let i = 0; i < quiz.questions.length; i += 1) {
+    initialState.push({ selectedAnswers: [] });
+  }
+  return initialState;
+};
+
+module.exports = { getKey, genRoomNumber, questionTypes, getFolderColor, getKeyType, folderColors, initializeState };

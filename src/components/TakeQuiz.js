@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
-import { questionTypes, getKey } from '../helpers';
+import { questionTypes, getKey, initializeState } from '../helpers';
 import socket from '../socket';
-
-function initializeState(quiz) {
-  const initialState = [];
-  for (let i = 0; i < quiz.questions.length; i += 1) {
-    initialState.push({ selectedAnswers: [] });
-  }
-  return initialState;
-}
 
 export default class TakeQuiz extends Component {
   constructor(props) {
