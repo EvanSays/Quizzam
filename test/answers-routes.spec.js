@@ -80,6 +80,140 @@ describe('Answer API routes', () => {
         });
     });
   });
+  
+  //   chai.request(app)
+  //     .get('/api/v1/quizzes')
+  //     .end((err, res) => {
+  //       const id = res.body[0].id;
+  // 
+  //       chai.request(app)
+  //         .get(`/api/v1/quizzes/${id}/questions`)
+  //         .end((err1, res1) => {
+  //           const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+  //           const questionId = testQuestion.id;
+  // 
+  //           chai.request(app)
+  //             .get(`/api/v1/questions/${questionId}/answers`)
+  //             .end((err2, res2) => {
+  //               const testAnswer = res2.body.find(array => array.answer_text === 'Blue');
+  //               const answerId = testAnswer.id;
+  // 
+  //               chai.request(app)
+  //                 .delete(`/api/v1/questions/${questionId}/answers/${answerId}`)
+  //                 .end((err3, res3) => {
+  // 
+  //                   done();
+  //                 });
+  //             });
+  //         });
+  //     });
+  // });
+
+  describe('POST api/v1/questions/:questionId/answers', () => {
+    it('Should return the answer\'s ID if a new answer is inserted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+              const questionId = testQuestion.id;
+
+              chai.request(app)
+                .post(`/api/v1/questions/${questionId}/answers`)
+                .send({
+                  answer_text: 'Fido the dog',
+                  points: 7,
+                  question_id: questionId,
+                })
+                .end((err2, res2) => {
+                  should.not.exist(err2);
+                  res2.status.should.equal(201);
+                  res2.should.be.json; //eslint-disable-line
+                  res2.body.should.be.a('object');
+                  res2.body.should.have.property('id');
+                  res2.body.id.should.be.a('number');
+                  done();
+                });
+            });
+        });
+    });
+
+    it('Should exist in the database after being posted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+              const questionId = testQuestion.id;
+              res1.body.should.have.length(3);
+
+              chai.request(app)
+                .get(`/api/v1/questions/${questionId}/answers`)
+                .end((err2, res2) => {
+                  res2.body.should.have.length(4);
+
+                  chai.request(app)
+                    .post(`/api/v1/questions/${questionId}/answers`)
+                    .send({
+                      answer_text: 'Meow the Cat',
+                      points: 3,
+                      question_id: questionId,
+                    })
+                    .end((err3, res3) => {
+                      should.exist(res3);
+
+                      chai.request(app)
+                        .get(`/api/v1/questions/${questionId}/answers`)
+                        .end((err4, res4) => {
+                          res4.body.should.have.length(5);
+                          done();
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('SAD PATH - Should not allow an answer to be posted if it\'s missing answer text', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              const testQuestion = res1.body.find(array => array.subject === 'Jquery');
+              const questionId = testQuestion.id;
+
+              chai.request(app)
+                .post(`/api/v1/questions/${questionId}/answers`)
+                .send({
+                  points: 7,
+                  question_id: questionId,
+                })
+                .end((err2, res2) => {
+                  should.exist(err2);
+                  should.exist(res2);
+                  res2.status.should.equal(422);
+                  res2.res.should.have.property('statusMessage');
+                  res2.res.statusMessage.should.equal('Unprocessable Entity');
+                  res2.body.should.have.property('error');
+                  res2.body.error.should.equal('You are missing the answer text!');
+                  done();
+                });
+            });
+        });
+    });
+  });
 
   describe('PATCH api/v1/questions/:questionId/answers/:answerId', () => {
     it('Should return the answer\'s ID if an existing answer is updated', (done) => {
@@ -177,34 +311,6 @@ describe('Answer API routes', () => {
         });
     });
   });
-  
-//   chai.request(app)
-//     .get('/api/v1/quizzes')
-//     .end((err, res) => {
-//       const id = res.body[0].id;
-// 
-//       chai.request(app)
-//         .get(`/api/v1/quizzes/${id}/questions`)
-//         .end((err1, res1) => {
-//           const testQuestion = res1.body.find(array => array.subject === 'Jquery');
-//           const questionId = testQuestion.id;
-// 
-//           chai.request(app)
-//             .get(`/api/v1/questions/${questionId}/answers`)
-//             .end((err2, res2) => {
-//               const testAnswer = res2.body.find(array => array.answer_text === 'Blue');
-//               const answerId = testAnswer.id;
-// 
-//               chai.request(app)
-//                 .delete(`/api/v1/questions/${questionId}/answers/${answerId}`)
-//                 .end((err3, res3) => {
-// 
-//                   done();
-//                 });
-//             });
-//         });
-//     });
-// });
 
   describe('DELETE /api/v1/questions/:questionId/answers/:answerId', () => {
     it('Should return a success message and an object containing the answer that was deleted', (done) => {
