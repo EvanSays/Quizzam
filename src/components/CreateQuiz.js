@@ -5,7 +5,6 @@ import { Question } from '../components/Question';
 import { getKey } from '../helpers';
 import './styles/CreateQuiz.scss';
 
-
 class CreateQuiz extends Component {
   constructor() {
     super();
@@ -27,11 +26,12 @@ class CreateQuiz extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
-    this.handleSubmitNewQuiz = this.submitNewQuiz.bind(this);
+    this.handleSubmitNewQuiz = this.handleSubmitNewQuiz.bind(this);
   }
 
-  submitNewQuiz() {
+  handleSubmitNewQuiz() {
     const { questions, quizId } = this.state;
+    const { history } = this.props;
 
     return Promise.all(questions.map((question) => {
       return fetch(`/api/v1/quizzes/${quizId}/questions`, {
@@ -62,7 +62,10 @@ class CreateQuiz extends Component {
             .catch(error => error);
         }
       })
-      .then(() => this.props.fetchFolders(this.props.selectedFolder.user_id))
+      .then(() => {
+        this.props.fetchFolders(this.props.selectedFolder.user_id);
+        history.push('/folder');
+      })
       .catch(error => error);
   }
 
@@ -174,6 +177,7 @@ class CreateQuiz extends Component {
               value={this.state.name}
               placeholder="Quiz Name"
               name="name"
+              autoComplete="off"
               onChange={this.handleChange}
             />
             <input
@@ -181,6 +185,7 @@ class CreateQuiz extends Component {
               value={this.state.subject}
               placeholder="Quiz Subject"
               name="subject"
+              autoComplete="off"
               onChange={this.handleChange}
             />
             <input
@@ -188,6 +193,7 @@ class CreateQuiz extends Component {
               value={this.state.type}
               placeholder="Quiz Type"
               name="type"
+              autoComplete="off"
               onChange={this.handleChange}
             />
             <input
@@ -235,6 +241,7 @@ class CreateQuiz extends Component {
 
 CreateQuiz.propTypes = {
   fetchFolders: PropTypes.func,
+  history: PropTypes.object,
   selectedFolder: PropTypes.object,
 };
 
