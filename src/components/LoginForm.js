@@ -52,7 +52,7 @@ class LoginForm extends Component {
 
     const type = location.pathname.slice(1);
     const typeClass = `login-form ${type}`;
-    const wrapperClass = isHidden ? 'login-hidden' : null;
+    const wrapperClass = isHidden ? 'login-hidden' : '';
     const errorClass = userFail ? 'error' : null;
     const { first_name, last_name, email, password } = this.state;
     const linkType = type === 'login' ? '/signup' : '/login';

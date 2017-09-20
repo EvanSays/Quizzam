@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { object } from 'prop-types';
-import { Link, Route, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import flash from '../assets/flash.svg';
 import LoginFormContainer from '../containers/LoginFormContainer';
 import CodeFormContainer from '../containers/CodeFormContainer';
@@ -41,7 +41,7 @@ class WelcomeView extends Component {
         <LoginFormContainer location={location} isHidden={isHidden} />
         <header className="welcome-header">
           <Link to="/" className="welcome-logo-ink">
-            <div style={logo} className="welcome-logo"></div>
+            <div style={logo} className="welcome-logo" />
             <h1 className="logo-title">Quizzam</h1>
           </Link>
           <nav className="welcome-nav">
