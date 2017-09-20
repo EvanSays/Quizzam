@@ -92,7 +92,7 @@ exports.createUser = (req, res) => {
 
 exports.signIn = (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return res.status(422).json({ Error: 'Missing user name or password' });
+    return res.status(422).json('Missing user name or password');
   }
   return db('user_account').where('email', req.body.email).select('password')
     .then((hash) => {

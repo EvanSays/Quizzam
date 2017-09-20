@@ -1,15 +1,14 @@
 /* eslint-disable no-console */
 const chai = require('chai');
-
-const should = chai.should();
 const chaiHttp = require('chai-http');
-
 const knex = require('../src/knex');
 const { app } = require('../server');
 
+const should = chai.should();
+
 chai.use(chaiHttp);
 
-describe('Testing ________ API routes', () => {
+describe.only('Testing ________ API routes', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => done())
@@ -41,5 +40,21 @@ describe('Testing ________ API routes', () => {
           done();
         });
     });
+    it('should return a 422 if email or password are not included', (done) => {
+      chai.request(app)
+        .post('/api/v1/users')
+        .send({
+          // Omitting email and password
+        })
+        .end((err, res) => {
+          res.should.have.status(422);
+          res.type.should.equal('application/json');
+          res.text.should.equal('"Missing user name or password"');
+          done();
+        });
+    });
+  });
+  describe('POST /api/v1/users/new', () => {
+    it();
   });
 });
