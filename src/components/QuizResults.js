@@ -12,12 +12,17 @@ export default class QuizResults extends Component {
       users: {},
       answerKey: [],
       selectedQuestion: {},
+      connectedUsers: [],
     };
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
+    this.handleIncomingUser = this.handleIncomingUser.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
       this.handleIncomingAnswer(data);
+    });
+    socket.on(`${this.props.room}connnectedUser`, (data) => { 
+      this.handleIncomingUser(data);
     });
   }
 
@@ -48,20 +53,25 @@ export default class QuizResults extends Component {
 
     this.setState({ users: newState });
   }
-
+  
   handleOnClick(selectedQuestion) {
     this.setState({ selectedQuestion });
   }
 
-  render() {
-    const { quizData, selectedQuestion, users } = this.state;
+  handleIncomingUser(data) {
+    const { connectedUsers } = this.state;
+    this.setState({ connectedUsers: [...connectedUsers, data.name] });
+  }
 
+  render() {
+    const { quizData, selectedQuestion, users, connectedUsers } = this.state;
     return (
       <section className="quiz-results">
         <ResultsChart selectedQuestion={selectedQuestion} users={users} />
         <QuizResultsAside 
           handleOnClick={this.handleOnClick} 
           quizData={quizData}
+          connectedUsers={connectedUsers}
         />
       </section>
     );
