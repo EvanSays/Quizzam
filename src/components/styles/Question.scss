@@ -1,0 +1,25 @@
+.create-quiz-card {
+  width: 90%;
+  padding: 20px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1), 0 14px 45px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+}
+
+.question {
+  margin-bottom: 20px;
+  animation: slide-right 0.4s;
+    .question-text-input {
+      width: 70%;
+      height: 35px;
+    }
+    button {
+      width: 25%;
+    }
+}
+
+.question-control-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

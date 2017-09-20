@@ -1,10 +1,22 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import PropTypes from 'prop-types';
+import './styles/Answer.scss';
 
-export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText, handleRadioClick, isCorrect }) => {
+export const Answer = (props) => {
+  const {
+    answerKey,
+    answerId,
+    questionId,
+    handleUpdateAnswer,
+    answerText,
+    handleRadioClick,
+    isCorrect,
+  } = props;
+
   return (
     <form>
       <input
+        className="answer-text-input"
         id={answerKey}
         type="text"
         value={answerText}
@@ -13,6 +25,7 @@ export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, an
       <label htmlFor={answerKey}>
           Correct
         <input
+          className="answer-radio"
           name={answerText}
           type="radio"
           checked={isCorrect}
@@ -23,16 +36,14 @@ export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, an
   );
 };
 
-// Answer.defaultProps = {
-//   id: '',
-//   onChange: () => '',
-//   value: '',
-// };
-//
-// Answer.propTypes = {
-//   id: string,
-//   onChange: func,
-//   value: string,
-// };
+Answer.propTypes = {
+  answerId: PropTypes.number,
+  answerKey: PropTypes.string,
+  answerText: PropTypes.string,
+  handleRadioClick: PropTypes.func,
+  handleUpdateAnswer: PropTypes.func,
+  isCorrect: PropTypes.string,
+  questionId: PropTypes.string,
+};
 
 // export default Answer;

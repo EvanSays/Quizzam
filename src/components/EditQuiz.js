@@ -1,7 +1,10 @@
 import React from 'react';
-import { getKey } from '../helpers';
+import PropTypes from 'prop-types';
 
-const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAnswer, handleSubmitEdit }) => {
+const EditQuiz = ({ quizObj,
+  onHandleUpdateQuestion,
+  onHandleUpdateAnswer,
+  onHandleSubmitEdit }) => {
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
     return (
@@ -9,7 +12,7 @@ const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAns
         <input
           id={quesId}
           value={quizObj.questions[index].question_text}
-          onChange={e => handleUpdateQuestion(e, quesId)}
+          onChange={e => onHandleUpdateQuestion(e, quesId)}
         />
         {
           question.answers.map((answer, i) => {
@@ -20,7 +23,7 @@ const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAns
                   id={ansId}
                   name={answer.answer_text}
                   value={quizObj.questions[index].answers[i].answer_text}
-                  onChange={e => handleUpdateAnswer(e, quesId, ansId)}
+                  onChange={e => onHandleUpdateAnswer(e, quesId, ansId)}
                 />
               </div>
             );
@@ -34,9 +37,16 @@ const EditQuiz = ({ quizObj, updateAnswer, handleUpdateQuestion, handleUpdateAns
     <div>
       <h1>{quizObj.name}</h1>
       {questions}
-      <button onClick={handleSubmitEdit}>submit changes</button>
+      <button onClick={onHandleSubmitEdit}>submit changes</button>
     </div>
   );
+};
+
+EditQuiz.propTypes = {
+  onHandleSubmitEdit: PropTypes.func,
+  onHandleUpdateAnswer: PropTypes.func,
+  onHandleUpdateQuestion: PropTypes.func,
+  quizObj: PropTypes.object,
 };
 
 export default EditQuiz;

@@ -42,7 +42,8 @@ export const selectedFolderReducer = (state = {}, action) => {
     case constants.SELECT_FOLDER:
       return action.folder;
     case constants.DELETE_QUIZ:
-      return Object.assign({}, state, { quizzes: state.quizzes.filter(quiz => quiz.id !== action.id) });
+      return Object.assign({}, state, {
+        quizzes: state.quizzes.filter(quiz => quiz.id !== action.id) });
     default:
       return state;
   }

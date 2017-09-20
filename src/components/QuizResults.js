@@ -1,16 +1,18 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable array-callback-return */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ResultsChart from './ResultsChart';
 import QuizResultsAside from './QuizResultsAside';
 import socket from '../socket';
 
-export default class QuizResults extends Component {
+class QuizResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
       quizData: props.quiz,
-      results: {},
       users: {},
-      answerKey:{},
+      answerKey: {},
       selectedQuestion: {},
       connectedUsers: [],
     };
@@ -21,7 +23,7 @@ export default class QuizResults extends Component {
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
       this.handleIncomingAnswer(data);
     });
-    socket.on(`${this.props.room}connnectedUser`, (data) => { 
+    socket.on(`${this.props.room}connnectedUser`, (data) => {
       this.handleIncomingUser(data);
     });
   }
@@ -54,7 +56,6 @@ export default class QuizResults extends Component {
 
     this.setState({ users: newState });
   }
-  
   handleOnClick(selectedQuestion) {
     this.setState({ selectedQuestion });
   }
@@ -69,8 +70,8 @@ export default class QuizResults extends Component {
     return (
       <section className="quiz-results">
         <ResultsChart selectedQuestion={selectedQuestion} users={users} />
-        <QuizResultsAside 
-          handleOnClick={this.handleOnClick} 
+        <QuizResultsAside
+          onHandleOnClick={this.handleOnClick}
           quizData={quizData}
           connectedUsers={connectedUsers}
         />
@@ -78,3 +79,10 @@ export default class QuizResults extends Component {
     );
   }
 }
+
+QuizResults.propTypes = {
+  quiz: PropTypes.object,
+  room: PropTypes.object,
+};
+
+export default QuizResults;

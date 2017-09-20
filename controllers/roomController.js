@@ -1,5 +1,5 @@
-// import genRoomNumber from '../src/helpers';
-
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
 const { db } = require('../server');
 const { genRoomNumber } = require('../src/helpers');
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import EditQuiz from './EditQuiz';
 import QuizListContainer from '../containers/QuizListContainer';
 import WelcomeViewContainer from '../containers/WelcomeViewContainer';
@@ -38,5 +39,12 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.number,
+  quiz: PropTypes.object,
+  room: PropTypes.object,
+  user: PropTypes.object,
+};
 
 export default App;

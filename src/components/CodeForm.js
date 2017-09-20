@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import socket from '../socket';
 import './styles/CodeForm.scss';
 
@@ -53,7 +54,7 @@ class CodeForm extends Component {
           maxLength="4"
         />
         <input
-          className="name-input"
+          className="code-input"
           onChange={this.handleNameInput}
           type="text"
           value={this.state.name}
@@ -64,5 +65,9 @@ class CodeForm extends Component {
     );
   }
 }
+
+CodeForm.propTypes = {
+  fetchQuiz: PropTypes.func,
+};
 
 export default CodeForm;

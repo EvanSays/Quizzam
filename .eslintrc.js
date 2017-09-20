@@ -14,6 +14,10 @@ module.exports = {
       "react/jsx-no-literals": [ 0, { "noStrings": true }],
       "react/no-set-state": [0],
       "react/require-optimization": [0],
+      "react/forbid-prop-types": [0],
+      "react/require-default-props": [0],
+      "react/no-did-mount-set-state": [0],
+      "jsx-a11y/label-has-for": [0],
     },
     "env": {
       "browser": true,
