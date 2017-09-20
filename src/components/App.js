@@ -41,9 +41,9 @@ class App extends Component {
 }
 
 App.propTypes = {
-  history: PropTypes.number,
+  history: PropTypes.object,
   quiz: PropTypes.object,
-  room: PropTypes.object,
+  room: PropTypes.string,
   user: PropTypes.object,
 };
 
