@@ -79,7 +79,7 @@ exports.createUser = (req, res) => {
   const user = req.body;
 
   if (!user.email || !user.password || !user.first_name || !user.last_name) {
-    return res.status(422).json({ error: true });
+    return res.status(422).json({ error: 'Missing params' });
   }
 
   auth(user).then((finalUser) => {

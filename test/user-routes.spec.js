@@ -30,7 +30,6 @@ describe.only('Testing ________ API routes', () => {
           password: 'password',
         })
         .end((err, res) => {
-          console.log(res.body);
           should.not.exist(err);
           res.status.should.equal(201);
           res.type.should.equal('application/json');
@@ -55,6 +54,37 @@ describe.only('Testing ________ API routes', () => {
     });
   });
   describe('POST /api/v1/users/new', () => {
-    it();
+    it('should create and return a new user with a token', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/new')
+        .send({
+          email: 'gary@thegary.com',
+          password: 'garyrulez',
+          first_name: 'steve',
+          last_name: 'smith',
+        }).end((err, res) => {
+          should.not.exist(err);
+          res.should.have.status(201);
+          res.type.should.equal('application/json');
+          res.body.should.include.keys('id', 'first_name', 'last_name', 'email', 'token');
+          done();
+        });
+    });
+    it('should return a 422 status and end error message if insufficient data is provided', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/new')
+        .send({
+          email: 'gary@thegary.com',
+          // omitting password
+          first_name: 'steve',
+          last_name: 'smith',
+        })
+        .end((err, res) => {
+          res.should.have.status(422);
+          res.type.should.equal('application/json');
+          res.body.error.should.equal('Missing params');
+          done();
+        });
+    });
   });
 });
