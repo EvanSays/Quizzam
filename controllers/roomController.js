@@ -4,7 +4,6 @@ const { db } = require('../server');
 const { genRoomNumber } = require('../src/helpers');
 
 exports.quiz = (req, res) => {
-  console.log(req.params.id);
   db('room').join('quiz', 'room.quiz_id', '=', 'quiz.id')
     .select('name', 'subject', 'type', 'room.id', 'quiz_id')
     .where('room.id', req.params.id)
