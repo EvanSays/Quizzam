@@ -120,7 +120,11 @@ class QuizList extends Component {
       <section className="quiz-list-wrapper">
         <header className="quiz-list-header">
           <h2>{name}</h2>
-          <button onClick={() => history.push('/quiz')}>Create Quiz</button>
+          <button
+            className="quiz-list-create-quiz"
+            onClick={() => history.push('/quiz')}
+          >Create Quiz
+          </button>
         </header>
         <section className="quiz-list">
           {quizArray}
