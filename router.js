@@ -22,7 +22,8 @@ router.delete('/quizzes/:id', quiz.delQuiz);
 // Questions
 router.get('/quizzes/:quizId/questions', question.indexQuestions);
 router.post('/quizzes/:quizId/questions', question.addQuestion);
-router.patch('/quizzes/:id/questions', question.editQuestion);
+router.patch('/quizzes/:id/questions/:questionId', question.editQuestion);
+router.delete('/quizzes/:id/questions/:questionId', question.delQuestion);
 
 // Answers
 router.get('/questions/:questionId/answers', answer.indexAnswers);
