@@ -28,7 +28,8 @@ router.delete('/quizzes/:id/questions/:questionId', question.delQuestion);
 // Answers
 router.get('/questions/:questionId/answers', answer.indexAnswers);
 router.post('/questions/:questionId/answers', answer.addAnswer);
-router.patch('/questions/:id/answers', answer.editAnswer);
+router.patch('/questions/:id/answers/:answerId', answer.editAnswer);
+router.delete('/questions/:id/answers/:answerId', answer.delAnswer);
 
 // Room
 router.get('/room/:id', room.quiz);
