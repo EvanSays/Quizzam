@@ -1,9 +1,9 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const Answer = (props) => {
   const {
-    answerKey, 
+    answerKey,
     answerId,
     questionId,
     handleUpdateAnswer,
@@ -33,16 +33,14 @@ export const Answer = (props) => {
   );
 };
 
-// Answer.defaultProps = {
-//   id: '',
-//   onChange: () => '',
-//   value: '',
-// };
-//
-// Answer.propTypes = {
-//   id: string,
-//   onChange: func,
-//   value: string,
-// };
+Answer.propTypes = {
+  answerId: PropTypes.number,
+  answerKey: PropTypes.string,
+  answerText: PropTypes.string,
+  handleRadioClick: PropTypes.func,
+  handleUpdateAnswer: PropTypes.func,
+  isCorrect: PropTypes.string,
+  questionId: PropTypes.string,
+};
 
 // export default Answer;

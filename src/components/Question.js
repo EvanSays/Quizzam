@@ -3,17 +3,17 @@ import { func } from 'prop-types';
 import PropTypes from 'prop-types';
 import { Answer } from './Answer';
 
-export const Question = ({ questionText, handleUpdateQuestion, questionId, handleAddAnswer, answers, handleUpdateAnswer, handleRadioClick }) => {
+export const Question = ({ questionText, onHandleUpdateQuestion, questionId, onHandleAddAnswer, answers, onHandleUpdateAnswer, onHandleRadioClick }) => {
   return (
     <section className="question">
       <h1>QUESTION</h1>
       <input
         type="text"
         value={questionText}
-        onChange={event => handleUpdateQuestion(event, questionId)}
+        onChange={event => onHandleUpdateQuestion(event, questionId)}
         placeholder="Enter Question"
       />
-      <button onClick={event => handleAddAnswer(event, questionId)}>Add Answer</button>
+      <button onClick={event => onHandleAddAnswer(event, questionId)}>Add Answer</button>
       {answers.map((answer, index) => {
         return (
           <Answer
@@ -22,8 +22,8 @@ export const Question = ({ questionText, handleUpdateQuestion, questionId, handl
             answerId={index}
             questionId={questionId}
             answerText={answer.answer_text}
-            handleUpdateAnswer={handleUpdateAnswer}
-            handleRadioClick={handleRadioClick}
+            onHandleUpdateAnswer={onHandleUpdateAnswer}
+            onHandleRadioClick={onHandleRadioClick}
             isCorrect={answer.correct}
           />
         );

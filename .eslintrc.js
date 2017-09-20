@@ -17,6 +17,7 @@ module.exports = {
       "react/forbid-prop-types": [0],
       "react/require-default-props": [0],
       "react/no-did-mount-set-state": [0],
+      "jsx-a11y/label-has-for": [0],
     },
     "env": {
       "browser": true,

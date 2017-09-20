@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import add from '../assets/add.svg';
 import './styles/CreateFolder.scss';
 
@@ -44,5 +45,9 @@ class CreateFolder extends Component {
     );
   }
 }
+
+CreateFolder.propTypes = {
+  postFolder: PropTypes.func,
+};
 
 export default CreateFolder;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object, array, string, func } from 'prop-types';
+import { object } from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes, getKey } from '../helpers';
 import socket from '../socket';
@@ -108,29 +108,29 @@ class TakeQuiz extends Component {
 
   render() {
     const { quiz } = this.props;
-    const { currentQuestion, answers } = this.state;
+    const { currentQuestion } = this.state;
 
-    if (!this.props.quiz.id) {
+    if (!quiz.id) {
       return <h3>LOADING</h3>;
     }
 
     return (
       <main>
         <header className="take-quiz-header">
-          <h1>{this.props.quiz.name}</h1>
-          <h1>Subject: {this.props.quiz.subject}</h1>
-          <h1>Room: {this.props.quiz.id}</h1>
+          <h1>{quiz.name}</h1>
+          <h1>Subject: {quiz.subject}</h1>
+          <h1>Room: {quiz.id}</h1>
         </header>
         <section className="take-quiz-question">
           <h3 className="take-quiz-question-title">
-            {this.props.quiz.questions[this.state.currentQuestion].question_text}
+            {quiz.questions[currentQuestion].question_text}
           </h3>
           <div className="question-wrapper">
             <p className="take-quiz-question-type">
-              ({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})
+              ({questionTypes[quiz.questions[currentQuestion].question_type]})
             </p>
             <form className="take-quiz-form">
-              {this.props.quiz.questions[this.state.currentQuestion].answers
+              {quiz.questions[currentQuestion].answers
                 .map((answer, index) => {
                   return this.determineInputType(answer, index);
                 })}
