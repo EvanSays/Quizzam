@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import LoginForm from './LoginForm';
+import LoginForm from '../LoginForm';
 
 describe.only('LOGINFORM COMPONENT TEST', () => {
   const wrapper = shallow(<LoginForm />);
