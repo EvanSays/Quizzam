@@ -2,6 +2,7 @@ import React from 'react';
 import { object } from 'prop-types';
 import { getWidths } from '../helpers';
 import Bar from './Bar';
+import { object } from 'prop-types';
 import './styles/ResultsChart.scss';
 
 const ResultsChart = ({ selectedQuestion, users }) => {

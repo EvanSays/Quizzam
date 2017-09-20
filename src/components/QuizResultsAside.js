@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getKey } from '../helpers';
 import './styles/QuizResultsAside.scss';
 
@@ -30,6 +31,12 @@ const QuizResultsAside = ({ handleOnClick, quizData, connectedUsers }) => {
       </section>
     </aside>
   );
+};
+
+QuizResultsAside.propTypes = {
+  quizData: PropTypes.object,
+  connectedUsers: PropTypes.array,
+  handleOnClick: PropTypes.func,
 };
 
 export default QuizResultsAside;

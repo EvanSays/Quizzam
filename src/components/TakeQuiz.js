@@ -3,6 +3,7 @@ import { object, array, string, func } from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes, getKey } from '../helpers';
 import socket from '../socket';
+import { object } from 'prop-types';
 
 function initializeState(quiz) {
   const initialState = [];
@@ -114,11 +115,6 @@ export default class TakeQuiz extends Component {
     if (!this.props.quiz.id) {
       return <h3>LOADING</h3>;
     }
-
-    console.log(this.state);
-    console.log(this.props.quiz);
-    
-    
 
     return (
       <main>
