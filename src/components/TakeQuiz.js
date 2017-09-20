@@ -4,19 +4,7 @@ import './styles/TakeQuiz.scss';
 import { questionTypes, getKey, initializeState } from '../helpers';
 import socket from '../socket';
 
-<<<<<<< HEAD
 export default class TakeQuiz extends Component {
-=======
-function initializeState(quiz) {
-  const initialState = [];
-  for (let i = 0; i < quiz.questions.length; i += 1) {
-    initialState.push({ selectedAnswers: [] });
-  }
-  return initialState;
-}
-
-class TakeQuiz extends Component {
->>>>>>> 54c5e9739cd1667dcf8c65a4bafd9ae4c4eda459
   constructor(props) {
     super(props);
     this.state = {
@@ -163,5 +151,3 @@ TakeQuiz.propTypes = {
   quiz: PropTypes.object,
   username: PropTypes.string,
 };
-
-export default TakeQuiz;
