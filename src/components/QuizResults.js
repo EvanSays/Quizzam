@@ -12,12 +12,17 @@ export default class QuizResults extends Component {
       users: {},
       answerKey: [],
       selectedQuestion: {},
+      connectedUsers: [],
     };
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
+    this.handleIncomingUser = this.handleIncomingUser.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
       this.handleIncomingAnswer(data);
+    });
+    socket.on(`${this.props.room}connnectedUser`, (data) => { 
+      this.handleIncomingUser(data);
     });
   }
 
@@ -49,11 +54,16 @@ export default class QuizResults extends Component {
     this.setState({ users: newState });
   }
 
+  handleIncomingUser(data) {
+    const { connectedUsers } = this.state;
+    this.setState({ connectedUsers: [...connectedUsers, data.name] });
+  }
+
   handleOnClick() {
     console.log('this.state.quiz',this.state.quiz );
     
     // this.setState({selectedQuiz})
-    
+
   }
 
   render() {

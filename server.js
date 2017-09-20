@@ -16,6 +16,11 @@ io.on('connection', (socket) => {
   socket.on('selectAnswer', (data) => {
     io.emit(`${data.room}submittedAnswer`, data);
   });
+  socket.on('login', (data) => {
+    console.log('data', data);
+    
+    io.emit(`${data.room}connnectedUser`, data);
+  });
 });
 
 app.use(bodyParser.json());

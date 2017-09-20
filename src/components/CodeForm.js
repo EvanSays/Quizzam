@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import socket from '../socket';
 import './styles/CodeForm.scss';
 
 class CodeForm extends Component {
@@ -11,6 +12,7 @@ class CodeForm extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
+    this.sendSocket = this.sendSocket.bind(this);
   }
 
   handleOnChange(event) {
@@ -31,7 +33,12 @@ class CodeForm extends Component {
     const { fetchQuiz } = this.props;
 
     fetchQuiz(code, name);
+    this.sendSocket();
     this.setState({ code: '', name: '' });
+  }
+
+  sendSocket() {
+    socket.emit('login', { name: this.state.name, room: this.state.code });
   }
 
   render() {
