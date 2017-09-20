@@ -52,6 +52,14 @@ const getFolderColor = () => {
   return { bg, dark };
 };
 
+const initializeState = (quiz) => {
+  const initialState = [];
+  for (let i = 0; i < quiz.questions.length; i += 1) {
+    initialState.push({ selectedAnswers: [] });
+  }
+  return initialState;
+};
+
 const getWidths = (results) => {
   return results.reduce((obj, result) => {
     const current = obj;
@@ -73,4 +81,5 @@ module.exports = {
   getKeyType,
   folderColors,
   getWidths,
+  initializeState,
 };

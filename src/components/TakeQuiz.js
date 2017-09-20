@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './styles/TakeQuiz.scss';
-import { questionTypes, getKey } from '../helpers';
+import { questionTypes, getKey, initializeState } from '../helpers';
 import socket from '../socket';
 
-function initializeState(quiz) {
-  const initialState = [];
-  for (let i = 0; i < quiz.questions.length; i += 1) {
-    initialState.push({ selectedAnswers: [] });
-  }
-  return initialState;
-}
-
-class TakeQuiz extends Component {
+export default class TakeQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -159,5 +151,3 @@ TakeQuiz.propTypes = {
   quiz: PropTypes.object,
   username: PropTypes.string,
 };
-
-export default TakeQuiz;
