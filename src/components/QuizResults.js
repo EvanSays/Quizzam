@@ -82,7 +82,7 @@ class QuizResults extends Component {
 
 QuizResults.propTypes = {
   quiz: PropTypes.object,
-  room: PropTypes.object,
+  room: PropTypes.string,
 };
 
 export default QuizResults;

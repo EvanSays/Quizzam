@@ -54,6 +54,6 @@ Question.propTypes = {
   onHandleRadioClick: PropTypes.func,
   onHandleUpdateAnswer: PropTypes.func,
   onHandleUpdateQuestion: PropTypes.func,
-  questionId: PropTypes.object,
-  questionText: PropTypes.object,
+  questionId: PropTypes.number,
+  questionText: PropTypes.string,
 };

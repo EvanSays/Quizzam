@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt');
 const { auth } = require('../jwt-helper');
 
 exports.indexFolders = (req, res) => {
-  const userId = req.params.id;
-  db('folder').where({ userId }).select()
+  const user_id = req.params.id;
+  db('folder').where({ user_id }).select()
     .then((folders) => {
       return Promise.all(folders.map((folder, index, array) => {
         return db('quiz').where('folder_id', folder.id).select()
@@ -65,8 +65,8 @@ exports.indexFolders = (req, res) => {
 
 exports.addFolder = (req, res) => {
   const name = req.body;
-  const userId = req.params.userId;
-  const newFolder = Object.assign({}, name, { userId: parseInt(userId, 10) });
+  const user_id = req.params.user_id;
+  const newFolder = Object.assign({}, name, { user_id: parseInt(user_id, 10) });
 
   return db('folder')
     .insert(newFolder, '*')
