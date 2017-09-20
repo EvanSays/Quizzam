@@ -90,6 +90,7 @@ describe('Question API routes', () => {
               subject: 'lunar studies',
               question_type: 'multiple choice',
               difficulty: 10,
+              quiz_id: id,
             })
             .end((err1, res1) => {
               res1.status.should.equal(201);
@@ -97,6 +98,45 @@ describe('Question API routes', () => {
               res1.body.should.be.a('object');
               res1.body.should.have.property('id');
               done();
+            });
+        });
+    });
+
+    it('Should exist in the database after being posted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          res.status.should.equal(200);
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              res1.status.should.equal(200);
+              res1.body.should.be.a('array');
+              res1.body.should.have.length(3);
+
+              chai.request(app)
+                .post(`/api/v1/quizzes/${id}/questions`)
+                .send({
+                  question_text: 'How old is the Moon?',
+                  subject: 'lunar studies',
+                  question_type: 'multiple choice',
+                  difficulty: 10,
+                  quiz_id: id,
+                })
+                .end((err2, res2) => {
+                  res2.status.should.equal(201);
+
+                  chai.request(app)
+                    .get(`/api/v1/quizzes/${id}/questions`)
+                    .end((err3, res3) => {
+                      res3.status.should.equal(200);
+                      res3.body.should.be.a('array');
+                      res3.body.should.have.length(4);
+                      done();
+                    });
+                });
             });
         });
     });
