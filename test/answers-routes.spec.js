@@ -80,34 +80,6 @@ describe('Answer API routes', () => {
         });
     });
   });
-  
-  //   chai.request(app)
-  //     .get('/api/v1/quizzes')
-  //     .end((err, res) => {
-  //       const id = res.body[0].id;
-  // 
-  //       chai.request(app)
-  //         .get(`/api/v1/quizzes/${id}/questions`)
-  //         .end((err1, res1) => {
-  //           const testQuestion = res1.body.find(array => array.subject === 'Jquery');
-  //           const questionId = testQuestion.id;
-  // 
-  //           chai.request(app)
-  //             .get(`/api/v1/questions/${questionId}/answers`)
-  //             .end((err2, res2) => {
-  //               const testAnswer = res2.body.find(array => array.answer_text === 'Blue');
-  //               const answerId = testAnswer.id;
-  // 
-  //               chai.request(app)
-  //                 .delete(`/api/v1/questions/${questionId}/answers/${answerId}`)
-  //                 .end((err3, res3) => {
-  // 
-  //                   done();
-  //                 });
-  //             });
-  //         });
-  //     });
-  // });
 
   describe('POST api/v1/questions/:questionId/answers', () => {
     it('Should return the answer\'s ID if a new answer is inserted', (done) => {
