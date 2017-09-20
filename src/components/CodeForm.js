@@ -46,6 +46,7 @@ class CodeForm extends Component {
     return (
       <form className="code-form" onSubmit={this.handleOnSubmit} action="">
         <input
+          id="code"
           className="code-input"
           onChange={this.handleOnChange}
           type="text"
@@ -54,6 +55,7 @@ class CodeForm extends Component {
           maxLength="4"
         />
         <input
+          id="name"
           className="code-input"
           onChange={this.handleNameInput}
           type="text"
