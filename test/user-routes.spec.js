@@ -8,7 +8,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe.only('Testing ________ API routes', () => {
+describe('Testing ________ API routes', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => done())
