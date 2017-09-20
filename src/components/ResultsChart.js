@@ -1,5 +1,5 @@
 import React from 'react';
-import { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import { getWidths } from '../helpers';
 import Bar from './Bar';
 import './styles/ResultsChart.scss';
@@ -35,8 +35,8 @@ const ResultsChart = ({ selectedQuestion, users }) => {
 };
 
 ResultsChart.propTypes = {
-  selectedQuestion: object,
-  users: object,
+  selectedQuestion: PropTypes.object,
+  users: PropTypes.object,
 };
 
 export default ResultsChart;

@@ -16,6 +16,7 @@ module.exports = {
       "react/require-optimization": [0],
       "react/forbid-prop-types": [0],
       "react/require-default-props": [0],
+      "react/no-did-mount-set-state": [0],
     },
     "env": {
       "browser": true,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number } from 'prop-types';
+import PropTypes from 'prop-types';
 import play from '../assets/play.svg';
 import pencil from '../assets/pencil.svg';
 import trash from '../assets/trash.svg';
@@ -41,14 +41,11 @@ const QuizCard = ({ quizData, postRoom, deleteQuiz, toggleEdit }) => {
   );
 };
 
-QuizCard.defaultProps = {
-  questionCount: 0,
-  title: '',
-};
-
 QuizCard.propTypes = {
-  questionCount: number,
-  title: string,
+  deleteQuiz: PropTypes.func,
+  postRoom: PropTypes.func,
+  quizData: PropTypes.object,
+  toggleEdit: PropTypes.func,
 };
 
 export default QuizCard;

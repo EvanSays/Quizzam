@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import QuizCard from './QuizCard';
 import EditQuiz from './EditQuiz';
-import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
 class QuizList extends Component {
@@ -31,9 +30,8 @@ class QuizList extends Component {
     createRoom(quiz);
   }
 
-  toggleEdit(quizData) {
-    const { quizObj } = this.state;
-    this.setState({ isEditing: true, quizObj: quizData });
+  toggleEdit(quizObj) {
+    this.setState({ isEditing: true, quizObj });
   }
 
   handleUpdateQuestion(e, id) {
@@ -86,7 +84,7 @@ class QuizList extends Component {
 
   render() {
     const { selectedFolder, history } = this.props;
-    const { quizObj, questionObj, answerArray } = this.state;
+    const { quizObj, answerArray } = this.state;
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
       return (
@@ -106,7 +104,7 @@ class QuizList extends Component {
     }
     const quizArray = quizzes.map((quiz) => {
       return (
-        <div className="quiz-card-wrapper" key={quiz.id}>
+        <div key={quiz.id} className="quiz-card-wrapper">
           <h2>{name}</h2>
           <QuizCard
             quizData={quiz}
@@ -132,14 +130,11 @@ class QuizList extends Component {
   }
 }
 
-// QuizList.defaultProps = {
-//
-// };
-//
-// QuizList.propTypes = {
-//   id: string,
-//   onChange: func,
-//   value: string,
-// };
+QuizList.propTypes = {
+  createRoom: PropTypes.func,
+  deleteQuiz: PropTypes.func,
+  history: PropTypes.object,
+  selectedFolder: PropTypes.object,
+};
 
 export default QuizList;
