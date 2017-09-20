@@ -3,19 +3,11 @@ import Bar from './Bar';
 import './styles/ResultsChart.scss';
 
 const ResultsChart = ({ selectedQuestion, users }) => {
-
-
   if (!selectedQuestion.id) {
-    return (
-      <section className="results-chart">
-        <h2>Question Name</h2>
-        <section className="bar-list">
-        </section>
-      </section>
-    );
+    return <div />;
   }
 
-  const { id, answers } = selectedQuestion;
+  const { id, answers, question_text } = selectedQuestion;
   const total = Object.values(users).filter(obj => obj.hasOwnProperty(`${id}`)).length;
   const results = Object.values(users).reduce((arr, user) => {
     arr.push(...Object.values(user));
@@ -23,27 +15,26 @@ const ResultsChart = ({ selectedQuestion, users }) => {
   }, []);
 
   const widths = results.reduce((obj, result) => {
-    if (!obj[result]) {
-      obj[result] = 0;
-    }
-    obj[result] += 1;
+    const current = obj;
 
-    return obj;
+    if (!obj[result]) {
+      current[result] = 0;
+    }
+    current[result] += 1;
+
+    return current;
   }, {});
 
-  // console.log(i);
-  
+  const bars = answers.map((answer, i) => {
+    const percentage = widths[answer.id] ? (widths[answer.id] / total * 100) : 0;
+    const width = `${Math.round(percentage)}%`;
 
-  const bars = answers.map((answer) => {
-    // const width = widths
-    console.log(answer);
-    
-    return <Bar key={answer.id} name={answer.answer_text} width={'20%'} />
+    return <Bar key={answer.id} name={answer.answer_text} width={width} index={i} />;
   });
 
   return (
     <section className="results-chart">
-      <h2>Question Name</h2>
+      <h2>{question_text}</h2>
       <section className="bar-list">
         {bars}
       </section>
