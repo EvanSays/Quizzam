@@ -10,14 +10,14 @@ export default class QuizResults extends Component {
       quizData: props.quiz,
       results: {},
       users: {},
-      answerKey: [],
+      answerKey:{},
       selectedQuestion: {},
       connectedUsers: [],
     };
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
     this.handleIncomingUser = this.handleIncomingUser.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
-    
+
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
       this.handleIncomingAnswer(data);
     });
@@ -31,13 +31,14 @@ export default class QuizResults extends Component {
   }
 
   answerKeyGenerator(obj) {
-    const answerKey = [];
-
-    obj.questions.map((answer) => {
-      return answer.answers.map((correct) => {
-        return correct.correct ? answerKey.push(correct.id.toString()) : null;
+    const answerKey = obj.questions.reduce((acc, question) => {
+      question.answers.map((answer) => {
+        if (answer.correct) {
+          acc[`Q${answer.question_id}`] = answer.id;
+        }
       });
-    });
+      return acc;
+    }, {});
     return this.setState({ answerKey });
   }
 
