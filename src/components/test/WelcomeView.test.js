@@ -1,9 +1,10 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import WelcomeView from '../WelcomeView';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import LoginForm from '../LoginForm';
+import WelcomeView from '../WelcomeView';
 
 
 describe('WELCOMEVIEW COMPONENT TEST', () => {
@@ -11,7 +12,10 @@ describe('WELCOMEVIEW COMPONENT TEST', () => {
   const mockStore = configureMockStore(middlewares)();
 
   const wrapper = shallow(<WelcomeView quiz={{}} user={{}} />);
-  const wrapperMount = mount(<Provider store={mockStore}><MemoryRouter><WelcomeView user={{}} quiz={{}} history={[]} /></MemoryRouter></Provider>);
+  const wrapperMount = mount(
+    <Provider store={mockStore}>
+      <MemoryRouter><WelcomeView user={{}} quiz={{}} history={[]} /></MemoryRouter>
+    </Provider>);
 
   const initialState = {
     isHidden: false,

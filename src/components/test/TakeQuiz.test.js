@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import TakeQuiz from '../TakeQuiz';
-import { MemoryRouter } from 'react-router-dom';
 
 describe('TAKE QUIZ COMPONENT TEST', () => {
   const mockFn = jest.fn();

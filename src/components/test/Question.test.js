@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Question } from '../Question';
-import { MemoryRouter } from 'react-router-dom';
 
 describe.skip('QUESTION COMPONENT TEST', () => {
   const mockFn = jest.fn();
@@ -36,7 +35,16 @@ describe.skip('QUESTION COMPONENT TEST', () => {
     }],
   };
 
-  const wrapper = shallow(<Question questionText={mockQuestion.question_text} history={[]} handleUpdateQuestion={mockFn()} handleRadioClick={mockFn()} answers={mockQuestion.answers} handleAddAnswer={mockFn()} handleUpdateAnswer={mockFn()} questionId={1} />);
+  const wrapper = shallow(<Question
+    questionText={mockQuestion.question_text}
+    history={[]}
+    handleUpdateQuestion={mockFn()}
+    handleRadioClick={mockFn()}
+    answers={mockQuestion.answers}
+    handleAddAnswer={mockFn()}
+    handleUpdateAnswer={mockFn()}
+    questionId={1}
+  />);
 
   it('should render the current question', () => {
     const question = wrapper.find('input');
