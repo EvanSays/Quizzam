@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { func, array, object } from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CreateFolder from './CreateFolder';
 import Folder from './Folder';
 import { getKeyType } from '../helpers';
@@ -65,11 +64,12 @@ class FolderAside extends Component {
 }
 
 FolderAside.propTypes = {
-  fetchFolders: func,
-  folders: array,
-  selectFolder: func,
-  history: object,
-  createFolder: func,
+  createFolder: PropTypes.func,
+  fetchFolders: PropTypes.func,
+  folders: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  history: PropTypes.object,
+  selectFolder: PropTypes.func,
+  user: PropTypes.object,
 };
 
 export default FolderAside;

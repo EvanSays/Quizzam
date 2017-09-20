@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const knex = require('../src/knex');

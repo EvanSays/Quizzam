@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './styles/LoginForm.scss';
 
 class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       email: 'joe@joe.com',
       password: 'password',
     };
@@ -32,8 +33,8 @@ class LoginForm extends Component {
       login({ email, password });
     }
     this.setState({
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
     });
@@ -52,9 +53,9 @@ class LoginForm extends Component {
 
     const type = location.pathname.slice(1);
     const typeClass = `login-form ${type}`;
-    const wrapperClass = isHidden ? 'login-hidden' : null;
+    const wrapperClass = isHidden ? 'login-hidden' : '';
     const errorClass = userFail ? 'error' : null;
-    const { first_name, last_name, email, password } = this.state;
+    const { firstName, lastName, email, password } = this.state;
     const linkType = type === 'login' ? '/signup' : '/login';
     const linkTitle = type === 'login' ? 'Register' : 'Login';
     const errorMsg = type === 'login' ? 'Invalid Email or Password' : 'Invalid Name, Email or Password';
@@ -65,19 +66,19 @@ class LoginForm extends Component {
         <form onSubmit={this.handleOnSubmit} className={typeClass}>
           <h2 className="login-title">{type}</h2>
           <input
-            id="first_name"
+            id="firstName"
             className="login-input"
             type="text"
             placeholder="Enter first name"
-            value={first_name}
+            value={firstName}
             onChange={this.handleOnChange}
           />
           <input
-            id="last_name"
+            id="lastName"
             className="login-input"
             type="text"
             placeholder="Enter last name"
-            value={last_name}
+            value={lastName}
             onChange={this.handleOnChange}
           />
           <input
@@ -106,5 +107,14 @@ class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  isHidden: PropTypes.bool,
+  location: PropTypes.object,
+  login: PropTypes.func,
+  signUp: PropTypes.func,
+  updateUserFail: PropTypes.func,
+  userFail: PropTypes.bool,
+};
 
 export default LoginForm;

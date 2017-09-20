@@ -9,12 +9,15 @@ const router = require('./router');
 
 const app = express();
 
-const server = require('http').createServer(app);
+const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
   socket.on('selectAnswer', (data) => {
     io.emit(`${data.room}submittedAnswer`, data);
+  });
+  socket.on('login', (data) => {
+    io.emit(`${data.room}connnectedUser`, data);
   });
 });
 

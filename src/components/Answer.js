@@ -1,38 +1,47 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import PropTypes from 'prop-types';
+import './styles/Answer.scss';
 
-export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText, handleRadioClick, isCorrect }) => {
+export const Answer = (props) => {
+  const {
+    answerKey,
+    answerId,
+    questionId,
+    onHandleUpdateAnswer,
+    answerText,
+    onHandleRadioClick,
+    isCorrect,
+  } = props;
+
   return (
     <form>
       <input
+        className="answer-text-input"
         id={answerKey}
         type="text"
         value={answerText}
-        onChange={event => handleUpdateAnswer(event, questionId, answerId)}
+        onChange={event => onHandleUpdateAnswer(event, questionId, answerId)}
       />
       <label htmlFor={answerKey}>
           Correct
         <input
+          className="answer-radio"
           name={answerText}
           type="radio"
           checked={isCorrect}
-          onClick={event => handleRadioClick(event, questionId, answerId, answerText)}
+          onClick={event => onHandleRadioClick(event, questionId, answerId, answerText)}
         />
       </label>
     </form>
   );
 };
 
-// Answer.defaultProps = {
-//   id: '',
-//   onChange: () => '',
-//   value: '',
-// };
-//
-// Answer.propTypes = {
-//   id: string,
-//   onChange: func,
-//   value: string,
-// };
-
-// export default Answer;
+Answer.propTypes = {
+  answerId: PropTypes.number,
+  answerKey: PropTypes.number,
+  answerText: PropTypes.string,
+  isCorrect: PropTypes.bool,
+  onHandleRadioClick: PropTypes.func,
+  onHandleUpdateAnswer: PropTypes.func,
+  questionId: PropTypes.number,
+};

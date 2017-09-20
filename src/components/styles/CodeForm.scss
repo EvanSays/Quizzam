@@ -1,10 +1,12 @@
 .code-input {
+  margin: 5px 0;
   background-color: transparent;
   border: 1px solid #FFF;
   border-radius: 5px;
   color: #FFF;
-  font-size: 60px;
+  font-size: 40px;
   text-align: center;
+  text-transform: uppercase;
   &::-webkit-input-placeholder {
     color: #FFF;
   }
@@ -17,6 +19,10 @@
   &:-moz-placeholder {
     color: #FFF;
   }
+}
+
+.code-input::placeholder {
+  text-transform: capitalize;
 }
 
 .code-form {
@@ -56,5 +62,12 @@
     &:hover {
       background-color: rgba(255, 255, 255, 0.57);
     }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .code-input {
+    font-size: 20px;
+    margin-bottom: 20px;
   }
 }

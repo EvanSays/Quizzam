@@ -57,6 +57,8 @@
   p {
     padding-left: 20px;
     line-height: 11px;
+    width: 320px;
+    text-align: left;
   }
 }
 
@@ -86,9 +88,8 @@
     background: #0AB19B;
     color: white;
   }
-  button:active {
+  button.active {
     background: darken(#0AB19B, 10%);
-    // darken(#800, 20%)
   }
   button:hover {
     cursor: pointer;

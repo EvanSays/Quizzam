@@ -1,7 +1,17 @@
 .results-chart {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
-  width: 400px;
+  width: 500px;
   padding: 10px 0;
+  margin-left: 300px;
+  margin-top: 50px;
+  border-radius: 5px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1), 0 14px 45px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.2s;
+  h2 {
+    width: 80%;
+    margin: 0 auto;
+    font-weight: lighter;
+  }
 }

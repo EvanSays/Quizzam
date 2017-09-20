@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import EditQuiz from './EditQuiz';
 import QuizListContainer from '../containers/QuizListContainer';
 import WelcomeViewContainer from '../containers/WelcomeViewContainer';
@@ -33,10 +34,16 @@ class App extends Component {
         <Route path="/folder" component={QuizListContainer} />
         <Route path="/quiz" component={CreateQuizContainer} />
         <Route path="/dashboard/quiz/:id" component={EditQuiz} />
-
       </section>
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.object,
+  quiz: PropTypes.object,
+  room: PropTypes.string,
+  user: PropTypes.object,
+};
 
 export default App;

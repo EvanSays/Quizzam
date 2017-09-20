@@ -1,3 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
+/* eslint-disable consistent-return */
+/* eslint-disable camelcase */
 const { db } = require('../server');
 const bcrypt = require('bcrypt');
 const { auth } = require('../jwt-helper');
@@ -62,8 +66,8 @@ exports.indexFolders = (req, res) => {
 
 exports.addFolder = (req, res) => {
   const name = req.body;
-  const userId = req.params.userId;
-  const newFolder = Object.assign({}, name, { user_id: parseInt(userId, 10) });
+  const user_id = req.params.user_id;
+  const newFolder = Object.assign({}, name, { user_id: parseInt(user_id, 10) });
 
   return db('folder')
     .insert(newFolder, '*')

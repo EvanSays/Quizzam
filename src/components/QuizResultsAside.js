@@ -1,13 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getKey } from '../helpers';
 import './styles/QuizResultsAside.scss';
 
-const QuizResultsAside = ({ handleOnClick, quizData }) => {
+const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeIndex }) => {
+  const user = connectedUsers.map((str) => {
+    return (<div key={getKey()} className="circle green"><p>{str}</p></div>);
+  });
   const question = quizData.questions.map((quesObj, index) => {
     return (
       <button
         key={getKey()}
-        onClick={handleOnClick}
+        className={activeIndex !== index ? null : 'active'}
+        onClick={() => onHandleOnClick(quesObj, index)}
       >Q{index + 1}<span>25%</span>
       </button>);
   });
@@ -16,9 +21,7 @@ const QuizResultsAside = ({ handleOnClick, quizData }) => {
       <h1>Quiz Name</h1>
       <section className="names">
         <h3>Connected</h3>
-        <div className="circle red"><p>Juan</p></div>
-        <div className="circle red"><p>James</p></div>
-        <div className="circle green"><p>George</p></div>
+        {user}
       </section>
       <section className="questions">
         <div className="header">
@@ -29,6 +32,13 @@ const QuizResultsAside = ({ handleOnClick, quizData }) => {
       </section>
     </aside>
   );
+};
+
+QuizResultsAside.propTypes = {
+  activeIndex: PropTypes.number,
+  connectedUsers: PropTypes.array,
+  onHandleOnClick: PropTypes.func,
+  quizData: PropTypes.object,
 };
 
 export default QuizResultsAside;

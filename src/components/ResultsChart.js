@@ -1,19 +1,42 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { getWidths } from '../helpers';
 import Bar from './Bar';
 import './styles/ResultsChart.scss';
 
-const ResultsChart = () => {
+const ResultsChart = ({ selectedQuestion, users }) => {
+  if (!selectedQuestion.id) {
+    return <div />;
+  }
+
+  const { id, answers, question_text: questionText } = selectedQuestion;
+  const total = Object.values(users).filter(obj => `${id}` in obj).length;
+  const results = Object.values(users).reduce((arr, user) => {
+    arr.push(...Object.values(user));
+    return arr;
+  }, []);
+
+  const widths = getWidths(results);
+  const bars = answers.map((answer, i) => {
+    const percentage = widths[answer.id] ? ((widths[answer.id] / total) * 100) : 0;
+    const width = `${Math.round(percentage)}%`;
+
+    return <Bar key={answer.id} name={answer.answer_text} width={width} index={i} />;
+  });
+
   return (
     <section className="results-chart">
-      <h2>Question Name</h2>
+      <h2>{questionText}</h2>
       <section className="bar-list">
-        <Bar name={"one"} width={'30%'} />
-        <Bar name={"two"} width={'10%'} />
-        <Bar name={"three"} width={'50%'} />
-        <Bar name={"four"} width={'100%'} />
+        {bars}
       </section>
     </section>
   );
+};
+
+ResultsChart.propTypes = {
+  selectedQuestion: PropTypes.object,
+  users: PropTypes.object,
 };
 
 export default ResultsChart;

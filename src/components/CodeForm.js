@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import socket from '../socket';
 import './styles/CodeForm.scss';
 
 class CodeForm extends Component {
@@ -11,10 +13,11 @@ class CodeForm extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
+    this.sendSocket = this.sendSocket.bind(this);
   }
 
   handleOnChange(event) {
-    const code = event.target.value;
+    const code = event.target.value.toUpperCase();
 
     this.setState({ code });
   }
@@ -31,13 +34,19 @@ class CodeForm extends Component {
     const { fetchQuiz } = this.props;
 
     fetchQuiz(code, name);
+    this.sendSocket();
     this.setState({ code: '', name: '' });
+  }
+
+  sendSocket() {
+    socket.emit('login', { name: this.state.name, room: this.state.code });
   }
 
   render() {
     return (
       <form className="code-form" onSubmit={this.handleOnSubmit} action="">
         <input
+          id="code"
           className="code-input"
           onChange={this.handleOnChange}
           type="text"
@@ -46,7 +55,8 @@ class CodeForm extends Component {
           maxLength="4"
         />
         <input
-          className="name-input"
+          id="name"
+          className="code-input"
           onChange={this.handleNameInput}
           type="text"
           value={this.state.name}
@@ -57,5 +67,9 @@ class CodeForm extends Component {
     );
   }
 }
+
+CodeForm.propTypes = {
+  fetchQuiz: PropTypes.func,
+};
 
 export default CodeForm;

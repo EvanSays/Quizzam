@@ -1,23 +1,31 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable array-callback-return */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ResultsChart from './ResultsChart';
 import QuizResultsAside from './QuizResultsAside';
 import socket from '../socket';
 
-export default class QuizResults extends Component {
+class QuizResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
       quizData: props.quiz,
-      results: {},
       users: {},
-      answerKey: [],
+      answerKey: {},
       selectedQuestion: {},
+      connectedUsers: [],
+      activeIndex: null,
     };
     this.handleIncomingAnswer = this.handleIncomingAnswer.bind(this);
+    this.handleIncomingUser = this.handleIncomingUser.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
-    
+
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
       this.handleIncomingAnswer(data);
+    });
+    socket.on(`${this.props.room}connnectedUser`, (data) => {
+      this.handleIncomingUser(data);
     });
   }
 
@@ -26,13 +34,14 @@ export default class QuizResults extends Component {
   }
 
   answerKeyGenerator(obj) {
-    const answerKey = [];
-
-    obj.questions.map((answer) => {
-      return answer.answers.map((correct) => {
-        return correct.correct ? answerKey.push(correct.id.toString()) : null;
+    const answerKey = obj.questions.reduce((acc, question) => {
+      question.answers.map((answer) => {
+        if (answer.correct) {
+          acc[`Q${answer.question_id}`] = answer.id;
+        }
       });
-    });
+      return acc;
+    }, {});
     return this.setState({ answerKey });
   }
 
@@ -49,23 +58,34 @@ export default class QuizResults extends Component {
     this.setState({ users: newState });
   }
 
-  handleOnClick() {
-    console.log('this.state.quiz',this.state.quiz );
-    
-    // this.setState({selectedQuiz})
-    
+  handleOnClick(selectedQuestion, index) {
+    this.setState({ selectedQuestion, activeIndex: index });
+  }
+
+  handleIncomingUser(data) {
+    const { connectedUsers } = this.state;
+    this.setState({ connectedUsers: [...connectedUsers, data.name] });
   }
 
   render() {
-    const { quizData } = this.state;
+    const { quizData, selectedQuestion, users, connectedUsers, activeIndex } = this.state;
     return (
       <section className="quiz-results">
-        <ResultsChart />
-        <QuizResultsAside 
-          handleOnClick={this.handleOnClick} 
+        <ResultsChart selectedQuestion={selectedQuestion} users={users} />
+        <QuizResultsAside
+          onHandleOnClick={this.handleOnClick}
           quizData={quizData}
+          activeIndex={activeIndex}
+          connectedUsers={connectedUsers}
         />
       </section>
     );
   }
 }
+
+QuizResults.propTypes = {
+  quiz: PropTypes.object,
+  room: PropTypes.string,
+};
+
+export default QuizResults;

@@ -1,9 +1,9 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-// import QuestionContainer from '../containers/QuestionsContainer';
-import { Question } from '../components/Question';
 import PropTypes from 'prop-types';
+import { Question } from '../components/Question';
 import { getKey } from '../helpers';
-
+import './styles/CreateQuiz.scss';
 
 class CreateQuiz extends Component {
   constructor() {
@@ -26,11 +26,12 @@ class CreateQuiz extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
-    this.handleSubmitNewQuiz = this.submitNewQuiz.bind(this);
+    this.handleSubmitNewQuiz = this.handleSubmitNewQuiz.bind(this);
   }
 
-  submitNewQuiz() {
+  handleSubmitNewQuiz() {
     const { questions, quizId } = this.state;
+    const { history } = this.props;
 
     return Promise.all(questions.map((question) => {
       return fetch(`/api/v1/quizzes/${quizId}/questions`, {
@@ -47,8 +48,8 @@ class CreateQuiz extends Component {
       })
       .then((questionIds) => {
         for (let i = 0; i < questions.length; i += 1) {
-          Promise.all(questions[i].answers.map((answer, index) => {
-            fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
+          Promise.all(questions[i].answers.map((answer) => {
+            return fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -58,10 +59,13 @@ class CreateQuiz extends Component {
               }),
             });
           }))
-            .catch(error => console.log(error));
+            .catch(error => error);
         }
       })
-      .then(() => this.props.fetchFolders(this.props.selectedFolder.user_id))
+      .then(() => {
+        this.props.fetchFolders(this.props.selectedFolder.user_id);
+        history.push('/folder');
+      })
       .catch(error => error);
   }
 
@@ -92,7 +96,7 @@ class CreateQuiz extends Component {
     this.setState({ questions: newState });
   }
 
-  handleRadioClick(event, questionId, answerId, answerText) {
+  handleRadioClick(event, questionId, answerId) {
     const newState = [...this.state.questions];
     const isCorrect = !newState[questionId].answers[answerId].correct;
 
@@ -163,60 +167,82 @@ class CreateQuiz extends Component {
   render() {
     if (!this.state.quizId) {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.name}
-            placeholder="Quiz Name"
-            name="name"
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            value={this.state.subject}
-            placeholder="Quiz Subject"
-            name="subject"
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            value={this.state.type}
-            placeholder="Quiz Type"
-            name="type"
-            onChange={this.handleChange}
-          />
-          <input
-            type="submit"
-            value="Submit New Quiz"
-          />
-        </form>
+        <section className="create-quiz-container ">
+          <form
+            className="create-quiz-form"
+            onSubmit={this.handleSubmit}
+          >
+            <input
+              type="text"
+              value={this.state.name}
+              placeholder="Quiz Name"
+              name="name"
+              autoComplete="off"
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              value={this.state.subject}
+              placeholder="Quiz Subject"
+              name="subject"
+              autoComplete="off"
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              value={this.state.type}
+              placeholder="Quiz Type"
+              name="type"
+              autoComplete="off"
+              onChange={this.handleChange}
+            />
+            <input
+              className="create-quiz-btn"
+              type="submit"
+              value="Submit New Quiz"
+            />
+          </form>
+        </section>
       );
     }
     return (
-      <section>
-        <button onClick={this.handleAddQuestion}>Add Question</button>
-        <button onClick={this.handleSubmitNewQuiz}>Save Quiz</button>
-
-        {this.state.questions.map((question, index) => {
-          return (<Question
-            key={index}
-            handleUpdateQuestion={this.handleUpdateQuestion}
-            handleUpdateAnswer={this.handleUpdateAnswer}
-            questionId={index}
-            questionText={question.question_text}
-            answers={question.answers}
-            handleAddAnswer={this.handleAddAnswer}
-            handleRadioClick={this.handleRadioClick}
-          />
-          );
-        })}
+      <section className="create-quiz-container">
+        <header className="create-quiz-header">
+          <button
+            className="create-quiz-btn"
+            onClick={this.handleAddQuestion}
+          >Add Question
+          </button>
+          <button
+            className="create-quiz-btn"
+            onClick={this.handleSubmitNewQuiz}
+          >Save Quiz
+          </button>
+        </header>
+        <div className="create-quiz-card">
+          {this.state.questions.map((question, index) => {
+            return (<Question
+              key={index}
+              onHandleUpdateQuestion={this.handleUpdateQuestion}
+              onHandleUpdateAnswer={this.handleUpdateAnswer}
+              questionId={index}
+              questionText={question.question_text}
+              answers={question.answers}
+              onHandleAddAnswer={this.handleAddAnswer}
+              onHandleRadioClick={this.handleRadioClick}
+            />
+            );
+          })}
+        </div>
       </section>
     );
   }
 }
 
 CreateQuiz.propTypes = {
-
+  fetchFolders: PropTypes.func,
+  history: PropTypes.object,
+  selectedFolder: PropTypes.object,
 };
 
 export default CreateQuiz;

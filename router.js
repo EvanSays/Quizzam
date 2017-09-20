@@ -22,12 +22,14 @@ router.delete('/quizzes/:id', quiz.delQuiz);
 // Questions
 router.get('/quizzes/:quizId/questions', question.indexQuestions);
 router.post('/quizzes/:quizId/questions', question.addQuestion);
-router.patch('/quizzes/:id/questions', question.editQuestion);
+router.patch('/quizzes/:id/questions/:questionId', question.editQuestion);
+router.delete('/quizzes/:id/questions/:questionId', question.delQuestion);
 
 // Answers
 router.get('/questions/:questionId/answers', answer.indexAnswers);
 router.post('/questions/:questionId/answers', answer.addAnswer);
-router.patch('/questions/:id/answers', answer.editAnswer);
+router.patch('/questions/:questionId/answers/:answerId', answer.editAnswer);
+router.delete('/questions/:questionId/answers/:answerId', answer.delAnswer);
 
 // Room
 router.get('/room/:id', room.quiz);

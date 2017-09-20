@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import QuizCard from './QuizCard';
 import EditQuiz from './EditQuiz';
-import { getKey } from '../helpers';
 import './styles/QuizList.scss';
 
 class QuizList extends Component {
@@ -31,9 +30,8 @@ class QuizList extends Component {
     createRoom(quiz);
   }
 
-  toggleEdit(quizData) {
-    const { quizObj } = this.state;
-    this.setState({ isEditing: true, quizObj: quizData });
+  toggleEdit(quizObj) {
+    this.setState({ isEditing: true, quizObj });
   }
 
   handleUpdateQuestion(e, id) {
@@ -62,9 +60,9 @@ class QuizList extends Component {
     this.setState({ quizObj: obj });
   }
 
+  /* eslint-disable no-unused-vars */
   handleSubmitEdit() {
     const obj = this.state.quizObj;
-
     const question = obj.questions.filter((el) => {
       return el.edited === true;
     });
@@ -75,6 +73,7 @@ class QuizList extends Component {
       return [...acc, ...filtered];
     }, []);
   }
+  /* eslint-enable */
 
   deleteQuiz(id) {
     const { deleteQuiz } = this.props;
@@ -86,7 +85,7 @@ class QuizList extends Component {
 
   render() {
     const { selectedFolder, history } = this.props;
-    const { quizObj, questionObj, answerArray } = this.state;
+    const { quizObj, answerArray } = this.state;
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
       return (
@@ -95,9 +94,9 @@ class QuizList extends Component {
           <EditQuiz
             updateQuestion={this.updateQuestion}
             updateAnswer={this.updateAnswer}
-            handleUpdateQuestion={this.handleUpdateQuestion}
-            handleUpdateAnswer={this.handleUpdateAnswer}
-            handleSubmitEdit={this.handleSubmitEdit}
+            onHandleUpdateQuestion={this.handleUpdateQuestion}
+            onHandleUpdateAnswer={this.handleUpdateAnswer}
+            onHandleSubmitEdit={this.handleSubmitEdit}
             quizObj={quizObj}
             answerArray={answerArray}
           />
@@ -106,7 +105,7 @@ class QuizList extends Component {
     }
     const quizArray = quizzes.map((quiz) => {
       return (
-        <div className="quiz-card-wrapper" key={quiz.id}>
+        <div key={quiz.id} className="quiz-card-wrapper">
           <h2>{name}</h2>
           <QuizCard
             quizData={quiz}
@@ -122,7 +121,11 @@ class QuizList extends Component {
       <section className="quiz-list-wrapper">
         <header className="quiz-list-header">
           <h2>{name}</h2>
-          <button onClick={() => history.push('/quiz')}>Create Quiz</button>
+          <button
+            className="quiz-list-create-quiz"
+            onClick={() => history.push('/quiz')}
+          >Create Quiz
+          </button>
         </header>
         <section className="quiz-list">
           {quizArray}
@@ -132,14 +135,11 @@ class QuizList extends Component {
   }
 }
 
-// QuizList.defaultProps = {
-//
-// };
-//
-// QuizList.propTypes = {
-//   id: string,
-//   onChange: func,
-//   value: string,
-// };
+QuizList.propTypes = {
+  createRoom: PropTypes.func,
+  deleteQuiz: PropTypes.func,
+  history: PropTypes.object,
+  selectedFolder: PropTypes.object,
+};
 
 export default QuizList;

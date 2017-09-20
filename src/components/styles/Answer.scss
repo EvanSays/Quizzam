@@ -1,0 +1,22 @@
+.answer-container {
+  display: flex;
+  flex-direction: column;
+    label {
+      margin-left: 45px;
+    }
+    form {
+      animation: slide-right 0.4s;
+    }
+}
+
+.answer-text-input{
+  width: 70%;
+  height: 35px;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.answer-radio {
+  width: 20px;
+  margin-left: 20px
+}

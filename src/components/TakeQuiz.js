@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
-import { object, array, string, func } from 'prop-types';
+import PropTypes from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes, getKey, initializeState } from '../helpers';
 import socket from '../socket';
 
+<<<<<<< HEAD
 export default class TakeQuiz extends Component {
+=======
+function initializeState(quiz) {
+  const initialState = [];
+  for (let i = 0; i < quiz.questions.length; i += 1) {
+    initialState.push({ selectedAnswers: [] });
+  }
+  return initialState;
+}
+
+class TakeQuiz extends Component {
+>>>>>>> 54c5e9739cd1667dcf8c65a4bafd9ae4c4eda459
   constructor(props) {
     super(props);
     this.state = {
@@ -12,13 +24,11 @@ export default class TakeQuiz extends Component {
       currentQuestion: 0,
       answers: initializeState(props.quiz),
     };
-
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
     this.sendSocket = this.sendSocket.bind(this);
   }
-
   sendSocket() {
     socket.emit('selectAnswer', {
       name: this.state.name,
@@ -102,29 +112,29 @@ export default class TakeQuiz extends Component {
 
   render() {
     const { quiz } = this.props;
-    const { currentQuestion, answers } = this.state;
+    const { currentQuestion } = this.state;
 
-    if (!this.props.quiz.id) {
+    if (!quiz.id) {
       return <h3>LOADING</h3>;
     }
 
     return (
       <main>
         <header className="take-quiz-header">
-          <h1>{this.props.quiz.name}</h1>
-          <h1>Subject: {this.props.quiz.subject}</h1>
-          <h1>Room: {this.props.quiz.id}</h1>
+          <h1>{quiz.name}</h1>
+          <h1>Subject: {quiz.subject}</h1>
+          <h1>Room: {quiz.id}</h1>
         </header>
         <section className="take-quiz-question">
           <h3 className="take-quiz-question-title">
-            {this.props.quiz.questions[this.state.currentQuestion].question_text}
+            {quiz.questions[currentQuestion].question_text}
           </h3>
           <div className="question-wrapper">
             <p className="take-quiz-question-type">
-              ({questionTypes[this.props.quiz.questions[this.state.currentQuestion].question_type]})
+              ({questionTypes[quiz.questions[currentQuestion].question_type]})
             </p>
             <form className="take-quiz-form">
-              {this.props.quiz.questions[this.state.currentQuestion].answers
+              {quiz.questions[currentQuestion].answers
                 .map((answer, index) => {
                   return this.determineInputType(answer, index);
                 })}
@@ -147,3 +157,11 @@ export default class TakeQuiz extends Component {
     );
   }
 }
+
+TakeQuiz.propTypes = {
+  code: PropTypes.string,
+  quiz: PropTypes.object,
+  username: PropTypes.string,
+};
+
+export default TakeQuiz;
