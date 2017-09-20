@@ -51,4 +51,25 @@ const getFolderColor = () => {
   return { bg, dark };
 };
 
-module.exports = { getKey, genRoomNumber, questionTypes, getFolderColor, getKeyType, folderColors };
+const getWidths = (results) => {
+  return results.reduce((obj, result) => {
+    const current = obj;
+
+    if (!obj[result]) {
+      current[result] = 0;
+    }
+    current[result] += 1;
+
+    return current;
+  }, {});
+};
+
+module.exports = {
+  getKey,
+  genRoomNumber,
+  questionTypes,
+  getFolderColor,
+  getKeyType,
+  folderColors,
+  getWidths,
+};
