@@ -66,7 +66,7 @@ exports.indexFolders = (req, res) => {
 
 exports.addFolder = (req, res) => {
   const name = req.body;
-  const user_id = req.params.user_id;
+  const user_id = req.params.userId;
   const newFolder = Object.assign({}, name, { user_id: parseInt(user_id, 10) });
 
   return db('folder')
@@ -79,7 +79,7 @@ exports.createUser = (req, res) => {
   const user = req.body;
 
   if (!user.email || !user.password || !user.first_name || !user.last_name) {
-    return res.status(422).json({ error: true });
+    return res.status(422).json({ error: 'Missing params' });
   }
 
   auth(user).then((finalUser) => {
@@ -92,7 +92,7 @@ exports.createUser = (req, res) => {
 
 exports.signIn = (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return res.status(422).json({ Error: 'Missing user name or password' });
+    return res.status(422).json('Missing user name or password');
   }
   return db('user_account').where('email', req.body.email).select('password')
     .then((hash) => {
