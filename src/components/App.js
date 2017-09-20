@@ -34,7 +34,6 @@ class App extends Component {
         <Route path="/folder" component={QuizListContainer} />
         <Route path="/quiz" component={CreateQuizContainer} />
         <Route path="/dashboard/quiz/:id" component={EditQuiz} />
-
       </section>
     );
   }

@@ -8,10 +8,10 @@ export const history = createHistory();
 const middleware = [routerMiddleware(history), thunk];
 
 /* eslint-disable no-underscore-dangle */
-// const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 /* eslint-enable */
 
-const composeEnhancers = compose(applyMiddleware(...middleware));
+const composeEnhancers = compose(applyMiddleware(...middleware), devTools);
 const store = createStore(rootReducer, composeEnhancers);
 
 export default store;
