@@ -233,5 +233,79 @@ describe('Question API routes', () => {
             });
         });
     });
+
+    it('SAD PATH - Should return an error if the question does not exist', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .patch(`/api/v1/quizzes/${id}/questions/0`)
+            .send({
+              subject: 'New Subject',
+            })
+            .end((err1, res1) => {
+              should.exist(res1);
+              res1.status.should.equal(404);
+              res1.should.be.json; //eslint-disable-line
+              res1.body.should.be.a('object');
+              res1.body.should.have.property('error');
+              res1.body.error.should.equal('The question with ID# 0 was not found and could not be updated');
+              done();
+            });
+        });
+    });
+  });
+
+  describe('DELETE /api/v1/quizzes/:id/questions/:questionId', () => {
+    it('Should return a success message and an object containing the question that was deleted', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .get(`/api/v1/quizzes/${id}/questions`)
+            .end((err1, res1) => {
+              const testQuestion = res1.body.find(array => array.question_text === 'What is your favorite color?');
+              const questionId = testQuestion.id;
+
+              chai.request(app)
+                .delete(`/api/v1/quizzes/${id}/questions/${questionId}`)
+                .end((err2, res2) => {
+                  res2.body.should.have.property('success');
+                  res2.body.success.should.equal(`Question #${questionId} was deleted.`);
+                  res2.body.should.have.property('deletedQuestion');
+                  res2.body.deletedQuestion.should.be.a('array');
+                  res2.body.deletedQuestion[0].id.should.equal(questionId);
+                  res2.body.deletedQuestion[0].subject.should.equal('Jquery');
+                  res2.body.deletedQuestion[0].difficulty.should.equal(1);
+                  res2.body.deletedQuestion[0].question_type.should.equal('multiple choice');
+                  done();
+                });
+            });
+        });
+    });
+
+    it('SAD PATH - Should return an error if the question does not exist', (done) => {
+      chai.request(app)
+        .get('/api/v1/quizzes')
+        .end((err, res) => {
+          const id = res.body[0].id;
+
+          chai.request(app)
+            .delete(`/api/v1/quizzes/${id}/questions/0`)
+            .end((err1, res1) => {
+              should.exist(res1);
+              res1.status.should.equal(404);
+              res1.should.be.json; //eslint-disable-line
+              res1.body.should.be.a('object');
+              res1.body.should.have.property('error');
+              res1.body.error.should.equal('The question with ID# 0 was not found and could not be deleted');
+              done();
+            });
+        });
+    });
   });
 });
