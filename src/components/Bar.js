@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number } from 'prop-types';
 import './styles/Bar.scss';
 
 const Bar = ({ name, width, index }) => {
@@ -15,6 +16,18 @@ const Bar = ({ name, width, index }) => {
       <div className="bar-name">{name}</div>
     </article>
   );
+};
+
+Bar.defaultProps = {
+  index: 0,
+  name: {},
+  width: {},
+};
+
+Bar.propTypes = {
+  index: number,
+  name: string,
+  width: string,
 };
 
 export default Bar;

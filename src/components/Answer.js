@@ -1,7 +1,17 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 
-export const Answer = ({ answerKey, answerId, questionId, handleUpdateAnswer, answerText, handleRadioClick, isCorrect }) => {
+export const Answer = (props) => {
+  const {
+    answerKey, 
+    answerId,
+    questionId,
+    handleUpdateAnswer,
+    answerText,
+    handleRadioClick,
+    isCorrect,
+  } = props;
+
   return (
     <form>
       <input

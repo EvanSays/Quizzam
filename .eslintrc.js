@@ -14,6 +14,7 @@ module.exports = {
       "react/jsx-no-literals": [ 0, { "noStrings": true }],
       "react/no-set-state": [0],
       "react/require-optimization": [0],
+      "react/forbid-prop-types": [0],
     },
     "env": {
       "browser": true,
