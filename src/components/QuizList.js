@@ -60,9 +60,9 @@ class QuizList extends Component {
     this.setState({ quizObj: obj });
   }
 
+  /* eslint-disable no-unused-vars */
   handleSubmitEdit() {
     const obj = this.state.quizObj;
-
     const question = obj.questions.filter((el) => {
       return el.edited === true;
     });
@@ -73,6 +73,7 @@ class QuizList extends Component {
       return [...acc, ...filtered];
     }, []);
   }
+  /* eslint-enable */
 
   deleteQuiz(id) {
     const { deleteQuiz } = this.props;
@@ -93,9 +94,9 @@ class QuizList extends Component {
           <EditQuiz
             updateQuestion={this.updateQuestion}
             updateAnswer={this.updateAnswer}
-            handleUpdateQuestion={this.handleUpdateQuestion}
-            handleUpdateAnswer={this.handleUpdateAnswer}
-            handleSubmitEdit={this.handleSubmitEdit}
+            onHandleUpdateQuestion={this.handleUpdateQuestion}
+            onHandleUpdateAnswer={this.handleUpdateAnswer}
+            onHandleSubmitEdit={this.handleSubmitEdit}
             quizObj={quizObj}
             answerArray={answerArray}
           />
