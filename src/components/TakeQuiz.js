@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import './styles/TakeQuiz.scss';
 import { questionTypes, getKey } from '../helpers';
 import socket from '../socket';
@@ -155,9 +155,9 @@ class TakeQuiz extends Component {
 }
 
 TakeQuiz.propTypes = {
-  code: object,
-  quiz: object,
-  username: object,
+  code: PropTypes.string,
+  quiz: PropTypes.object,
+  username: PropTypes.string,
 };
 
 export default TakeQuiz;
