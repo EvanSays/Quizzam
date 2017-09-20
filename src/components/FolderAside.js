@@ -66,7 +66,7 @@ class FolderAside extends Component {
 FolderAside.propTypes = {
   createFolder: PropTypes.func,
   fetchFolders: PropTypes.func,
-  folders: PropTypes.array,
+  folders: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   history: PropTypes.object,
   selectFolder: PropTypes.func,
   user: PropTypes.object,

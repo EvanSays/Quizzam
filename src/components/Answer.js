@@ -7,9 +7,9 @@ export const Answer = (props) => {
     answerKey,
     answerId,
     questionId,
-    handleUpdateAnswer,
+    onHandleUpdateAnswer,
     answerText,
-    handleRadioClick,
+    onHandleRadioClick,
     isCorrect,
   } = props;
 
@@ -20,7 +20,7 @@ export const Answer = (props) => {
         id={answerKey}
         type="text"
         value={answerText}
-        onChange={event => handleUpdateAnswer(event, questionId, answerId)}
+        onChange={event => onHandleUpdateAnswer(event, questionId, answerId)}
       />
       <label htmlFor={answerKey}>
           Correct
@@ -29,7 +29,7 @@ export const Answer = (props) => {
           name={answerText}
           type="radio"
           checked={isCorrect}
-          onClick={event => handleRadioClick(event, questionId, answerId, answerText)}
+          onClick={event => onHandleRadioClick(event, questionId, answerId, answerText)}
         />
       </label>
     </form>
@@ -38,12 +38,10 @@ export const Answer = (props) => {
 
 Answer.propTypes = {
   answerId: PropTypes.number,
-  answerKey: PropTypes.string,
+  answerKey: PropTypes.number,
   answerText: PropTypes.string,
-  handleRadioClick: PropTypes.func,
-  handleUpdateAnswer: PropTypes.func,
-  isCorrect: PropTypes.string,
-  questionId: PropTypes.string,
+  isCorrect: PropTypes.bool,
+  onHandleRadioClick: PropTypes.func,
+  onHandleUpdateAnswer: PropTypes.func,
+  questionId: PropTypes.number,
 };
-
-// export default Answer;

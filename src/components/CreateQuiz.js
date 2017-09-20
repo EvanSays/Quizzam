@@ -235,7 +235,7 @@ class CreateQuiz extends Component {
 
 CreateQuiz.propTypes = {
   fetchFolders: PropTypes.func,
-  selectedFolder: PropTypes.func,
+  selectedFolder: PropTypes.object,
 };
 
 export default CreateQuiz;
