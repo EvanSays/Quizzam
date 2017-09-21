@@ -30,16 +30,16 @@ exports.seed = (knex, Promise) => {
         .then((folder) => {
           return Promise.all([
             knex('quiz').insert({
-              name: 'First Quiz',
+              name: 'Demo Night',
               folder_id: folder[0].id,
               user_id: folder[0].user_id,
-              subject: 'Javascript',
+              subject: 'Fun Times',
               type: 'Pop Quiz',
             }, '*')
               .then((quiz) => {
                 return Promise.all([
                   knex('question').insert({
-                    question_text: 'What is your favorite color?',
+                    question_text: 'What is your quest?',
                     quiz_id: quiz[0].id,
                     subject: 'Jquery',
                     question_type: 'multiple choice',
@@ -48,16 +48,47 @@ exports.seed = (knex, Promise) => {
                     .then((answer) => {
                       return Promise.all([
                         knex('answer').insert({
-                          answer_text: 'Blue',
+                          answer_text: 'To find the holy grail',
                           question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'To get a job',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'To grind the holy fail',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'To win the 4th of July Hot Dog eating contest',
+                          question_id: answer[0].id,
+                          points: 1,
+                          correct: true,
+                        }),
+                      ]);
+                    }),
+                  knex('question').insert({
+                    question_text: 'What is your favorite color?',
+                    quiz_id: quiz[0].id,
+                    subject: 'Colors',
+                    question_type: 'multiple choice',
+                    difficulty: 3,
+                  }, '*')
+                    .then((answer) => {
+                      return Promise.all([
+                        knex('answer').insert({
+                          answer_text: 'Blue…wait, no…green',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Elephant',
+                          question_id: answer[0].id,
+
                         }),
                         knex('answer').insert({
                           answer_text: 'Red',
                           question_id: answer[0].id,
-                        }),
-                        knex('answer').insert({
-                          answer_text: 'Yellow',
-                          question_id: answer[0].id,
+
                         }),
                         knex('answer').insert({
                           answer_text: 'Chartreuse',
@@ -68,51 +99,99 @@ exports.seed = (knex, Promise) => {
                       ]);
                     }),
                   knex('question').insert({
-                    question_text: 'What does the Array prototype map return?',
+                    question_text: 'What is the airspeed velocity of an unladen swallow?',
                     quiz_id: quiz[0].id,
-                    subject: 'Arrays',
-                    question_type: 'true/false',
-                    difficulty: 3,
-                  }, '*')
-                    .then((answer) => {
-                      return Promise.all([
-                        knex('answer').insert({
-                          answer_text: 'A string',
-                          question_id: answer[0].id,
-                        }),
-                        knex('answer').insert({
-                          answer_text: 'An array',
-                          question_id: answer[0].id,
-                          points: 1,
-                          correct: true,
-                        }),
-                      ]);
-                    }),
-                  knex('question').insert({
-                    question_text: 'Which of the following are array prototypes?',
-                    quiz_id: quiz[0].id,
-                    subject: 'Arrays',
+                    subject: 'Birds',
                     question_type: 'multiple choice',
                     difficulty: 7,
                   }, '*')
                     .then((answer) => {
                       return Promise.all([
                         knex('answer').insert({
-                          answer_text: 'blamp',
+                          answer_text: 'An African or European swallow?',
                           question_id: answer[0].id,
                         }),
                         knex('answer').insert({
-                          answer_text: 'map',
+                          answer_text: '10',
                           question_id: answer[0].id,
                           points: 1,
                           correct: true,
                         }),
                         knex('answer').insert({
-                          answer_text: 'reductionator',
+                          answer_text: 'Swallows are not birds',
                           question_id: answer[0].id,
                         }),
                         knex('answer').insert({
-                          answer_text: 'split',
+                          answer_text: '72 MPH',
+                          question_id: answer[0].id,
+                        }),
+                      ]);
+                    }),
+                  knex('question').insert({
+                    question_text: 'How is the family name spelled in the popular bear family children book series?',
+                    quiz_id: quiz[0].id,
+                    subject: 'Books',
+                    question_type: 'multiple choice',
+                    difficulty: 7,
+                  }, '*')
+                    .then((answer) => {
+                      return Promise.all([
+                        knex('answer').insert({
+                          answer_text: 'Berenstein Bears',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Barry the barely there bear',
+                          question_id: answer[0].id,
+                          points: 1,
+                          correct: true,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Berenstain Bears',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Beepboopbot the Bearbots',
+                          question_id: answer[0].id,
+                        }),
+                      ]);
+                    }),
+                  knex('question').insert({
+                    question_text: 'What should Jeff\'s next haircut be?',
+                    quiz_id: quiz[0].id,
+                    subject: 'Hair',
+                    question_type: 'multiple choice',
+                    difficulty: 7,
+                  }, '*')
+                    .then((answer) => {
+                      return Promise.all([
+                        knex('answer').insert({
+                          answer_text: 'That flippy thing',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Shaved head',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Mullet',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Man Bun',
+                          question_id: answer[0].id,
+                          correct: true,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Mohawk',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Dreadlocks',
+                          question_id: answer[0].id,
+                        }),
+                        knex('answer').insert({
+                          answer_text: 'Side spike',
                           question_id: answer[0].id,
                         }),
                       ]);

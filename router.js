@@ -7,6 +7,8 @@ const answer = require('./controllers/answerController');
 
 const router = express.Router();
 
+// Create a login/auth path
+
 // User
 router.get('/users/:id/folders', user.indexFolders);
 router.post('/users/:userId/folders', user.addFolder);
