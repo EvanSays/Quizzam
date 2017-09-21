@@ -101,6 +101,12 @@ export default class TakeQuiz extends Component {
   render() {
     const { quiz } = this.props;
     const { currentQuestion } = this.state;
+    console.log(currentQuestion);
+    const final = this.state.answers.length - 1;
+    console.log(final);
+    
+    
+    const nextBnt = final !== currentQuestion ? <button className="take-quiz-btn" onClick={this.handleClick}>Next</button> : <a href="https://demonight.herokuapp.com" className="take-quiz-btn decoration-off" onClick={this.handleClick}>Submit</a>;
 
     if (!quiz.id) {
       return <h3>LOADING</h3>;
@@ -133,11 +139,7 @@ export default class TakeQuiz extends Component {
                 onClick={this.handleClick}
               >Prev
               </button>
-              <button
-                className="take-quiz-btn"
-                onClick={this.handleClick}
-              >Next
-              </button>
+              {nextBnt}
             </nav>
           </div>
         </section>

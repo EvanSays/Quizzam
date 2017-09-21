@@ -13,7 +13,7 @@ const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeInd
         key={getKey()}
         className={activeIndex !== index ? null : 'active'}
         onClick={() => onHandleOnClick(quesObj, index)}
-      >Q{index + 1}<span>25%</span>
+      >Q{index + 1}
       </button>);
   });
   return (
