@@ -12,6 +12,8 @@ const middleware = [routerMiddleware(history), thunk];
 /* eslint-enable */
 
 // const composeEnhancers = compose(applyMiddleware(...middleware), devTools);
+// const store = createStore(rootReducer, composeEnhancers);
+
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 export default store;
