@@ -15,7 +15,6 @@ const ResultsChart = ({ selectedQuestion, users }) => {
     arr.push(...Object.values(user));
     return arr;
   }, []);
-
   const widths = getWidths(results);
   const bars = answers.map((answer, i) => {
     const percentage = widths[answer.id] ? ((widths[answer.id] / total) * 100) : 0;

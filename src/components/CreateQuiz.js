@@ -39,21 +39,21 @@ class CreateQuiz extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           question_text: question.question_text,
-          quiz_id: quizId,
+          quiz_id: quizId
         }),
       });
     }))
-      .then((response) => {
-        return response[0].json();
+      .then((res) => {
+        return Promise.all(res.map(el => el.json()));
       })
       .then((questionIds) => {
         for (let i = 0; i < questions.length; i += 1) {
           Promise.all(questions[i].answers.map((answer) => {
-            return fetch(`/api/v1/questions/${questionIds.id[i]}/answers`, {
+            return fetch(`/api/v1/questions/${questionIds[i].id}/answers`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                question_id: questionIds.id[i],
+                question_id: questionIds[i].id,
                 answer_text: answer.answer_text,
                 correct: answer.correct,
               }),
