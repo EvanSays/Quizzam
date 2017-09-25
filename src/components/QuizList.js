@@ -90,7 +90,7 @@ class QuizList extends Component {
     if (this.state.isEditing) {
       return (
         <div className="edit-quiz-container">
-          <h1>edit quiz</h1>
+          <h1 className="edit-quiz-header">Edit Quiz</h1>
           <EditQuiz
             updateQuestion={this.updateQuestion}
             updateAnswer={this.updateAnswer}

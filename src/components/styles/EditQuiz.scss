@@ -1,3 +1,11 @@
+.edit-quiz-header {
+  background-color: #0AB19B;
+  color: #FFF;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
 .edit-quiz {
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1), 0 14px 45px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -6,7 +14,7 @@
   margin-top: 50px;
   padding: 20px;
   align-items: center;
-  width: 70%;
+  width: 90%;
   input {
     display: block;
     width: 90%;
