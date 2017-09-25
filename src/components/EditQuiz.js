@@ -13,6 +13,7 @@ const EditQuiz = ({ quizObj,
         key={quesId}
         className="edit-question-container"
       >
+        <h4>Question</h4>
         <input
           id={quesId}
           value={quizObj.questions[index].question_text}
