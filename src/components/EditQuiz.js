@@ -9,7 +9,10 @@ const EditQuiz = ({ quizObj,
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
     return (
-      <div key={quesId}>
+      <div
+        key={quesId}
+        className="edit-question-container"
+      >
         <input
           id={quesId}
           value={quizObj.questions[index].question_text}
@@ -19,7 +22,10 @@ const EditQuiz = ({ quizObj,
           question.answers.map((answer, i) => {
             const ansId = answer.id;
             return (
-              <div key={ansId}>
+              <div
+                key={ansId}
+                className="edit-answer-container"
+              >
                 <input
                   id={ansId}
                   name={answer.answer_text}
@@ -39,7 +45,7 @@ const EditQuiz = ({ quizObj,
       <h1>{quizObj.name}</h1>
       {questions}
       <button
-        className="create-quiz-btn"
+        className="edit-quiz-btn"
         onClick={onHandleSubmitEdit}
       >submit changes
       </button>
