@@ -1,3 +1,10 @@
+.edit-quiz-container {
+  align-items: center;
+  display: flex;
+  padding-left: 256px;
+  flex-direction: column;
+}
+
 .edit-quiz-header {
   background-color: #0AB19B;
   color: #FFF;
@@ -12,6 +19,7 @@
   flex-direction: column;
   justify-content: space-between;
   margin-top: 50px;
+  overflow-y: scroll;
   padding: 20px;
   align-items: center;
   width: 90%;
