@@ -35,3 +35,11 @@
     background-color: lighten(#00C3FF, 20%);
   }
 }
+
+.edit-quiz-container {
+  align-items: center;
+  display: flex;
+  padding-left: 256px;
+  height: 100vh;
+  flex-direction: column;
+}

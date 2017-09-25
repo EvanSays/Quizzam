@@ -89,7 +89,7 @@ class QuizList extends Component {
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
       return (
-        <div>
+        <div className="edit-quiz-container">
           <h1>edit quiz</h1>
           <EditQuiz
             updateQuestion={this.updateQuestion}

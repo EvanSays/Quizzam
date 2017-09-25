@@ -34,10 +34,14 @@ const EditQuiz = ({ quizObj,
   });
 
   return (
-    <div>
+    <div className="edit-quiz">
       <h1>{quizObj.name}</h1>
       {questions}
-      <button onClick={onHandleSubmitEdit}>submit changes</button>
+      <button
+        className="create-quiz-btn"
+        onClick={onHandleSubmitEdit}
+      >submit changes
+      </button>
     </div>
   );
 };
