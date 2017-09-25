@@ -89,8 +89,8 @@ class QuizList extends Component {
     const { name, quizzes } = selectedFolder;
     if (this.state.isEditing) {
       return (
-        <div>
-          <h1>edit quiz</h1>
+        <div className="edit-quiz-container">
+          <h1 className="edit-quiz-header">Edit Quiz</h1>
           <EditQuiz
             updateQuestion={this.updateQuestion}
             updateAnswer={this.updateAnswer}
