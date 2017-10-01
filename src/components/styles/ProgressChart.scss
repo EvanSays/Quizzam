@@ -1,0 +1,32 @@
+.progress-chart {
+  position: relative;
+  width: 200px;
+}
+
+.progress-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  color: #757575;
+  font-size: 30px;
+}
+
+#progress {
+  transform: rotate(-90deg);
+}
+
+#progress circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.3s linear;
+  stroke: transparent;
+  stroke-width: 1em;
+}
+
+#progress #bar {
+  stroke: #22C4FC;
+}
