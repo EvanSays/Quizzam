@@ -170,7 +170,7 @@ describe('Question API routes', () => {
     });
   });
 
-  describe('PATCH /api/v1/quizzes/:id/questions', () => {
+  describe('PATCH /api/v1/questions/:questionId', () => {
     it('Should return the questions\'s ID if an existing question is updated', (done) => {
       chai.request(app)
         .get('/api/v1/quizzes')
@@ -183,7 +183,7 @@ describe('Question API routes', () => {
               const questionId = res1.body[0].id;
 
               chai.request(app)
-                .patch(`/api/v1/quizzes/${id}/questions/${questionId}`)
+                .patch(`/api/v1/questions/${questionId}`)
                 .send({
                   subject: 'moon studies',
                 })
@@ -215,7 +215,7 @@ describe('Question API routes', () => {
               testQuestion.subject.should.equal('Jquery');
 
               chai.request(app)
-                .patch(`/api/v1/quizzes/${id}/questions/${questionId}`)
+                .patch(`/api/v1/questions/${questionId}`)
                 .send({
                   subject: 'moon studies',
                 })
@@ -236,29 +236,23 @@ describe('Question API routes', () => {
 
     it('SAD PATH - Should return an error if the question does not exist', (done) => {
       chai.request(app)
-        .get('/api/v1/quizzes')
-        .end((err, res) => {
-          const id = res.body[0].id;
-
-          chai.request(app)
-            .patch(`/api/v1/quizzes/${id}/questions/0`)
-            .send({
-              subject: 'New Subject',
-            })
-            .end((err1, res1) => {
-              should.exist(res1);
-              res1.status.should.equal(404);
-              res1.should.be.json; //eslint-disable-line
-              res1.body.should.be.a('object');
-              res1.body.should.have.property('error');
-              res1.body.error.should.equal('The question with ID# 0 was not found and could not be updated');
-              done();
-            });
+        .patch('/api/v1/questions/0')
+        .send({
+          subject: 'New Subject',
+        })
+        .end((err1, res1) => {
+          should.exist(res1);
+          res1.status.should.equal(404);
+          res1.should.be.json; //eslint-disable-line
+          res1.body.should.be.a('object');
+          res1.body.should.have.property('error');
+          res1.body.error.should.equal('The question with ID# 0 was not found and could not be updated');
+          done();
         });
     });
   });
 
-  describe('DELETE /api/v1/quizzes/:id/questions/:questionId', () => {
+  describe('DELETE /api/v1/questions/:questionId', () => {
     it('Should return a success message and an object containing the question that was deleted', (done) => {
       chai.request(app)
         .get('/api/v1/quizzes')
@@ -272,7 +266,7 @@ describe('Question API routes', () => {
               const questionId = testQuestion.id;
 
               chai.request(app)
-                .delete(`/api/v1/quizzes/${id}/questions/${questionId}`)
+                .delete(`/api/v1/questions/${questionId}`)
                 .end((err2, res2) => {
                   res2.body.should.have.property('success');
                   res2.body.success.should.equal(`Question #${questionId} was deleted.`);
@@ -290,21 +284,15 @@ describe('Question API routes', () => {
 
     it('SAD PATH - Should return an error if the question does not exist', (done) => {
       chai.request(app)
-        .get('/api/v1/quizzes')
-        .end((err, res) => {
-          const id = res.body[0].id;
-
-          chai.request(app)
-            .delete(`/api/v1/quizzes/${id}/questions/0`)
-            .end((err1, res1) => {
-              should.exist(res1);
-              res1.status.should.equal(404);
-              res1.should.be.json; //eslint-disable-line
-              res1.body.should.be.a('object');
-              res1.body.should.have.property('error');
-              res1.body.error.should.equal('The question with ID# 0 was not found and could not be deleted');
-              done();
-            });
+        .delete('/api/v1/questions/0')
+        .end((err1, res1) => {
+          should.exist(res1);
+          res1.status.should.equal(404);
+          res1.should.be.json; //eslint-disable-line
+          res1.body.should.be.a('object');
+          res1.body.should.have.property('error');
+          res1.body.error.should.equal('The question with ID# 0 was not found and could not be deleted');
+          done();
         });
     });
   });

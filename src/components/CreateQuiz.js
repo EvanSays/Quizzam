@@ -39,7 +39,7 @@ class CreateQuiz extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           question_text: question.question_text,
-          quiz_id: quizId
+          quiz_id: quizId,
         }),
       });
     }))
