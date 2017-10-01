@@ -14,8 +14,10 @@ class QuizList extends Component {
     this.postRoom = this.postRoom.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.deleteQuiz = this.deleteQuiz.bind(this);
-    this.handleUpdateQuestion = this.handleUpdateQuestion.bind(this);
-    this.handleUpdateAnswer = this.handleUpdateAnswer.bind(this);
+    this.handleQuestionChange = this.handleQuestionChange.bind(this);
+    this.handleAnswerChange = this.handleAnswerChange.bind(this);
+    this.handleSubmitQuestion = this.handleSubmitQuestion.bind(this);
+    this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
     this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
   }
 
@@ -34,7 +36,7 @@ class QuizList extends Component {
     this.setState({ isEditing: true, quizObj });
   }
 
-  handleUpdateQuestion(e, id) {
+  handleQuestionChange(e, id) {
     const obj = this.state.quizObj;
     const question = obj.questions.filter((el) => {
       return el.id === id;
@@ -42,10 +44,12 @@ class QuizList extends Component {
     question[0].edited = true;
     question[0].question_text = e.target.value;
 
-    this.setState({ quizObj: obj });
+    this.setState({
+      quizObj: obj,
+    });
   }
 
-  handleUpdateAnswer(e, quesId, ansId) {
+  handleAnswerChange(e, quesId, ansId) {
     const obj = this.state.quizObj;
     const question = obj.questions.filter((el) => {
       return el.id === quesId;
@@ -57,10 +61,11 @@ class QuizList extends Component {
     answer[0].edited = true;
     answer[0].answer_text = e.target.value;
 
-    this.setState({ quizObj: obj });
+    this.setState({
+      quizObj: obj,
+    });
   }
 
-  /* eslint-disable no-unused-vars */
   handleSubmitEdit() {
     const obj = this.state.quizObj;
     const question = obj.questions.filter((el) => {
@@ -72,6 +77,33 @@ class QuizList extends Component {
       });
       return [...acc, ...filtered];
     }, []);
+    this.handleSubmitQuestion(question);
+    this.handleSubmitAnswer(answer);
+  }
+
+  /* eslint-disable class-methods-use-this */
+  handleSubmitQuestion(question) {
+    question.forEach((obj) => {
+      fetch(`/api/v1/questions/${parseInt(obj.id, 10)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question_text: obj.question_text,
+        }),
+      });
+    });
+  }
+
+  handleSubmitAnswer(answer) {
+    answer.forEach((obj) => {
+      fetch(`/api/v1/answers/${parseInt(obj.id, 10)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          answer_text: obj.answer_text,
+        }),
+      });
+    });
   }
   /* eslint-enable */
 
@@ -94,8 +126,8 @@ class QuizList extends Component {
           <EditQuiz
             updateQuestion={this.updateQuestion}
             updateAnswer={this.updateAnswer}
-            onHandleUpdateQuestion={this.handleUpdateQuestion}
-            onHandleUpdateAnswer={this.handleUpdateAnswer}
+            onHandleQuestionChange={this.handleQuestionChange}
+            onHandleAnswerChange={this.handleAnswerChange}
             onHandleSubmitEdit={this.handleSubmitEdit}
             quizObj={quizObj}
             answerArray={answerArray}
