@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import './styles/EditQuiz.scss';
 
 const EditQuiz = ({ quizObj,
-  onHandleUpdateQuestion,
-  onHandleUpdateAnswer,
+  onHandleQuestionChange,
+  onHandleAnswerChange,
   onHandleSubmitEdit }) => {
   const questions = quizObj.questions.map((question, index) => {
     const quesId = question.id;
@@ -17,7 +17,7 @@ const EditQuiz = ({ quizObj,
         <input
           id={quesId}
           value={quizObj.questions[index].question_text}
-          onChange={e => onHandleUpdateQuestion(e, quesId)}
+          onChange={e => onHandleQuestionChange(e, quesId)}
         />
         {
           question.answers.map((answer, i) => {
@@ -31,7 +31,7 @@ const EditQuiz = ({ quizObj,
                   id={ansId}
                   name={answer.answer_text}
                   value={quizObj.questions[index].answers[i].answer_text}
-                  onChange={e => onHandleUpdateAnswer(e, quesId, ansId)}
+                  onChange={e => onHandleAnswerChange(e, quesId, ansId)}
                 />
               </div>
             );
@@ -55,9 +55,9 @@ const EditQuiz = ({ quizObj,
 };
 
 EditQuiz.propTypes = {
+  onHandleAnswerChange: PropTypes.func,
+  onHandleQuestionChange: PropTypes.func,
   onHandleSubmitEdit: PropTypes.func,
-  onHandleUpdateAnswer: PropTypes.func,
-  onHandleUpdateQuestion: PropTypes.func,
   quizObj: PropTypes.object,
 };
 

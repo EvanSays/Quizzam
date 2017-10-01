@@ -187,7 +187,7 @@ describe('Answer API routes', () => {
     });
   });
 
-  describe('PATCH api/v1/questions/:questionId/answers/:answerId', () => {
+  describe('PATCH api/v1/answers/:answerId', () => {
     it('Should return the answer\'s ID if an existing answer is updated', (done) => {
       chai.request(app)
         .get('/api/v1/quizzes')
@@ -207,7 +207,7 @@ describe('Answer API routes', () => {
                   const answerId = testAnswer.id;
 
                   chai.request(app)
-                    .patch(`/api/v1/questions/${questionId}/answers/${answerId}`)
+                    .patch(`/api/v1/answers/${answerId}`)
                     .send({
                       correct: true,
                     })
@@ -246,7 +246,7 @@ describe('Answer API routes', () => {
                   testAnswer.correct.should.equal(false);
 
                   chai.request(app)
-                    .patch(`/api/v1/questions/${questionId}/answers/${answerId}`)
+                    .patch(`/api/v1/answers/${answerId}`)
                     .send({
                       correct: true,
                     })
@@ -284,7 +284,7 @@ describe('Answer API routes', () => {
     });
   });
 
-  describe('DELETE /api/v1/questions/:questionId/answers/:answerId', () => {
+  describe('DELETE /api/v1/answers/:answerId', () => {
     it('Should return a success message and an object containing the answer that was deleted', (done) => {
       chai.request(app)
         .get('/api/v1/quizzes')
@@ -304,7 +304,7 @@ describe('Answer API routes', () => {
                   const answerId = testAnswer.id;
 
                   chai.request(app)
-                    .delete(`/api/v1/questions/${questionId}/answers/${answerId}`)
+                    .delete(`/api/v1/answers/${answerId}`)
                     .end((err3, res3) => {
                       res3.body.should.have.property('success');
                       res3.body.success.should.equal(`Answer #${answerId} was deleted.`);
@@ -323,7 +323,7 @@ describe('Answer API routes', () => {
 
     it('SAD PATH - Should return an error if the answer does not exist', (done) => {
       chai.request(app)
-        .delete('/api/v1/questions/0/answers/0')
+        .delete('/api/v1/answers/0')
         .end((err, res) => {
           should.exist(res);
           res.status.should.equal(404);
