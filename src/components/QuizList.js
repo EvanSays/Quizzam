@@ -79,6 +79,7 @@ class QuizList extends Component {
     }, []);
     this.handleSubmitQuestion(question);
     this.handleSubmitAnswer(answer);
+    this.setState({ isEditing: false });
   }
 
   /* eslint-disable class-methods-use-this */
