@@ -15,22 +15,12 @@ export default class TakeQuiz extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
-    this.sendSocket = this.sendSocket.bind(this);
-  }
-  sendSocket() {
-    socket.emit('selectAnswer', {
-      name: this.state.name,
-      answer: this.state.answers[this.state.currentQuestion].selectedAnswers[0],
-      questionId: this.props.quiz.questions[this.state.currentQuestion].id,
-      room: this.props.code,
-    });
   }
 
   handleClick(event) {
     const { textContent } = event.target;
     const { questions } = this.props.quiz;
     const { currentQuestion } = this.state;
-    this.sendSocket();
 
     if (textContent === 'Next' && currentQuestion < questions.length - 1) {
       const newState = this.state.currentQuestion + 1;
@@ -60,6 +50,15 @@ export default class TakeQuiz extends Component {
       newState[currentQuestion] = { selectedAnswers: [selectedElement] };
       this.setState({ answers: newState });
     }
+
+    const sendData = {
+      name: this.state.name,
+      answer: newState[this.state.currentQuestion].selectedAnswers[0],
+      questionId: this.props.quiz.questions[this.state.currentQuestion].id,
+      room: this.props.code,
+    };
+
+    socket.emit('selectAnswer', sendData);
   }
 
   determineInputType(answer, index) {
