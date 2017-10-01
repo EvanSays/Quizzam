@@ -15,22 +15,12 @@ export default class TakeQuiz extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.determineInputType = this.determineInputType.bind(this);
     this.handleSelectAnswer = this.handleSelectAnswer.bind(this);
-    this.sendSocket = this.sendSocket.bind(this);
-  }
-  sendSocket() {
-    socket.emit('selectAnswer', {
-      name: this.state.name,
-      answer: this.state.answers[this.state.currentQuestion].selectedAnswers[0],
-      questionId: this.props.quiz.questions[this.state.currentQuestion].id,
-      room: this.props.code,
-    });
   }
 
   handleClick(event) {
     const { textContent } = event.target;
     const { questions } = this.props.quiz;
     const { currentQuestion } = this.state;
-    this.sendSocket();
 
     if (textContent === 'Next' && currentQuestion < questions.length - 1) {
       const newState = this.state.currentQuestion + 1;
@@ -60,6 +50,15 @@ export default class TakeQuiz extends Component {
       newState[currentQuestion] = { selectedAnswers: [selectedElement] };
       this.setState({ answers: newState });
     }
+
+    const sendData = {
+      name: this.state.name,
+      answer: newState[this.state.currentQuestion].selectedAnswers[0],
+      questionId: this.props.quiz.questions[this.state.currentQuestion].id,
+      room: this.props.code,
+    };
+
+    socket.emit('selectAnswer', sendData);
   }
 
   determineInputType(answer, index) {
@@ -69,7 +68,10 @@ export default class TakeQuiz extends Component {
     switch (quiz.questions[currentQuestion].question_type) {
       case 'multiple choice-multiple answer':
         return (
-          <div key={`answer_${answer.id}`}>
+          <div
+            key={`answer_${answer.id}`}
+            className="take-quiz-anzswers"
+          >
             <input
               type="checkbox"
               data-id={answer.id}
@@ -83,7 +85,10 @@ export default class TakeQuiz extends Component {
         );
       default:
         return (
-          <div key={answer.answer_text}>
+          <div
+            key={answer.answer_text}
+            className="take-quiz-answers"
+          >
             <input
               type="radio"
               data-id={answer.id}
@@ -101,11 +106,8 @@ export default class TakeQuiz extends Component {
   render() {
     const { quiz } = this.props;
     const { currentQuestion } = this.state;
-    console.log(currentQuestion);
     const final = this.state.answers.length - 1;
-    console.log(final);
-    
-    
+
     const nextBnt = final !== currentQuestion ? <button className="take-quiz-btn" onClick={this.handleClick}>Next</button> : <a href="https://demonight.herokuapp.com" className="take-quiz-btn decoration-off" onClick={this.handleClick}>Submit</a>;
 
     if (!quiz.id) {
