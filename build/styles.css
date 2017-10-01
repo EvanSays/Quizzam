@@ -705,7 +705,14 @@
     .take-quiz-header h1 {
       margin: 10px; }
   .take-quiz-question {
-    width: 100%; } }
+    margin: 0 auto;
+    width: 96%; }
+  .take-quiz-answers {
+    margin: 15px 0; }
+    .take-quiz-answers input[type="radio"],
+    .take-quiz-answers input[type="checkbox"] {
+      height: 20px;
+      width: 20px; } }
 .bar {
   position: relative;
   display: flex;
