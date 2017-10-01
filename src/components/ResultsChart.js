@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getWidths, getTotalSubmissions, getResults, getPercentage, getCorrectAnswer } from '../helpers';
+import { getWidths, getTotalSubmissions, getResults, getPercentage } from '../helpers';
 import Bar from './Bar';
 import ProgressChart from './ProgressChart';
 import './styles/ResultsChart.scss';
@@ -25,7 +25,7 @@ const ResultsChart = ({ question, users }) => {
   return (
     <section className="results-chart-wrapper">
       <section className="results-chart">
-        <h2>{questionText}</h2>
+        <h2 className="results-title">{questionText}</h2>
         <section className="bar-list">
           {bars}
         </section>

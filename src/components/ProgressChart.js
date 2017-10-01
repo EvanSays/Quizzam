@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles/ProgressChart.scss';
 
 const ProgressChart = ({ total }) => {
@@ -14,6 +15,10 @@ const ProgressChart = ({ total }) => {
       </svg>
     </section>
   );
+};
+
+ProgressChart.propTypes = {
+  total: PropTypes.number,
 };
 
 export default ProgressChart;

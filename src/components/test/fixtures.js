@@ -10,6 +10,7 @@ export const selectedQuestion = {
   answers: [
     {
       id: 569,
+      correct: true,
       answer_text: 'Rocks',
       question_id: 169,
     },

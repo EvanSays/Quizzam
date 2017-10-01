@@ -5,14 +5,14 @@ import ResultsChart from '../ResultsChart';
 
 describe('ResultsChart', () => {
   Object.values = obj => Object.keys(obj).map(key => obj[key]);
-  const wrapper = shallow(<ResultsChart users={users} selectedQuestion={selectedQuestion} />);
+  const wrapper = shallow(<ResultsChart users={users} question={selectedQuestion} />);
 
   it('should render when it mounts', () => {
     expect(wrapper.find('.results-chart').length).toBe(1);
   });
 
   it('should render the correct question title', () => {
-    const title = wrapper.find('h2').props().children;
+    const title = wrapper.find('.results-title').props().children;
 
     expect(title).toBe('What does a bird eat?');
   });
@@ -23,8 +23,14 @@ describe('ResultsChart', () => {
     expect(component.length).toBe(1);
   });
 
+  it('should render Progress Chart component', () => {
+    const component = wrapper.find('ProgressChart');
+
+    expect(component.length).toBe(1);
+  });
+
   it('should pass the correct properties to Bar', () => {
-    const component = mount(<ResultsChart users={users} selectedQuestion={selectedQuestion} />);
+    const component = mount(<ResultsChart users={users} question={selectedQuestion} />);
     const width = component.find('.bar-result').props().children;
     const name = component.find('.bar-name').props().children;
 
