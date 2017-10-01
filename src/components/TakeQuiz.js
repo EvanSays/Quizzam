@@ -68,7 +68,10 @@ export default class TakeQuiz extends Component {
     switch (quiz.questions[currentQuestion].question_type) {
       case 'multiple choice-multiple answer':
         return (
-          <div key={`answer_${answer.id}`}>
+          <div
+            key={`answer_${answer.id}`}
+            className="take-quiz-anzswers"
+          >
             <input
               type="checkbox"
               data-id={answer.id}
@@ -82,7 +85,10 @@ export default class TakeQuiz extends Component {
         );
       default:
         return (
-          <div key={answer.answer_text}>
+          <div
+            key={answer.answer_text}
+            className="take-quiz-answers"
+          >
             <input
               type="radio"
               data-id={answer.id}
