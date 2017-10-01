@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getWidths } from '../helpers';
+import { getWidths, getTotalSubmissions, getResults, getPercentage } from '../helpers';
 import Bar from './Bar';
+import ProgressChart from './ProgressChart';
 import './styles/ResultsChart.scss';
 
-const ResultsChart = ({ selectedQuestion, users }) => {
-  if (!selectedQuestion.id) {
+const ResultsChart = ({ question, users }) => {
+  if (!question.id) {
     return <div />;
   }
 
-  const { id, answers, question_text: questionText } = selectedQuestion;
-  const total = Object.values(users).filter(obj => `${id}` in obj).length;
-  const results = Object.values(users).reduce((arr, user) => {
-    arr.push(...Object.values(user));
-    return arr;
-  }, []);
+  const { id, answers, question_text: questionText } = question;
+  const total = getTotalSubmissions(users, id);
+  const results = getResults(users);
+  const correct = getPercentage(results, total, answers);
   const widths = getWidths(results);
   const bars = answers.map((answer, i) => {
     const percentage = widths[answer.id] ? ((widths[answer.id] / total) * 100) : 0;
@@ -24,17 +23,24 @@ const ResultsChart = ({ selectedQuestion, users }) => {
   });
 
   return (
-    <section className="results-chart">
-      <h2>{questionText}</h2>
-      <section className="bar-list">
-        {bars}
+    <section className="results-chart-wrapper">
+      <section className="results-chart">
+        <h2 className="results-title">{questionText}</h2>
+        <section className="bar-list">
+          {bars}
+        </section>
+      </section>
+      <section className="progress-results">
+        <h2>Percent Correct:</h2>
+        <ProgressChart total={correct} />
+        <h2>Total Responses: <span>{total}</span></h2>
       </section>
     </section>
   );
 };
 
 ResultsChart.propTypes = {
-  selectedQuestion: PropTypes.object,
+  question: PropTypes.object,
   users: PropTypes.object,
 };
 
