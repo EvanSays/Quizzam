@@ -13,7 +13,6 @@ export const foldersFail = (bool) => {
 };
 
 export const fetchFolders = (id) => {
-  console.log(id);
   return (dispatch) => {
     dispatch(foldersLoading(true));
     fetch(`api/v1/users/${id}/folders`)
@@ -22,7 +21,6 @@ export const fetchFolders = (id) => {
         return res.json();
       })
       .then((folders) => {
-        console.log(folders);
         dispatch(getFolders(folders));
         dispatch(foldersFail(false));
       })
