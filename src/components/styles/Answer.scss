@@ -10,10 +10,22 @@
 }
 
 .answer-text-input{
-  width: 70%;
+  width: 68%;
   height: 35px;
   font-size: 14px;
+  margin-left: 2%;
   padding-left: 10px;
+}
+
+.answer-text-input:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+  outline-color: rgba(32, 176, 155, 0.5);
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.answer-text-input:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .answer-radio {
