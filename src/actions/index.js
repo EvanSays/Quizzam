@@ -112,6 +112,7 @@ export const login = (body) => {
         dispatch(getUser(user.data));
         dispatch(fetchFolders(user.data.id));
         dispatch(userFail(false));
+        localStorage.setItem('user', JSON.stringify(user.data));
       })
       .catch(() => {
         dispatch(userFail(true));
