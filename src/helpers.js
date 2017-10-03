@@ -73,6 +73,25 @@ const getWidths = (results) => {
   }, {});
 };
 
+const getTotalSubmissions = (users, id) => Object.values(users).filter(obj => `${id}` in obj).length;
+
+const getResults = users => Object.values(users).reduce((arr, user) => {
+  arr.push(...Object.values(user));
+  return arr;
+}, []);
+
+const getPercentage = (results, total, answers) => {
+  const correctAnswer = answers.find(answer => answer.correct).id;
+
+  if (total === 0) {
+    return 0;
+  }
+
+  const correctTotal = results.filter(result => result === `${correctAnswer}`).length;
+
+  return Math.round(correctTotal / total * 100);
+};
+
 module.exports = {
   getKey,
   genRoomNumber,
@@ -82,4 +101,7 @@ module.exports = {
   folderColors,
   getWidths,
   initializeState,
+  getTotalSubmissions,
+  getResults,
+  getPercentage,
 };
