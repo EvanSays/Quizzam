@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createRoom } from '../actions';
+import { createRoom, getUser, fetchFolders } from '../actions';
 import App from '../components/App';
 
 const mapStateToProps = ({ user, room, quiz }) => {
@@ -9,6 +9,8 @@ const mapStateToProps = ({ user, room, quiz }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createRoom: id => dispatch(createRoom(id)),
+    getUser: user => dispatch(getUser(user)),
+    fetchFolders: id => dispatch(fetchFolders(id)),
   };
 };
 
