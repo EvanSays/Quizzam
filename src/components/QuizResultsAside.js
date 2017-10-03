@@ -4,12 +4,13 @@ import { getKey } from '../helpers';
 import './styles/QuizResultsAside.scss';
 
 const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeIndex }) => {
+  
   const user = connectedUsers.map((str) => {
     return (<div key={getKey()} className="circle green"><p>{str}</p></div>);
   });
   return (
     <aside className="quiz-result-wrapper">
-      <h1>Quiz Name</h1>
+      <h1>{quizData.name}</h1>
       <section className="names">
         <h3>Connected</h3>
         {user}
