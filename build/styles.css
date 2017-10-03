@@ -878,18 +878,15 @@
   .quiz-result-wrapper .green {
     background: #02FF02; }
 
-.names,
-.questions {
+.names {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%; }
-
-.names {
+  width: 100%;
   padding: 20px;
   padding: 20px;
   overflow-y: scroll;
-  height: 200px; }
+  height: 100%; }
   .names p {
     padding-left: 20px;
     line-height: 11px;

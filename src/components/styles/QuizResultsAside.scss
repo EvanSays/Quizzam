@@ -44,19 +44,15 @@
   }
 }
 
-.names,
-.questions {
+.names {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-}
-
-.names {
   padding: 20px;
   padding: 20px;
   overflow-y: scroll;
-  height: 200px;
+  height: 100%;
   p {
     padding-left: 20px;
     line-height: 11px;

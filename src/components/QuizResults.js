@@ -23,7 +23,6 @@ class QuizResults extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
 
     socket.on(`${this.props.room}submittedAnswer`, (data) => {
-      console.log(data);
       this.handleIncomingAnswer(data);
     });
     socket.on(`${this.props.room}connnectedUser`, (data) => {
