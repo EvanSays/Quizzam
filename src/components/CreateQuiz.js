@@ -219,6 +219,7 @@ class CreateQuiz extends Component {
           >Save Quiz
           </button>
         </header>
+        <h3 className="-create-quiz-name">{this.state.name}</h3>
         <div className="create-quiz-card">
           {this.state.questions.map((question, index) => {
             return (<Question
