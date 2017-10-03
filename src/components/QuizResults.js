@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ResultsChart from './ResultsChart';
 import QuizResultsAside from './QuizResultsAside';
 import socket from '../socket';
+import './styles/QuizResults.scss';
 
 class QuizResults extends Component {
   constructor(props) {

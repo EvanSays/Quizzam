@@ -928,6 +928,11 @@
 .questions button:hover {
   cursor: pointer;
   background: #0cd3b9; }
+.quiz-results {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: scroll; }
 * {
   box-sizing: border-box; }
 
