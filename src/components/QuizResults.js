@@ -70,12 +70,14 @@ class QuizResults extends Component {
 
   render() {
     const { quizData, users, connectedUsers, activeIndex } = this.state;
+    const { room } = this.props;
     const resultCards = quizData.questions.map((question) => {
       return <ResultsChart key={question.id} question={question} users={users} />;
     });
 
     return (
       <section className="quiz-results">
+        <h2 className="room">Room: {room}</h2>
         {resultCards}
         <QuizResultsAside
           onHandleOnClick={this.handleOnClick}
