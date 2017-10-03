@@ -9,11 +9,13 @@ const Bar = ({ name, width, index }) => {
   return (
     <article className="bar">
       <h3 className="bar-label">{`A${index + 1}`}</h3>
-      <div className="bar-wrapper">
-        <div style={style} className="bar-color" />
-        <p className="bar-result">{result}</p>
+      <div className="bar-flex">
+        <div className="bar-wrapper">
+          <div style={style} className="bar-color" />
+          <p className="bar-result">{result}</p>
+        </div>
+        <div className="bar-name">{name}</div>
       </div>
-      <div className="bar-name">{name}</div>
     </article>
   );
 };

@@ -3,4 +3,9 @@
   flex-wrap: wrap;
   width: 100%;
   overflow: scroll;
+  .room {
+    position: absolute;
+    left: 50%;
+    font-size: 30px;
+  }
 }

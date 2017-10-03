@@ -5,6 +5,12 @@
   margin: 20px auto;
   width: 90%;
 }
+.bar-flex {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  width: 100%;
+}
 
 .bar-label {
   width: 10%;
@@ -21,6 +27,7 @@
   background-color: #00C3FF;
   border-radius: 5px;
   transition: all 0.4s;
+  margin: 0 10px;
 }
 
 .bar-result {
@@ -29,7 +36,7 @@
 }
 
 .bar-name {
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 10%;
   display: flex;
