@@ -9,10 +9,18 @@
   margin-bottom: 20px;
   animation: slide-right 0.4s;
     .question-text-input {
+      background-color: rgba(32, 176, 155, 0.3);
+      outline: none;
       width: 70%;
       height: 35px;
       font-size: 14px;
       padding-left: 10px;
+    }
+    .question-text-input:hover {
+      background-color: rgba(32, 176, 155, 0.5);
+      outline-color: rgba(32, 176, 155, 0.8);
+      outline-style: solid;
+      outline-width: 1px;
     }
     button {
       width: 25%;

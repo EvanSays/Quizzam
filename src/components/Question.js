@@ -13,7 +13,7 @@ export const Question = ({ questionText,
   onHandleRadioClick }) => {
   return (
     <section className="question">
-      <h1>QUESTION</h1>
+      <h1>{`QUESTION ${questionId + 1}`}</h1>
       <div className="question-control-wrapper">
         <input
           className="question-text-input"
