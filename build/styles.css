@@ -901,7 +901,7 @@
     width: 35px; }
   .quiz-result-wrapper h1 {
     font-size: 30px;
-    margin: 25px; }
+    margin: 10px 25px 25px 25px; }
   .quiz-result-wrapper h3 {
     text-transform: uppercase;
     font-weight: 400;
