@@ -8,14 +8,6 @@ import FolderAsideContainer from '../containers/FolderAsideContainer';
 import CreateQuizContainer from '../containers/CreateQuizContainer';
 
 class App extends Component {
-  componentDidMount() {
-    if (localStorage.getItem('user')) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      this.props.getUser(user);
-      this.props.fetchFolders(user.id);
-    }
-  }
-
   shouldComponentUpdate() {
     return true;
   }
