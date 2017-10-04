@@ -21,17 +21,30 @@
   0 14px 45px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   overflow-y: scroll;
-  
+
+  .welcome-logo-ink {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    margin: 15px;
+  }
+  .welcome-logo{
+    height: 35px;
+    width: 35px;
+  }
   h1 {
     font-size: 30px;
-    margin: 15px;
+    margin: 10px 25px 25px 25px;
   }
   h3 {
     text-transform: uppercase;
+    font-weight: 400;
+    margin: 10px;
   }
   .circle {
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     margin: 5px;
   }
@@ -42,6 +55,7 @@
 
   .green {
     background: #02FF02;
+    margin: 10px;
   }
 }
 
@@ -49,19 +63,26 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
-  padding: 20px;
-  padding: 20px;
+  width: 90%;
   overflow-y: scroll;
   height: 100%;
   p {
     padding-left: 20px;
-    line-height: 11px;
-    width: 320px;
+    line-height: 15px;
+    width: 215px;
     text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 
+.users {
+  background-color: rgba(128, 128, 128, 0.11);
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+}
 .questions {
   .header {
     width: 100%;

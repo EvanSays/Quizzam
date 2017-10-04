@@ -7,6 +7,7 @@
 }
 .bar-flex {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   height: 50px;
   width: 100%;
@@ -31,10 +32,12 @@
 }
 
 .bar-color {
+  height: 25px;
   background-color: #00C3FF;
   border-radius: 5px;
   transition: all 0.4s;
   margin: 0 10px;
+  border: 1px solid #00c3FF;
 }
 
 .bar-result {
@@ -43,15 +46,22 @@
 }
 
 .bar-name {
-  // position: absolute;
   top: 0;
   left: 10%;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  text-align: left;
   width: 80%;
-  height: 100%;
   padding: 0 10px;
   color: #353535;
   background-color: rgba(255, 255, 255, 0.56);
   font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bar-flex:hover .bar-name {
+  overflow: visible;
+  white-space: normal;
+  height:auto;
 }
