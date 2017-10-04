@@ -749,7 +749,14 @@
 .bar-label {
   width: 10%;
   font-weight: lighter;
-  text-align: left; }
+  text-align: center;
+  font-size: 22px;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  line-height: 50px;
+  background: rgba(255, 87, 34, 0.72);
+  color: white; }
 
 .bar-wrapper {
   display: flex;
