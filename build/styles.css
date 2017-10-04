@@ -750,8 +750,14 @@
 .bar-label {
   width: 10%;
   font-weight: lighter;
-  text-align: left;
-  font-size: 25px; }
+  text-align: center;
+  font-size: 22px;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  line-height: 50px;
+  background: rgba(255, 87, 34, 0.72);
+  color: white;
 
 .bar-wrapper {
   display: flex;
@@ -772,13 +778,21 @@
 .bar-name {
   top: 0;
   left: 10%;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  text-align: left;
   width: 80%;
   padding: 0 10px;
   color: #353535;
   background-color: rgba(255, 255, 255, 0.56);
-  font-size: 14px; }
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.bar-flex:hover .bar-name {
+  overflow: visible;
+  white-space: normal;
+  height: auto; }
 .progress-chart {
   position: relative;
   width: 200px; }
@@ -876,35 +890,54 @@
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1), 0 14px 45px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   overflow-y: scroll; }
+  .quiz-result-wrapper .welcome-logo-ink {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    margin: 15px; }
+  .quiz-result-wrapper .welcome-logo {
+    height: 35px;
+    width: 35px; }
   .quiz-result-wrapper h1 {
     font-size: 30px;
-    margin: 15px; }
+    margin: 10px 25px 25px 25px; }
   .quiz-result-wrapper h3 {
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 10px; }
   .quiz-result-wrapper .circle {
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     margin: 5px; }
   .quiz-result-wrapper .red {
     background: red; }
   .quiz-result-wrapper .green {
-    background: #02FF02; }
+    background: #02FF02;
+    margin: 10px; }
 
 .names {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
-  padding: 20px;
-  padding: 20px;
+  width: 90%;
   overflow-y: scroll;
   height: 100%; }
   .names p {
     padding-left: 20px;
-    line-height: 11px;
-    width: 320px;
-    text-align: left; }
+    line-height: 15px;
+    width: 215px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+
+.users {
+  background-color: rgba(128, 128, 128, 0.11);
+  border-radius: 5px;
+  height: 100%;
+  width: 100%; }
 
 .questions .header {
   width: 100%;
