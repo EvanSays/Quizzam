@@ -46,14 +46,22 @@
 }
 
 .bar-name {
-  // position: absolute;
   top: 0;
   left: 10%;
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  text-align: left;
   width: 80%;
   padding: 0 10px;
   color: #353535;
   background-color: rgba(255, 255, 255, 0.56);
   font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bar-flex:hover .bar-name {
+  overflow: visible;
+  white-space: normal;
+  height:auto;
 }
