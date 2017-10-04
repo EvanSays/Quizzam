@@ -61,6 +61,7 @@ class CodeForm extends Component {
           type="text"
           value={this.state.name}
           placeholder="Enter your name!"
+          maxLength="15"
         />
         <button className="code-btn">Press enter or<span>click here</span> to start</button>
       </form>
