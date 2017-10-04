@@ -77,7 +77,9 @@ class QuizResults extends Component {
 
     return (
       <section className="quiz-results">
-        <h2 className="room">Room: {room}</h2>
+        <div className="room-wrapper">
+          <h2 className="room">Room: {room}</h2>
+        </div>
         {resultCards}
         <QuizResultsAside
           onHandleOnClick={this.handleOnClick}
