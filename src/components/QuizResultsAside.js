@@ -23,7 +23,6 @@ const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeInd
           {user}
         </div>
       </section>
-
     </aside>
   );
 };

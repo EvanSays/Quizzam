@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createRoom, getUser, fetchFolders, getSound } from '../actions';
+import { createRoom, getUser, fetchFolders } from '../actions';
 import App from '../components/App';
 
 const mapStateToProps = ({ user, room, quiz }) => {
