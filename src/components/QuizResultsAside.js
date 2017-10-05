@@ -7,7 +7,7 @@ import './styles/QuizResultsAside.scss';
 
 const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeIndex }) => {
   const logo = { backgroundImage: `url(${flash})` };
-  
+
   const user = connectedUsers.map((str) => {
     return (<div key={getKey()} className="circle green"><p>{str}</p></div>);
   });
@@ -23,6 +23,7 @@ const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeInd
           {user}
         </div>
       </section>
+
     </aside>
   );
 };
