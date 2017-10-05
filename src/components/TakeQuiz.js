@@ -108,7 +108,7 @@ export default class TakeQuiz extends Component {
     const { currentQuestion } = this.state;
     const final = this.state.answers.length - 1;
 
-    const nextBnt = final !== currentQuestion ? <button className="take-quiz-btn" onClick={this.handleClick}>Next</button> : <a href="https://demonight.herokuapp.com" className="take-quiz-btn decoration-off" onClick={this.handleClick}>Submit</a>;
+    const nextBnt = final !== currentQuestion ? <button className="take-quiz-btn" onClick={this.handleClick}>Next</button> : <a href="https://quizzam.herokuapp.com/" className="take-quiz-btn decoration-off" onClick={this.handleClick}>Submit</a>;
 
     if (!quiz.id) {
       return <h3>LOADING</h3>;
