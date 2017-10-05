@@ -40,8 +40,6 @@ class App extends Component {
 }
 
 App.propTypes = {
-  fetchFolders: PropTypes.func,
-  getUser: PropTypes.func,
   history: PropTypes.object,
   quiz: PropTypes.object,
   room: PropTypes.string,

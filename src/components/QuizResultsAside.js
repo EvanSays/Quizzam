@@ -5,9 +5,8 @@ import { getKey } from '../helpers';
 import flash from '../assets/flash.svg';
 import './styles/QuizResultsAside.scss';
 
-const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeIndex }) => {
+const QuizResultsAside = ({ quizData, connectedUsers }) => {
   const logo = { backgroundImage: `url(${flash})` };
-  
   const user = connectedUsers.map((str) => {
     return (<div key={getKey()} className="circle green"><p>{str}</p></div>);
   });
@@ -28,9 +27,7 @@ const QuizResultsAside = ({ onHandleOnClick, quizData, connectedUsers, activeInd
 };
 
 QuizResultsAside.propTypes = {
-  activeIndex: PropTypes.number,
   connectedUsers: PropTypes.array,
-  onHandleOnClick: PropTypes.func,
   quizData: PropTypes.object,
 };
 
