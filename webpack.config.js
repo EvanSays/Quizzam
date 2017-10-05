@@ -23,6 +23,10 @@ module.exports = {
         exclude: /node-modules/,
       },
       {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+      },
+      {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
