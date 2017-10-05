@@ -9,7 +9,7 @@ import FolderAsideContainer from '../containers/FolderAsideContainer';
 import CreateQuizContainer from '../containers/CreateQuizContainer';
 import horn from '../assets/horn.mp3';
 import flash from '../assets/flash.svg';
-
+import './styles/App.scss';
 
 class App extends Component {
   constructor() {
@@ -47,20 +47,7 @@ class App extends Component {
 
     const aside = room ? null : <FolderAsideContainer history={history} />;
     const sound = isPlaying ? <Sound url={horn} playStatus={Sound.status.PLAYING} /> : null;
-    const logoStyle = {
-      position: 'absolute',
-      top: '10px',
-      right: '20px',
-      width: '30px',
-      height: '30px',
-      backgroundColor: 'transparent',
-      backgroundImage: `url(${flash})`,
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'contain',
-      border: 'none',
-      cursor: 'pointer',
-    };
+    const logoStyle = { backgroundImage: `url(${flash})` };
 
     return (
       <section className="App">
@@ -69,7 +56,7 @@ class App extends Component {
         <Route path="/quiz" component={CreateQuizContainer} />
         <Route path="/dashboard/quiz/:id" component={EditQuiz} />
         {sound}
-        <button onClick={this.handlePlaySound} style={logoStyle} />
+        <button onClick={this.handlePlaySound} style={logoStyle} className="sound" />
       </section>
     );
   }

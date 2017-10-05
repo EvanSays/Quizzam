@@ -657,6 +657,20 @@
   cursor: pointer; }
   .create-quiz-btn:hover {
     background-color: #66dbff; }
+.sound {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer; }
+  .sound:foucs {
+    outline: none; }
 .take-quiz-header {
   background-color: #00C3FF;
   color: #FFF;
