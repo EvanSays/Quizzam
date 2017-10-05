@@ -23,7 +23,6 @@ class QuizList extends Component {
 
   componentDidMount() {
     const { quizzes } = this.props.selectedFolder;
-    
     this.setState({ quizzes });
   }
 
